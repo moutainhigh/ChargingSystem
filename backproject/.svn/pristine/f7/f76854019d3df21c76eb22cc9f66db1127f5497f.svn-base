@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.DepartmentMapper">
+    <resultMap id="rightRoleMapper" type="com.egintra.common.repository.entity.Department">
+        <result column="unit_region" property="id"/>
+        <result column="unit_name" property="unitName"/>
+        <result column="unit_level" property="unitLevel"/>
+        <result column="remark" property="remark"/>
+        <result column="pos_mode" property="posMode"/>
+    </resultMap>
+
+    <select id="getDepartmentList"
+            resultType="com.egintra.common.dto.DepartmentReqDTO">
+        SELECT
+          unit_region AS unitRegion,
+          unit_name AS unitName,
+          unit_level AS unitLevel,
+          remark AS remark,
+          pos_mode AS posMode
+        FROM
+         fee_department
+        <where>
+            <if test="unitRegion != null and unitRegion != ''">
+                and unit_region like CONCAT(CONCAT('%',#{unitRegion}),'%')
+            </if>
+            <if test="unitName != null and unitName != ''">
+                and unit_name like CONCAT(CONCAT('%',#{unitName}),'%')
+            </if>
+            <if test="unitLevel != null and unitLevel != ''">
+                and unit_level = #{unitLevel}
+            </if>
+        </where>
+        ORDER BY unit_region desc
+    </select>
+
+    <select id="getOne" resultType="com.egintra.common.dto.DepartmentReqDTO">
+        SELECT
+          unit_region AS unitRegion,
+          unit_name AS unitName,
+          unit_level AS unitLevel,
+          remark AS remark,
+          pos_mode AS posMode
+        FROM
+          fee_department
+        WHERE
+          unit_region = #{id}
+    </select>
+
+    <select id="findByName" resultType="com.egintra.common.dto.DepartmentReqDTO">
+        SELECT
+          unit_region AS unitRegion,
+          unit_name AS unitName,
+          unit_level AS unitLevel,
+          remark AS remark,
+          pos_mode AS posMode
+        FROM
+          fee_department
+        WHERE
+          unit_name = #{unitName}
+    </select>
+
+    <insert id="addDepartment" parameterType="com.egintra.common.dto.DepartmentReqDTO">
+        INSERT INTO fee_department(
+          unit_region,
+          unit_name,
+          unit_level,
+          remark,
+          pos_mode)
+        values (
+          #{unitRegion},
+          #{unitName},
+          #{unitLevel},
+          #{remark},
+          #{posMode})
+    </insert>
+
+    <select id="getDepartParam" resultType="com.egintra.common.dto.DepartmentReqDTO">
+        SELECT
+          unit_region AS unitRegion,
+          unit_name AS unitName,
+          unit_level AS unitLevel,
+          remark AS remark,
+          pos_mode AS posMode
+        FROM
+          fee_department
+        WHERE
+          unit_name = #{unitName}
+          and unit_region = #{unitRegion}
+    </select>
+
+    <update id="editDepart" >
+        <foreach collection="list" index="index" item="item" open="begin" separator=";" close=";end;">
+            UPDATE fee_department
+            <set>
+                <if test="item.unitRegion != null and item.unitRegion != ''">
+                    unit_region = #{item.unitRegion},
+                </if>
+                <if test="item.unitName != null and item.unitName != ''">
+                    unit_name = #{item.unitName},
+                </if>
+                <if test="item.unitLevel != null and item.unitLevel != ''">
+                    unit_level = #{item.unitLevel},
+                </if>
+                remark = #{item.remark},
+                pos_mode = #{item.posMode},
+            </set>
+            WHERE unit_region = #{item.unitRegion}
+        </foreach>
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM fee_department
+        WHERE unit_region = #{id}
+    </delete>
+</mapper>

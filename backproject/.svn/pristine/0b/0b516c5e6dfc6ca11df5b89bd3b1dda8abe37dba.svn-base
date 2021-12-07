@@ -1,0 +1,184 @@
+package com.egintra.feeService.finance.driverLicense.service.impl;
+
+import com.egintra.common.dto.PubSimplenumberRespDTO;
+import com.egintra.common.dto.finance.FeeDrvjkReqDTO;
+import com.egintra.common.dto.finance.FeeDrvjkRespDTO;
+import com.egintra.common.dto.sys.VehDrvParamsRespDTO;
+import com.egintra.common.enums.DriverLicenseOptionsEnum;
+import com.egintra.common.enums.PubsimplecateEnum;
+import com.egintra.common.enums.RecordStatusEnum;
+import com.egintra.common.exception.ResultCode;
+import com.egintra.common.repository.mapper.FeeDrvjkMapper;
+import com.egintra.common.repository.mapper.PubSimplenumberMapper;
+import com.egintra.common.utils.DataReuslt;
+import com.egintra.common.utils.DateUtils;
+import com.egintra.common.utils.PageHelperUtils;
+import com.egintra.common.utils.StringUtil;
+import com.egintra.feeService.config.PageResult;
+import com.egintra.feeService.finance.driverLicense.service.FeeDriverLicenseService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+@Service
+public class FeeDriverLicenseServiceImpl implements FeeDriverLicenseService {
+
+    @Resource
+    private FeeDrvjkMapper feeDrvjkMapper;
+    @Resource
+    private PubSimplenumberMapper pubSimplenumberMapper;
+
+    /**
+     * 初始化
+     *
+     * @param feeDrvjkReqDTO 参数
+     * @return 初始化结果
+     */
+    @Override
+    public DataReuslt driverLicenseInit(FeeDrvjkReqDTO feeDrvjkReqDTO) {
+
+        // 在执行SQL时获取分页参数
+        Page page = PageHelper.startPage(feeDrvjkReqDTO.getPage(), feeDrvjkReqDTO.getSize());
+
+        // 初始化查询所有机动车业务收费信息数据
+        List<FeeDrvjkRespDTO> feeDrvjks = feeDrvjkMapper.queryFeeDrvjks(feeDrvjkReqDTO);
+        // 循环 feeDrvjks 转换字段"options"内容为中文
+        Map<String, String> EnumMap = Arrays.stream(DriverLicenseOptionsEnum.values()).collect(
+                Collectors.toMap(s -> s.getCode(), s -> s.getDesc()));
+        for (FeeDrvjkRespDTO feeDrvjk : feeDrvjks) {
+            if (!StringUtil.isEmpty(feeDrvjk.getOptions())) {
+                feeDrvjk.setOptions(EnumMap.get(feeDrvjk.getOptions()));
+            }
+        }
+
+        // 分页
+        PageResult<FeeDrvjkRespDTO> pagingData = PageHelperUtils.getPagingData(feeDrvjks, page);
+
+        // 返回结果
+        return DataReuslt.success(pagingData);
+    }
+
+    /**
+     * 新增
+     *
+     * @param feeDrvjkReqDTO 请求对象
+     * @return 返回结果
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public DataReuslt addDriverLicense(FeeDrvjkReqDTO feeDrvjkReqDTO) {
+        // 查询是否已经存在当前收费信息设置，存在则报错提示
+        List<FeeDrvjkRespDTO> feeDrvjkS = feeDrvjkMapper.queryFeeDrvjks(feeDrvjkReqDTO);
+        if (!CollectionUtils.isEmpty(feeDrvjkS)) {
+            return DataReuslt.fail(ResultCode.ADD_FEE_ERROR.code(),
+                    ResultCode.ADD_FEE_ERROR.message());
+        }
+
+        // 新增驾驶证业务收费信息设置
+        feeDrvjkReqDTO.setRecordStatus(RecordStatusEnum.NO.getCode());
+        Date currentDate = DateUtils.getCurrentDate();
+        feeDrvjkReqDTO.setRecordCreateTm(currentDate);
+        feeDrvjkReqDTO.setRecordCreateTm(currentDate);
+        int i = feeDrvjkMapper.addFeeDrvjk(feeDrvjkReqDTO);
+
+        return DataReuslt.success("保存成功");
+    }
+
+    /**
+     * 修改
+     *
+     * @param feeDrvjks 请求对象
+     * @return 返回结果
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public DataReuslt updateDriverLicense(List<FeeDrvjkReqDTO> feeDrvjks) {
+        // 设置更新时间
+        Date currentDate = DateUtils.getCurrentDate();
+        for (FeeDrvjkReqDTO feeDrvjk : feeDrvjks) {
+            feeDrvjk.setRecordModifyTm(currentDate);
+        }
+
+        // 更新数据
+        int updates = feeDrvjkMapper.batchUpdateFeeDrvjks(feeDrvjks);
+
+        // 返回结果
+        return DataReuslt.success("保存成功");
+    }
+
+    /**
+     * 删除
+     *
+     * @param feeDrvjkReqDTO 请求对象
+     * @return 返回结果
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public DataReuslt deleteDriverLicense(FeeDrvjkReqDTO feeDrvjkReqDTO) {
+        // 设置删除时间
+        Date currentDate = DateUtils.getCurrentDate();
+        feeDrvjkReqDTO.setRecordModifyTm(currentDate);
+
+        // 删除
+        feeDrvjkMapper.deleteFeeDrvjk(feeDrvjkReqDTO);
+
+        // 返回结果
+        return DataReuslt.success("删除成功");
+    }
+
+    /**
+     * 查询
+     *
+     * @param feeDrvjkReqDTO 请求对象
+     * @return 返回结果
+     */
+    @Override
+    public DataReuslt queryDriverLicense(FeeDrvjkReqDTO feeDrvjkReqDTO) {
+
+        // 在执行SQL时获取分页参数
+        Page page = PageHelper.startPage(feeDrvjkReqDTO.getPage(), feeDrvjkReqDTO.getSize());
+
+        // 查询驾驶证业务收费信息
+        List<FeeDrvjkRespDTO> feeDrvjks = feeDrvjkMapper.queryFeeDrvjks(feeDrvjkReqDTO);
+
+        // 分页
+        PageResult<FeeDrvjkRespDTO> pagingData = PageHelperUtils.getPagingData(feeDrvjks, page);
+
+        // 返回结果
+        return DataReuslt.success(pagingData);
+    }
+
+    /**
+     * 新增初始化获取下拉框数据
+     *
+     * @return 返回结果
+     */
+    @Override
+    public DataReuslt getSelectedData() {
+        // 获取准驾车型、驾驶证业务类型编码分类代码
+        String zjcx = PubsimplecateEnum.ZJCX.getCode();
+        String ywlx = PubsimplecateEnum.JSZYWLX.getCode();
+
+        // 根据编码分类代码分别查询准驾车型和 驾驶证业务类型具体编码参数
+        List<PubSimplenumberRespDTO> zjcxs = pubSimplenumberMapper.queryNumbersByCateCd(zjcx);
+        List<PubSimplenumberRespDTO> ywlxs = pubSimplenumberMapper.queryNumbersByCateCd(ywlx);
+
+        // 封装返回对象
+        VehDrvParamsRespDTO respDto = new VehDrvParamsRespDTO();
+        respDto.setZjcx(zjcxs);
+        respDto.setYwlx(ywlxs);
+
+        // 返回结果
+        return DataReuslt.success(respDto);
+    }
+}

@@ -1,0 +1,96 @@
+package com.egintra.feeService.finance.vehjk.service.impl;
+
+import com.egintra.common.dto.VehicleReqDTO;
+import com.egintra.common.repository.mapper.VehicleMapper;
+import com.egintra.common.utils.DataReuslt;
+import com.egintra.common.utils.DateUtils;
+import com.egintra.common.utils.PageHelperUtils;
+import com.egintra.feeService.config.PageResult;
+import com.egintra.feeService.finance.vehjk.service.VehicleService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.util.Date;
+import java.util.List;
+
+@Service
+public class VehicleServiceImpl implements VehicleService {
+
+    @Resource
+    private VehicleMapper vehicleMapper;
+
+
+    /**
+     * 查看列表(分页)
+     *
+     * @param vehicleReqDTO
+     * @return
+     */
+    @Override
+    public DataReuslt getVehicleList(VehicleReqDTO vehicleReqDTO) {
+        Page ps = PageHelper.startPage(vehicleReqDTO.getPage(), vehicleReqDTO.getSize());
+        List<VehicleReqDTO> materialReqDTOS = vehicleMapper.getVehicleList(vehicleReqDTO);
+        PageResult<VehicleReqDTO> result = PageHelperUtils.getPagingData(materialReqDTOS, ps);
+        return DataReuslt.success(result);
+    }
+
+    /**
+     * 查看列表(不分页)
+     *
+     * @param vehicleReqDTO
+     * @return
+     */
+    @Override
+    public DataReuslt getVehicleLists(VehicleReqDTO vehicleReqDTO) {
+        List<VehicleReqDTO> departments = vehicleMapper.getVehicleList(vehicleReqDTO);
+
+        return DataReuslt.success(departments);
+    }
+
+    /**
+     * 新增
+     *
+     * @param vehicleReqDTO
+     * @return
+     */
+    @Override
+    @Transactional
+    public DataReuslt addVehicle(VehicleReqDTO vehicleReqDTO) {
+        VehicleReqDTO material = vehicleMapper.getOne(vehicleReqDTO);
+        if (material != null) {
+            return DataReuslt.fail("0", "数据已经在");
+        }
+        vehicleMapper.addVehicle(vehicleReqDTO);
+
+        return DataReuslt.success(vehicleReqDTO);
+    }
+
+    /**
+     * 编辑
+     *
+     * @param materialReqDTOs
+     * @return
+     */
+    @Override
+    @Transactional
+    public DataReuslt editVehicle(List<VehicleReqDTO> materialReqDTOs) {
+        vehicleMapper.editVehicleReqDTO(materialReqDTOs);
+        return DataReuslt.success(materialReqDTOs);
+    }
+
+    /**
+     * 删除
+     *
+     * @param vehjkReqDTO
+     * @return
+     */
+    @Override
+    public DataReuslt deleteById(VehicleReqDTO vehjkReqDTO) {
+        vehicleMapper.deleteById(vehjkReqDTO);
+
+        return DataReuslt.success("删除成功");
+    }
+}

@@ -1,0 +1,54 @@
+package com.egintra.feeService.user.controller;
+
+import com.egintra.common.annotation.ResponseResult;
+import com.egintra.common.dto.RightRoleUserReqDTO;
+import com.egintra.common.dto.RightUserDTO;
+import com.egintra.common.pointcuts.SysToken;
+import com.egintra.common.utils.DataReuslt;
+import com.egintra.feeService.user.service.SysUserService;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+
+/**
+ * 用户信息相关接口
+ *
+ * @author liushihao
+ * @date 2021/7/30
+ */
+@RestController
+@RequestMapping("/sysUser")
+@ResponseResult
+public class SysUserController {
+
+    @Resource
+    private SysUserService sysUserService;
+
+    /**
+     * 根据用户ID查询已配置的角色
+     *
+     * @param rightUserDTO 参数
+     * @return 结果
+     */
+    @SysToken
+    @RequestMapping(value = "/getUserAllRoles")
+    public DataReuslt getUserAllRoles(@RequestBody RightUserDTO rightUserDTO) {
+
+        return sysUserService.getUserAllRoles(rightUserDTO);
+    }
+
+    /**
+     * 更新用户分配角色
+     *
+     * @param rightRoleUserReqDTO 请求对象
+     * @return 处理结果
+     */
+    @SysToken
+    @RequestMapping(value = "/updateRoleUserInfo")
+    public DataReuslt updateRoleUserInfo(@RequestBody RightRoleUserReqDTO rightRoleUserReqDTO) {
+
+        return sysUserService.updateRoleUserInfo(rightRoleUserReqDTO);
+    }
+}

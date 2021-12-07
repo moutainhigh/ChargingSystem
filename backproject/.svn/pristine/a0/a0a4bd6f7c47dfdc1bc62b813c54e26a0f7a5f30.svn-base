@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.InvoiceMapper">
+    <resultMap id="rightRoleMapper" type="com.egintra.common.repository.entity.Vehicle">
+        <result column="hpzl" property="hpzl"/>
+        <result column="ywlx" property="ywlx"/>
+        <result column="ywyy" property="ywyy"/>
+        <result column="ywmc" property="ywmc"/>
+        <result column="project_id" property="projectId"/>
+        <result column="quantity" property="quantity"/>
+        <result column="options" property="options"/>
+        <result column="record_status" property="recordStatus"/>
+        <result column="record_create_cd" property="recordCreateCd"/>
+        <result column="record_create_nm" property="recordCreateNm"/>
+        <result column="record_create_tm" property="recordCreateTm"/>
+        <result column="record_modify_cd" property="recordModifyCd"/>
+        <result column="record_modify_nm" property="recordModifyNm"/>
+        <result column="record_modify_tm" property="recordModifyTm"/>
+    </resultMap>
+
+    <select id="isPaymentNot" resultType="com.egintra.common.dto.InvoiceReqDTO">
+        SELECT
+            id,
+            department,
+            account_id accountId,
+            invoice_id invoiceId,
+            paper_id paperId,
+            pay_unit payUnit,
+            pay_way payWay,
+            total_money totalMoney,
+            total_pure totalPure,
+            receiver_id receiverId,
+            receiver receiver,
+            posid posId,
+            dates,
+            dtimes,
+            receive_account receiveAccount,
+            check_number checkNumber,
+            pos_info posInfo,
+            status ,
+            types,
+            sfzmhm,
+            lsh,
+            cxhp,
+            ywlx,
+            ywyy
+        FROM
+            FEE_INVOICE
+       where lsh = #{lsh}
+    </select>
+
+</mapper>

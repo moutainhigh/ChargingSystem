@@ -1,0 +1,51 @@
+package com.egintra.common.repository.entity;
+
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+
+import java.util.Date;
+
+@TableName("fee_department")
+public class Department extends Model<Department> {
+
+    private String id;
+
+    private String unitName;
+
+    private String unitLevel;
+
+    private String remark;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUnitName() {
+        return unitName;
+    }
+
+    public void setUnitName(String unitName) {
+        this.unitName = unitName;
+    }
+
+    public String getUnitLevel() {
+        return unitLevel;
+    }
+
+    public void setUnitLevel(String unitLevel) {
+        this.unitLevel = unitLevel;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+}

@@ -1,0 +1,49 @@
+package com.egintra.feeService.pay.service.impl;
+
+import com.egintra.common.dto.sysSet.FeeGetDataSetReqDTO;
+import com.egintra.common.dto.sysSet.FeeGetDataSetRespDTO;
+import com.egintra.common.enums.DatafromEnum;
+import com.egintra.common.utils.DataReuslt;
+import com.egintra.feeService.pay.service.ExaminationFeeOnLineService;
+import com.egintra.feeService.sys.dataFrom.service.FeeGetDataSetService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+@Service
+public class ExaminationFeeOnLineServiceImpl implements ExaminationFeeOnLineService {
+
+    @Resource
+    private FeeGetDataSetService feeGetDataSetService;
+
+    @Value("${examination.fee.onLine.modelid}")
+    private String examinationModelid;
+
+    /**
+     * 考试费线上缴费接口
+     *
+     * @return 结果
+     */
+    @Override
+    public DataReuslt payExaminationFee() {
+        // 根据modelid取得获取数据方式
+        FeeGetDataSetReqDTO dto = new FeeGetDataSetReqDTO();
+        dto.setModelid(examinationModelid);
+        DataReuslt dataReuslt = feeGetDataSetService.queryDataSets(dto);
+        List<FeeGetDataSetRespDTO> list = (List<FeeGetDataSetRespDTO>) dataReuslt.getData();
+        // 如果是下发库，查下发库获取考试预约数据
+//        if (DatafromEnum.LESSUE.getCode().equals(list.get(0).getDatafrom())) {
+//
+//        }
+        // 如果是调用webservice接口获取考试预约数据
+//        if (DatafromEnum.WEB.getCode().equals(list.get(0).getDatafrom())) {
+//
+//        }
+
+
+
+        return DataReuslt.success();
+    }
+}

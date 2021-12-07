@@ -1,0 +1,199 @@
+package com.egintra.common.repository.entity;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+
+import java.util.Date;
+
+@TableName("right_func_action")
+public class RightFuncAction extends Model<RightFuncAction> {
+
+    private static final long serialVersionUID = 4013659354269359761L;
+    /**
+     * 内码
+     */
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
+
+    /**
+     * 功能内码
+     */
+    @TableId(value = "func_id")
+    private Integer funcId;
+
+    /**
+     * 按钮名
+     */
+    @TableId(value = "name")
+    private String name;
+
+    /**
+     * 按钮标题
+     */
+    @TableId(value = "title")
+    private String title;
+
+    /**
+     * 排序
+     */
+    @TableId(value = "order_no")
+    private String orderNo;
+
+    /**
+     * 状态
+     */
+    @TableId(value = "record_status")
+    private String recordStatus;
+
+    /**
+     * 创建人编码
+     */
+    @TableId(value = "record_create_cd")
+    private String recordCreateCd;
+
+    /**
+     * 创建人名称
+     */
+    @TableId(value = "record_create_nm")
+    private String recordCreateNm;
+
+    /**
+     * 创建时间
+     */
+    @TableId(value = "record_create_tm")
+    private Date recordCreateTm;
+
+    /**
+     * 修改人编码
+     */
+    @TableId(value = "record_modify_cd")
+    private String recordModifyCd;
+
+    /**
+     * 修改人名称
+     */
+    @TableId(value = "record_modify_nm")
+    private String recordModifyNm;
+
+    /**
+     * 修改日期
+     */
+    @TableId(value = "record_modify_tm")
+    private Date recordModifyTm;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getFuncId() {
+        return funcId;
+    }
+
+    public void setFuncId(Integer funcId) {
+        this.funcId = funcId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    public String getRecordStatus() {
+        return recordStatus;
+    }
+
+    public void setRecordStatus(String recordStatus) {
+        this.recordStatus = recordStatus;
+    }
+
+    public String getRecordCreateCd() {
+        return recordCreateCd;
+    }
+
+    public void setRecordCreateCd(String recordCreateCd) {
+        this.recordCreateCd = recordCreateCd;
+    }
+
+    public String getRecordCreateNm() {
+        return recordCreateNm;
+    }
+
+    public void setRecordCreateNm(String recordCreateNm) {
+        this.recordCreateNm = recordCreateNm;
+    }
+
+    public Date getRecordCreateTm() {
+        return recordCreateTm;
+    }
+
+    public void setRecordCreateTm(Date recordCreateTm) {
+        this.recordCreateTm = recordCreateTm;
+    }
+
+    public String getRecordModifyCd() {
+        return recordModifyCd;
+    }
+
+    public void setRecordModifyCd(String recordModifyCd) {
+        this.recordModifyCd = recordModifyCd;
+    }
+
+    public String getRecordModifyNm() {
+        return recordModifyNm;
+    }
+
+    public void setRecordModifyNm(String recordModifyNm) {
+        this.recordModifyNm = recordModifyNm;
+    }
+
+    public Date getRecordModifyTm() {
+        return recordModifyTm;
+    }
+
+    public void setRecordModifyTm(Date recordModifyTm) {
+        this.recordModifyTm = recordModifyTm;
+    }
+
+    @Override
+    public String toString() {
+        return "RightFuncAction{" +
+                "id=" + id +
+                ", funcId=" + funcId +
+                ", name='" + name + '\'' +
+                ", title='" + title + '\'' +
+                ", orderNo='" + orderNo + '\'' +
+                ", recordStatus='" + recordStatus + '\'' +
+                ", recordCreateCd='" + recordCreateCd + '\'' +
+                ", recordCreateNm='" + recordCreateNm + '\'' +
+                ", recordCreateTm=" + recordCreateTm +
+                ", recordModifyCd='" + recordModifyCd + '\'' +
+                ", recordModifyNm='" + recordModifyNm + '\'' +
+                ", recordModifyTm=" + recordModifyTm +
+                '}';
+    }
+}

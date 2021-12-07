@@ -1,0 +1,309 @@
+package com.egintra.feeService.pay.service.impl;
+
+import com.egintra.common.dto.InvoiceDetailTmp;
+import com.egintra.common.dto.InvoiceTmp;
+import com.egintra.common.dto.VehiclePayReqDTO;
+import com.egintra.common.dto.pay.FeePayparaReqDTO;
+import com.egintra.common.dto.pay.FeePayparaRespDTO;
+import com.egintra.common.dto.sysSet.FeeGetDataSetRespDTO;
+import com.egintra.common.repository.mapper.*;
+import com.egintra.common.utils.DataReuslt;
+import com.egintra.common.utils.DateUtils;
+import com.egintra.common.utils.XmlUtils;
+import com.egintra.feeService.pay.service.InvoiceService;
+import com.egintra.feeService.pay.service.VehicleOnlinePayService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Service
+public class VehicleOnlinePayServiceImpl implements VehicleOnlinePayService {
+
+    @Resource
+    private InvoiceService invoiceService;
+
+    @Resource
+    private VehiclePayMapper vehiclePayMapper;
+
+    @Resource
+    private VehicleOnlinePayMapper vehicleOnlinePayMapper;
+
+    @Resource
+    private InvoiceTmpMapper invoiceTmpMapper;
+
+    @Resource
+    private InvoiceTmpDetailMapper invoiceTmpDetailMapper;
+
+    @Resource
+    private FeeGetDataSetMapper feeGetDataSetMapper;
+
+    @Resource
+    private FeePayparaMapper feePayparaMapper;
+
+
+    @Value("${vechicleOnliePay.fee.onLine.modelid}")
+    private String vechicleOnliePayModelId;
+
+
+    @Override
+    public DataReuslt vehicleOnlinePay(String lsh) {
+        //首先根据模块名称访问数据请求访问格式设置表
+        FeeGetDataSetRespDTO feeGetDataSetRespDTO =feeGetDataSetMapper.getOneByModelId(vechicleOnliePayModelId);
+        String dataFrom = feeGetDataSetRespDTO.getDatafrom();
+        if ("1".equals(dataFrom)) { // 综合平台webservice方式
+            // 根据流水号调用平台接口01c25接口 获取信息 glbm,hpzl,ywlxx,ywyy
+            Map<String, String> xmlMap = getXmlMap();
+            String code = xmlMap.get("head.code");
+            if ("1".equals(code)) {
+                String num = xmlMap.get("head.rownum");
+                if (Integer.parseInt(num) != 0) {
+                    String xh = xmlMap.get("body.veh.xh");
+                    String ywlx = xmlMap.get("body.veh.ywlx");
+                    String ywyy = xmlMap.get("body.veh.ywyy");
+                    String hpzl = xmlMap.get("body.veh.hpzl");
+                    String hphm = xmlMap.get("body.veh.hphm");
+                    String glbm = xmlMap.get("body.veh.glbm");
+                    // 核查是否已经缴费
+                    DataReuslt dataReuslt = invoiceService.isPaymentNot(lsh);
+                    if (!"000000".equals(dataReuslt.getCode())) { //未缴费
+                        FeePayparaReqDTO feePayparaReqDTO=new FeePayparaReqDTO();
+                        feePayparaReqDTO.setGlbm(glbm);
+                        List<FeePayparaRespDTO> list=feePayparaMapper.queryFeePaypara(feePayparaReqDTO);
+                        if(list.size()==0){
+                            return DataReuslt.fail("管理部门不存在");
+                        }
+                        FeePayparaRespDTO feePayparaRespDTO= list.get(0);
+                        VehiclePayReqDTO vehiclePayReqDTO = new VehiclePayReqDTO();
+                        vehiclePayReqDTO.setHpzl(hpzl);
+                        vehiclePayReqDTO.setYwlx(ywlx);
+                        vehiclePayReqDTO.setYwyy(ywyy);
+                        List<VehiclePayReqDTO> vehiclePayList = vehiclePayMapper.getVehiclePayList(vehiclePayReqDTO);
+                        if (vehiclePayList.size() != 0) {
+                            // 记临时账
+                            vehiclePayList.forEach(vehiclePayReqDTO1 -> {
+                                //获取orderId
+                                String orderId = vehicleOnlinePayMapper.getGenerateOrder(lsh);
+                                // 总金额
+                                double totalSum = vehiclePayReqDTO1.getQuantity() * vehiclePayReqDTO1.getUnitPrice();
+                                // 纯盈利
+                                double profitPrice = totalSum - vehiclePayReqDTO1.getMaterialCost();
+                                InvoiceTmp invoiceTmp = new InvoiceTmp();
+                                String tmpId = vehicleOnlinePayMapper.getTmpId();
+                                invoiceTmp.setId(tmpId);
+                                invoiceTmp.setAccountId(feePayparaRespDTO.getAccountid());
+                                invoiceTmp.setOrderid(orderId);
+                                invoiceTmp.setInvoiceId("0");
+                                invoiceTmp.setDepartment(glbm);
+                                invoiceTmp.setPaperId("");
+                                invoiceTmp.setPayUnit(xh);
+                                invoiceTmp.setPayWay("05");
+                                invoiceTmp.setTotalMoney(totalSum);
+                                invoiceTmp.setTotalPure(profitPrice);
+                                invoiceTmp.setReceiver("intnernet");
+                                invoiceTmp.setReceiverId("intnernet");
+                                invoiceTmp.setPosId("");
+                                invoiceTmp.setDates(DateUtils.getCurDateString());
+                                invoiceTmp.setDtimes(DateUtils.getCurrentDate());
+                                invoiceTmp.setReceiveAccount("");
+                                invoiceTmp.setCheckNumber("");
+                                invoiceTmp.setPosInfo("");
+                                invoiceTmp.setStatus("1");
+                                invoiceTmp.setTypes("1");
+                                invoiceTmp.setSfzmhm(hphm);
+                                invoiceTmp.setLsh(lsh);
+                                invoiceTmp.setCxhp(hpzl);
+                                invoiceTmp.setYwlx(ywlx);
+                                invoiceTmp.setYwyy(ywyy);
+                                invoiceTmp.setYwlb("1");
+                                //返回主键id
+                                invoiceTmpMapper.addInvoiceTmp(invoiceTmp);
+                                InvoiceDetailTmp invoiceDetailTmp = new InvoiceDetailTmp();
+                                String detailId = vehicleOnlinePayMapper.getTmpDetailId();
+                                invoiceDetailTmp.setId(detailId);
+                                invoiceDetailTmp.setFeeInvoiceId(tmpId);
+                                invoiceDetailTmp.setDepartment(glbm);
+                                invoiceDetailTmp.setAccountId(feePayparaRespDTO.getAccountid());
+                                invoiceDetailTmp.setInvoiceId("0");
+                                invoiceDetailTmp.setPaperId("");
+                                invoiceDetailTmp.setDates(DateUtils.getCurDateString());
+                                invoiceDetailTmp.setStatus("1");
+                                invoiceDetailTmp.setProjectId(vehiclePayReqDTO1.getProjectId());
+                                invoiceDetailTmp.setProjectName(vehiclePayReqDTO1.getProjectName());
+                                invoiceDetailTmp.setUnitPrice(vehiclePayReqDTO1.getUnitPrice());
+                                invoiceDetailTmp.setQuantity(vehiclePayReqDTO1.getQuantity());
+                                invoiceDetailTmp.setClassId(vehiclePayReqDTO1.getClassId());
+                                invoiceDetailTmp.setProvinceRate(vehiclePayReqDTO1.getProvinceRate());
+                                invoiceDetailTmp.setCityRate(vehiclePayReqDTO1.getCityRate());
+                                invoiceDetailTmp.setMaterialCost(vehiclePayReqDTO1.getMaterialCost());
+                                invoiceDetailTmp.setFinanceCode(vehiclePayReqDTO1.getFinanceCode());
+                                invoiceDetailTmp.setPayWay("05");
+                                invoiceDetailTmp.setOrderId(orderId);
+                                invoiceTmpDetailMapper.addInvoiceTmpDetail(invoiceDetailTmp);
+                            });
+                        } else {
+                            return DataReuslt.fail("1", "请添加收费项目信息！");
+                        }
+
+                    } else { //缴费
+                        return DataReuslt.success("已经交过费用！");
+                    }
+                } else {
+                    return DataReuslt.fail("流水号输入不正确");
+                }
+            }
+        } else { //下发库
+
+        }
+
+        return DataReuslt.success("支付成功");
+    }
+
+
+    public Map<String, String> getXmlMap() {
+        String xml = "<?xml version=\"1.0\" encoding=\"GBK\"?>\n" +
+                "<root>\n" +
+                "<head>\n" +
+                "<code>1</code>\n" +
+                "<message>%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD%E6%88%90%E5%8A%9F%EF%BC%81</message>\n" +
+                "<rownum>1</rownum>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<veh id=\"0\">\n" +
+                "  <lsh>1210806019988</lsh>\n" +
+                "  <xh>37040007001292</xh>\n" +
+                "  <ywlx>K</ywlx>\n" +
+                "  <ywyy>A</ywyy>\n" +
+                "  <syr>%E6%9D%8E%E7%BA%A2%E4%BA%91</syr>\n" +
+                "  <hpzl>02</hpzl>\n" +
+                "  <hphm>DS0069</hphm>\n" +
+                "  <clpp1>%E9%A3%9E%E5%BA%A6%E7%89%8C</clpp1>\n" +
+                "  <clxh>HG7132A%28i-DSI+CVT%29</clxh>\n" +
+                "  <cllx>K33</cllx>\n" +
+                "  <xzqh>370403</xzqh>\n" +
+                "  <sqrq>2021-08-06+10%3A44%3A13.0</sqrq>\n" +
+                "  <bjrq>2021-08-06+10%3A55%3A37.0</bjrq>\n" +
+                "  <xygw>E</xygw>\n" +
+                "  <ywlc>25E</ywlc>\n" +
+                "  <lszt>E</lszt>\n" +
+                "  <glbm>370402000400</glbm>\n" +
+                "  <fpbj>0</fpbj>\n" +
+                "  <ffbj>0</ffbj>\n" +
+                "  <rkbj>0</rkbj>\n" +
+                "  <clsbdh>LHGGD182772011600</clsbdh>\n" +
+                "</veh>\n" +
+                "</body>\n" +
+                "</root>";
+        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> xmlMap = XmlUtils.parseXml2Map(xml, map);
+        return xmlMap;
+    }
+
+    @Override
+    public DataReuslt OnLinePay(String glbm) {
+        // 根据部门glbm 查询该管理部门下对应的线上缴费账套号、线上支付银行参数信息等
+        String hpzl = "";
+        String ywlx = "";
+        String ywyy = "";
+        String lsh = "";
+        // 根据号牌种类,业务类型,业务原因 查询接动车相关的信息
+        VehiclePayReqDTO vehiclePayReqDTO = new VehiclePayReqDTO();
+        vehiclePayReqDTO.setHpzl(hpzl);
+        vehiclePayReqDTO.setYwlx(ywlx);
+        vehiclePayReqDTO.setYwyy(ywyy);
+        List<VehiclePayReqDTO> vehiclePayList = vehiclePayMapper.getVehiclePayList(vehiclePayReqDTO);
+        if (vehiclePayList.size() != 0) {
+            //获取orderId
+            // 记临时账
+            vehiclePayList.forEach(vehiclePayReqDTO1 -> {
+                String orderId = vehicleOnlinePayMapper.getGenerateOrder(lsh);
+                InvoiceTmp invoiceTmp = new InvoiceTmp();
+                invoiceTmp.setId("");
+                invoiceTmp.setOrderid("");
+                invoiceTmp.setInvoiceId("0");
+                invoiceTmp.setDepartment(glbm);
+                invoiceTmp.setPaperId("");
+                invoiceTmp.setPayUnit("");
+                invoiceTmp.setPayWay("05");
+                invoiceTmp.setTotalMoney(0);
+                invoiceTmp.setTotalPure(0);
+                invoiceTmp.setReceiver("");
+                invoiceTmp.setReceiverId("");
+                invoiceTmp.setPosId("");
+                invoiceTmp.setDates(DateUtils.getCurrentDate());
+                invoiceTmp.setDtimes(DateUtils.getCurrentDate());
+                invoiceTmp.setReceiveAccount("");
+                invoiceTmp.setCheckNumber("");
+                invoiceTmp.setPosInfo("");
+                invoiceTmp.setStatus("1");
+                invoiceTmp.setTypes("1");
+                invoiceTmp.setSfzmhm("");
+                invoiceTmp.setLsh(lsh);
+                invoiceTmp.setCxhp(hpzl);
+                invoiceTmp.setYwlx(ywlx);
+                invoiceTmp.setYwyy(ywyy);
+                invoiceTmp.setYwlb("1");
+                //返回主键id
+                int id = invoiceTmpMapper.addInvoiceTmp(invoiceTmp);
+                InvoiceDetailTmp invoiceDetailTmp = new InvoiceDetailTmp();
+                invoiceDetailTmp.setId("");
+                invoiceDetailTmp.setFeeInvoiceId(String.valueOf(id));
+                invoiceDetailTmp.setDepartment(glbm);
+                invoiceDetailTmp.setAccountId("");
+                invoiceDetailTmp.setInvoiceId("0");
+                invoiceDetailTmp.setPaperId("");
+                invoiceDetailTmp.setDates(DateUtils.getCurrentDate());
+                invoiceDetailTmp.setStatus("1");
+                invoiceDetailTmp.setProjectId(vehiclePayReqDTO1.getProjectId());
+                invoiceDetailTmp.setProjectName(vehiclePayReqDTO1.getProjectName());
+                invoiceDetailTmp.setUnitPrice(vehiclePayReqDTO1.getUnitPrice());
+                invoiceDetailTmp.setQuantity(vehiclePayReqDTO1.getQuantity());
+                invoiceDetailTmp.setClassId(vehiclePayReqDTO1.getClassId());
+                invoiceDetailTmp.setProvinceRate(vehiclePayReqDTO1.getProvinceRate());
+                invoiceDetailTmp.setCityRate(vehiclePayReqDTO1.getCityRate());
+                invoiceDetailTmp.setMaterialCost(0);
+                invoiceDetailTmp.setFinanceCode(vehiclePayReqDTO1.getFinanceCode());
+                invoiceDetailTmp.setPayWay("");
+                invoiceDetailTmp.setOrderId("");
+                invoiceTmpDetailMapper.addInvoiceTmpDetail(invoiceDetailTmp);
+            });
+        } else {
+            return DataReuslt.fail("1", "请添加收费项目信息！");
+        }
+
+
+        return null;
+    }
+
+    public InvoiceTmp setInvoiceTmp(InvoiceTmp invoiceTmp, String orderId) {
+        invoiceTmp.setId("");
+        invoiceTmp.setOrderid(orderId);
+        invoiceTmp.setInvoiceId("0");
+        invoiceTmp.setDepartment("");
+        invoiceTmp.setPaperId("");
+        invoiceTmp.setPayUnit("");
+        invoiceTmp.setPayWay("05");
+        invoiceTmp.setTotalMoney(0);
+        invoiceTmp.setTotalPure(0);
+        invoiceTmp.setReceiver("");
+        invoiceTmp.setReceiverId("");
+        invoiceTmp.setPosId("");
+        invoiceTmp.setDates(DateUtils.getCurrentDate());
+        invoiceTmp.setDtimes(DateUtils.getCurrentDate());
+        invoiceTmp.setReceiveAccount("");
+        invoiceTmp.setCheckNumber("");
+        invoiceTmp.setPosInfo("");
+        invoiceTmp.setStatus("1");
+        invoiceTmp.setTypes("1");
+        invoiceTmp.setSfzmhm("");
+        invoiceTmp.setLsh("");
+        invoiceTmp.setCxhp("");
+        invoiceTmp.setYwlx("");
+        invoiceTmp.setYwyy("");
+        invoiceTmp.setYwlb("1");
+        return invoiceTmp;
+    }
+}

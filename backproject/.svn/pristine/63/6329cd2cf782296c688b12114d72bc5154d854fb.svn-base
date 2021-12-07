@@ -1,0 +1,200 @@
+package com.egintra.common.dto;
+
+import java.util.Date;
+
+/**
+ * 功能按钮返回结果DTO
+ *
+ * @author liushihao
+ * @date 2021/7/09
+ */
+public class RightFuncActionRespDTO {
+
+    /**
+     * 内码
+     */
+    private String id;
+
+    /**
+     * 功能内码
+     */
+    private String funcId;
+
+    /**
+     * 按钮名
+     */
+    private String name;
+
+    /**
+     * 按钮标题
+     */
+    private String title;
+
+    /**
+     * 排序
+     */
+    private String orderNo;
+
+    /**
+     * 状态
+     */
+    private String recordStatus;
+
+    /**
+     * 创建人编码
+     */
+    private String recordCreateCd;
+
+    /**
+     * 创建人名称
+     */
+    private String recordCreateNm;
+
+    /**
+     * 创建时间
+     */
+    private Date recordCreateTm;
+
+    /**
+     * 修改人编码
+     */
+    private String recordModifyCd;
+
+    /**
+     * 修改人名称
+     */
+    private String recordModifyNm;
+
+    /**
+     * 修改日期
+     */
+    private Date recordModifyTm;
+
+    /**
+     * 是否配置权限
+     */
+    private String isPower;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getFuncId() {
+        return funcId;
+    }
+
+    public void setFuncId(String funcId) {
+        this.funcId = funcId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    public String getRecordStatus() {
+        return recordStatus;
+    }
+
+    public void setRecordStatus(String recordStatus) {
+        this.recordStatus = recordStatus;
+    }
+
+    public String getRecordCreateCd() {
+        return recordCreateCd;
+    }
+
+    public void setRecordCreateCd(String recordCreateCd) {
+        this.recordCreateCd = recordCreateCd;
+    }
+
+    public String getRecordCreateNm() {
+        return recordCreateNm;
+    }
+
+    public void setRecordCreateNm(String recordCreateNm) {
+        this.recordCreateNm = recordCreateNm;
+    }
+
+    public Date getRecordCreateTm() {
+        return recordCreateTm;
+    }
+
+    public void setRecordCreateTm(Date recordCreateTm) {
+        this.recordCreateTm = recordCreateTm;
+    }
+
+    public String getRecordModifyCd() {
+        return recordModifyCd;
+    }
+
+    public void setRecordModifyCd(String recordModifyCd) {
+        this.recordModifyCd = recordModifyCd;
+    }
+
+    public String getRecordModifyNm() {
+        return recordModifyNm;
+    }
+
+    public void setRecordModifyNm(String recordModifyNm) {
+        this.recordModifyNm = recordModifyNm;
+    }
+
+    public Date getRecordModifyTm() {
+        return recordModifyTm;
+    }
+
+    public void setRecordModifyTm(Date recordModifyTm) {
+        this.recordModifyTm = recordModifyTm;
+    }
+
+    public String getIsPower() {
+        return isPower;
+    }
+
+    public void setIsPower(String isPower) {
+        this.isPower = isPower;
+    }
+
+    @Override
+    public String toString() {
+        return "RightFuncActionRespDTO{" +
+                "id=" + id +
+                ", funcId=" + funcId +
+                ", name='" + name + '\'' +
+                ", title='" + title + '\'' +
+                ", orderNo='" + orderNo + '\'' +
+                ", recordStatus='" + recordStatus + '\'' +
+                ", recordCreateCd='" + recordCreateCd + '\'' +
+                ", recordCreateNm='" + recordCreateNm + '\'' +
+                ", recordCreateTm=" + recordCreateTm +
+                ", recordModifyCd='" + recordModifyCd + '\'' +
+                ", recordModifyNm='" + recordModifyNm + '\'' +
+                ", recordModifyTm=" + recordModifyTm +
+                ", isPower='" + isPower + '\'' +
+                '}';
+    }
+}

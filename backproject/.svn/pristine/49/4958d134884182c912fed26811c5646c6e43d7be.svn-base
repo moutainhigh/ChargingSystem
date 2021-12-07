@@ -1,0 +1,54 @@
+package com.egintra.feeService.account.service;
+
+import com.egintra.common.dto.AccountReqDTO;
+import com.egintra.common.dto.DictReqDTO;
+import com.egintra.common.utils.DataReuslt;
+
+import java.util.List;
+
+public interface AccountService {
+
+    /**
+     * 查看列表
+     *
+     * @return 结果
+     */
+    DataReuslt getAccountList(AccountReqDTO accountReqDTO);
+
+
+    /**
+     * 添加
+     *
+     * @param accountReqDTO
+     */
+    DataReuslt addAccount(AccountReqDTO accountReqDTO);
+
+
+    /**
+     * 编辑
+     *
+     * @param accountReqDTO
+     */
+    DataReuslt editAccount(List<AccountReqDTO> accountReqDTO);
+
+
+    /**
+     * 查看详情
+     *
+     * @param id
+     * @return
+     */
+    DataReuslt getOne(String id);
+
+
+    /**
+     * 删除
+     *
+     * @param id
+     */
+    DataReuslt deleteById(String id);
+
+
+
+
+}

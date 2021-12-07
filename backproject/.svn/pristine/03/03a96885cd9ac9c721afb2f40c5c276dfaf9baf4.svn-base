@@ -1,0 +1,40 @@
+package com.egintra.common.repository.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.egintra.common.dto.MaterialReqDTO;
+
+import java.util.List;
+
+public interface MaterialMapper extends BaseMapper<MaterialReqDTO> {
+
+    /**
+     * 查看列表
+     *
+     * @return 查询结果
+     */
+    List<MaterialReqDTO> getMaterialList(MaterialReqDTO materialReqDTO);
+
+
+    /**
+     * 添加
+     *
+     * @param materialReqDTO
+     */
+    void addMaterial(MaterialReqDTO materialReqDTO);
+
+
+    /**
+     * 编辑
+     *
+     * @param materialReqDTO
+     */
+    void editMaterial(MaterialReqDTO materialReqDTO);
+
+
+    /**
+     * 删除
+     *
+     * @param id
+     */
+    void deleteById(String id);
+}

@@ -1,0 +1,21 @@
+package com.egintra.common.repository.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.egintra.common.dto.DrvPreasignReqDTO;
+
+public interface DrvPreasignMapper extends BaseMapper<DrvPreasignReqDTO> {
+
+    /**
+     * 查看是否欠费
+     * @return
+     */
+    int checkExamPay(DrvPreasignReqDTO drvPreasignReqDTO);
+
+
+    /**
+     * 根据流水号，身份证号查询信息
+     * @param drvPreasignReqDTO
+     * @return
+     */
+    DrvPreasignReqDTO getDrvPreasignParam(DrvPreasignReqDTO drvPreasignReqDTO);
+}

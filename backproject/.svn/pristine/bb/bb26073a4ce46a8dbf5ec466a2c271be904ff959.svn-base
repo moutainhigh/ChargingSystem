@@ -1,0 +1,68 @@
+package com.egintra.common.utils;
+
+import org.apache.commons.beanutils.BeanUtils;
+
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
+/**
+ * xml格式封装类
+ *
+ * @author liushihao
+ * @date 2021/8/5
+ */
+public class XmlFileUtils {
+
+    public static String getXmlFileHead() {
+        return "<?xml version=\"1.0\" encoding=\"GBK\"?>\n<root>\n";
+    }
+
+    public static String getXmlFileFoot() {
+        return "</root>";
+    }
+
+    public static String bean2XmlUTF8(Object bean, String itemName, String itemId) throws Exception {
+
+        Map p = BeanUtils.describe(bean);
+
+        Set s = p.keySet();
+        Iterator i = s.iterator();
+        StringBuffer buff = new StringBuffer();
+        buff.append("<");
+        buff.append(itemName);
+        if (itemId == null || itemId.equals("")) {
+            buff.append(">");
+        } else {
+            buff.append("id=\''");
+            buff.append(itemId);
+            buff.append("\">");
+        }
+        while (i.hasNext()) {
+            Object key = i.next();
+            if (key.equals("class")) {
+
+            } else {
+                Object value = p.get(key);
+
+                buff.append("\n <");
+                buff.append(key);
+                buff.append(">");
+                if (value == null || value.toString().equals("")) {
+                    buff.append("");
+                } else {
+                    value = Utf8Utils.encodeUTF8(value.toString());
+                    buff.append(value);
+                }
+                buff.append("</");
+                buff.append(key);
+                buff.append(">");
+            }
+        }
+        buff.append("\n</");
+        buff.append(itemName);
+        buff.append(">\n");
+
+        return buff.toString();
+    }
+}

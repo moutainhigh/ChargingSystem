@@ -1,0 +1,47 @@
+package com.egintra.feeService.finance.vehjk.service;
+
+import com.egintra.common.dto.VehicleReqDTO;
+import com.egintra.common.utils.DataReuslt;
+
+import java.util.List;
+
+public interface VehicleService {
+
+    /**
+     * 查看列表
+     *
+     * @return 结果
+     */
+    DataReuslt getVehicleList(VehicleReqDTO VehjkReqDTO);
+
+    /**
+     * 查看列表
+     *
+     * @return 结果
+     */
+    DataReuslt getVehicleLists(VehicleReqDTO VehjkReqDTO);
+
+    /**
+     * 添加
+     *
+     * @param VehjkReqDTO
+     * @return
+     */
+    DataReuslt addVehicle(VehicleReqDTO VehjkReqDTO);
+
+    /**
+     * 编辑
+     *
+     * @param VehjkReqDTO
+     * @return
+     */
+    DataReuslt editVehicle(List<VehicleReqDTO> VehjkReqDTO);
+
+    /**
+     * 删除
+     *
+     * @param vehjkReqDTO
+     * @return
+     */
+    DataReuslt deleteById(VehicleReqDTO vehjkReqDTO);
+}

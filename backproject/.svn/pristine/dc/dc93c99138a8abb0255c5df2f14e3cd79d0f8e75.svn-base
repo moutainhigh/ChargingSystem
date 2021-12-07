@@ -1,0 +1,11 @@
+package com.egintra.common.dto.business;
+
+/**
+ * 测试DTO
+ *
+ * @author liushihao
+ * @date 2021/9/1
+ */
+public class testDTO {
+
+}

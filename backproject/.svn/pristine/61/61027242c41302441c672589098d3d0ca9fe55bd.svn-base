@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.RightRoleuserMapper">
+    <resultMap id="rightRoleMapper" type="com.egintra.common.repository.entity.RightRoleuser">
+        <result column="id"  property="id"/>
+        <result column="role_id"  property="roleId"/>
+        <result column="user_id"  property="userId"/>
+        <result column="record_status"  property="recordStatus"/>
+        <result column="record_create_cd"  property="recordCreateCd"/>
+        <result column="record_create_nm"  property="recordCreateNm"/>
+        <result column="record_create_tm"  property="recordCreateTm"/>
+        <result column="record_modify_cd"  property="recordModifyCd"/>
+        <result column="record_modify_nm"  property="recordModifyNm"/>
+        <result column="record_modify_tm"  property="recordModifyTm"/>
+    </resultMap>
+
+    <select id="queryRoleUsers" resultType="com.egintra.common.dto.RightRoleUserResqDTO">
+        SELECT id,
+        role_id,
+        user_id
+        FROM sys_user_role
+        WHERE record_status = '0'
+        <if test="req.roleId != null and req.roleId != ''">
+            AND role_id = #{req.roleId}
+        </if>
+        <if test="req.userId != null and req.userId != ''">
+            AND user_id = #{req.userId}
+        </if>
+    </select>
+</mapper>

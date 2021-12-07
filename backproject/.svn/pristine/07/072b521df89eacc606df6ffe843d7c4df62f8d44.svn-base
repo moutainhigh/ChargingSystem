@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.MaterialMapper">
+    <resultMap id="rightRoleMapper" type="com.egintra.common.repository.entity.Material">
+        <result column="material_id" property="materialId"/>
+        <result column="material_name" property="materialName"/>
+        <result column="material_cost" property="materialCost"/>
+        <result column="project_id" property="projectId"/>
+        <result column="record_status" property="recordStatus"/>
+        <result column="record_create_cd" property="recordCreateCd"/>
+        <result column="record_create_nm" property="recordCreateNm"/>
+        <result column="record_create_tm" property="recordCreateTm"/>
+        <result column="record_modify_cd" property="recordModifyCd"/>
+        <result column="record_modify_nm" property="recordModifyNm"/>
+        <result column="record_modify_tm" property="recordModifyTm"/>
+    </resultMap>
+
+    <select id="getMaterialList"
+            resultType="com.egintra.common.dto.MaterialReqDTO">
+        SELECT
+        m.material_id materialId,
+        m.material_name materialName,
+        m.material_cost materialCost,
+        m.project_id projectId,
+        m.record_status,
+        m.record_create_tm,
+        m.record_modify_tm,
+        d.PROJECT_NAME projectName
+        FROM
+        fee_material m LEFT JOIN FEE_PROJECT_DETAIL d on
+        m.PROJECT_ID = d.PROJECT_ID
+        <where>
+            m.record_status = '0'
+            <if test="materialName != null and materialName != ''">
+                and m.material_name like CONCAT(CONCAT('%',#{materialName}),'%')
+            </if>
+            <if test="materialCost != null and materialCost != ''">
+                and m.material_cost=#{materialCost}
+            </if>
+        </where>
+        ORDER BY
+        m.record_create_tm
+    </select>
+
+
+    <insert id="addMaterial" parameterType="com.egintra.common.dto.MaterialReqDTO">
+        INSERT INTO fee_material(material_id,
+                                 material_name,
+                                 material_cost,
+                                 project_id,
+                                 record_status,
+                                 record_create_tm,
+                                 record_modify_tm)
+        values (#{materialId,jdbcType=VARCHAR},
+                #{materialName,jdbcType=VARCHAR},
+                #{materialCost,jdbcType=DECIMAL},
+                #{projectId,jdbcType=VARCHAR},
+                #{recordStatus,jdbcType=VARCHAR},
+                #{recordCreateTm,jdbcType=VARCHAR},
+                #{recordModifyTm,jdbcType=VARCHAR})
+    </insert>
+
+
+    <update id="editMaterial">
+        update fee_material
+        <set>
+            <if test="materialName != null and materialName != ''">
+                material_name=#{materialName},
+            </if>
+            <if test="materialCost != null and materialCost != ''">
+                material_cost=#{materialCost},
+            </if>
+
+        </set>
+        where material_id = #{materialId}
+    </update>
+
+
+    <update id="deleteById">
+        update fee_material
+        set record_status = '1'
+        where material_id = #{materialId,jdbcType=VARCHAR}
+    </update>
+</mapper>

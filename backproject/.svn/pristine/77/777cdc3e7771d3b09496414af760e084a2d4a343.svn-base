@@ -1,0 +1,32 @@
+package com.egintra.feeService.pay.service.impl;
+
+import com.egintra.common.dto.pay.FeePayparaReqDTO;
+import com.egintra.common.dto.pay.FeePayparaRespDTO;
+import com.egintra.common.repository.mapper.FeePayparaMapper;
+import com.egintra.common.utils.DataReuslt;
+import com.egintra.feeService.pay.service.FeePayparaService;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+@Service
+public class FeePayparaServiceImpl implements FeePayparaService {
+
+
+    @Resource
+    private FeePayparaMapper feePayparaMapper;
+
+    /**
+     * 获取该管理部门下对应的线上缴费账套号、线上支付银行参数信息
+     *
+     * @param feePayparaReqDTO 参数
+     * @return 结果
+     */
+    @Override
+    public DataReuslt queryPayInfo(FeePayparaReqDTO feePayparaReqDTO) {
+        List<FeePayparaRespDTO> feePayparaRespDTOS = feePayparaMapper.queryFeePaypara(feePayparaReqDTO);
+
+        return DataReuslt.success(feePayparaRespDTOS);
+    }
+}

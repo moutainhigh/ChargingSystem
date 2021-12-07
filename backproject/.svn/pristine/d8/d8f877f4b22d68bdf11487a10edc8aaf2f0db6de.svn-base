@@ -1,0 +1,112 @@
+package com.egintra.feeService.sys.dict.controller;
+
+import com.egintra.common.annotation.ResponseResult;
+import com.egintra.common.dto.DictReqDTO;
+import com.egintra.common.pointcuts.SysToken;
+import com.egintra.common.utils.DataReuslt;
+import com.egintra.feeService.sys.dict.service.DictService;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+/**
+ * 字典接口
+ *
+ * @author zyt
+ * @date 2021/07/22
+ */
+@RestController
+@RequestMapping("/dict")
+@ResponseResult
+public class DictController {
+
+    @Resource
+    private DictService dictService;
+
+    /**
+     * 分页 查看列表
+     *
+     * @return 结果
+     */
+    @SysToken
+    @RequestMapping(value = "/getDictList")
+    public DataReuslt getDictList(@RequestBody DictReqDTO dictReqDTO) {
+
+        return dictService.getDictList(dictReqDTO);
+    }
+
+    /**
+     * 不分页 查看列表
+     *
+     * @return 结果
+     */
+    @SysToken
+    @RequestMapping(value = "/getDictLists")
+    public DataReuslt getDictLists(@RequestBody DictReqDTO dictReqDTO) {
+
+        return dictService.getDictLists(dictReqDTO);
+    }
+
+    /**
+     * 新增单位
+     *
+     * @return 结果
+     */
+    @RequestMapping(value = "/addDict")
+    public DataReuslt addDict(@RequestBody DictReqDTO dictReqDTO) {
+
+        return dictService.addDict(dictReqDTO);
+    }
+
+    /**
+     * 编辑单位
+     *
+     * @return 结果
+     */
+    @SysToken
+    @RequestMapping(value = "/editDict")
+    public DataReuslt editDict(@RequestBody List<DictReqDTO> dictReqDTO) {
+        return dictService.editDict(dictReqDTO);
+    }
+
+
+    /**
+     * 查看单位详情
+     *
+     * @return 结果
+     */
+    @SysToken
+    @RequestMapping(value = "/getOne")
+    public DataReuslt getOne(@RequestBody DictReqDTO dictReqDTO) {
+
+        return dictService.getOne(dictReqDTO.getId());
+    }
+
+    /**
+     * 删除单位
+     *
+     * @return 结果
+     */
+    @SysToken
+    @RequestMapping(value = "/deleteById")
+    public DataReuslt deleteById(@RequestBody DictReqDTO dictReqDTO) {
+
+        return dictService.deleteById(dictReqDTO.getId());
+    }
+
+
+    /**
+     * 根据字典类型查询结果
+     *
+     * @return 结果
+     */
+    @SysToken
+    @RequestMapping(value = "/getListByType")
+    public DataReuslt getListByType(@RequestBody DictReqDTO dictReqDTO) {
+
+        return dictService.getListByType(dictReqDTO.getType());
+    }
+}

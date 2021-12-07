@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.InvoiceTmpMapper">
+    <resultMap id="invoiceTmpMapper" type="com.egintra.common.repository.entity.FeeInvoiceTmp">
+        <result column="id" property="id"/>
+        <result column="department" property="department"/>
+        <result column="account_id" property="accountId"/>
+        <result column="invoice_id" property="invoiceId"/>
+        <result column="paper_id" property="paperId"/>
+        <result column="pay_unit" property="payUnit"/>
+        <result column="pay_way" property="payWay"/>
+        <result column="total_money" property="totalMoney"/>
+        <result column="total_pure" property="totalPure"/>
+        <result column="receiver_id" property="receiverId"/>
+        <result column="receiver" property="receiver"/>
+        <result column="posid" property="posid"/>
+        <result column="dates" property="dates"/>
+        <result column="dtimes" property="dtimes"/>
+        <result column="receive_account" property="receiveAccount"/>
+        <result column="check_number" property="checkNumber"/>
+        <result column="pos_info" property="posInfo"/>
+        <result column="status" property="status"/>
+        <result column="types" property="types"/>
+        <result column="sfzmhm" property="sfzmhm"/>
+        <result column="lsh" property="lsh"/>
+        <result column="cxhp" property="cxhp"/>
+        <result column="ywlx" property="ywlx"/>
+        <result column="ywyy" property="ywyy"/>
+        <result column="ywlb" property="ywlb"/>
+        <result column="orderid" property="orderid"/>
+    </resultMap>
+
+    <insert id="addInvoiceTmp" parameterType="com.egintra.common.dto.InvoiceTmp" useGeneratedKeys="true"
+            keyProperty="id" keyColumn="id">
+        INSERT INTO fee_invoice_tmp(
+          id,
+          department,
+          account_id,
+          invoice_id,
+          paper_id,
+          pay_unit,
+          pay_way,
+          total_money,
+          total_pure,
+          receiver_id,
+          receiver,
+          posid,
+          dates,
+          dtimes,
+          receive_account,
+          check_number,
+          pos_info,
+          status,
+          types,
+          sfzmhm,
+          lsh,
+          cxhp,
+          ywlx,
+          ywyy,
+          ywlb,
+          orderid)
+        VALUES (
+          #{id},
+          #{department},
+          #{accountId},
+          #{invoiceId},
+          #{paperId},
+          #{payUnit},
+          #{payWay},
+          #{totalMoney},
+          #{totalPure},
+          #{receiverId},
+          #{receiver},
+          #{posId},
+          #{dates},
+          #{dtimes},
+          #{receiveAccount},
+          #{checkNumber},
+          #{posInfo},
+          #{status},
+          #{types},
+          #{sfzmhm},
+          #{lsh},
+          #{cxhp},
+          #{ywlx},
+          #{ywyy},
+          #{ywlb},
+          #{orderid})
+    </insert>
+</mapper>

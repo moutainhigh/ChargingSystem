@@ -1,0 +1,228 @@
+package com.egintra.common.dto.finance;
+
+import com.egintra.common.dto.pay.FeePayparaRespDTO;
+
+/**
+ * 获取驾驶证业务缴费信息返回DTO
+ *
+ * @author liushihao
+ * @date 2021/8/6
+ */
+public class FeeDrvjkMeterialRespDTO {
+    /**
+     * 准驾车型
+     */
+    private String zjcx;
+
+    /**
+     * 业务类型
+     */
+    private String ywlx;
+
+    /**
+     * 业务原因
+     */
+    private String ywyy;
+
+    /**
+     * 收费项目代码
+     */
+    private String projectId;
+
+    /**
+     * 收费项目数量
+     */
+    private double quantity;
+
+    /**
+     *
+     */
+    private String projectName;
+
+    /**
+     *
+     */
+    private double unitPrice;
+
+    /**
+     *
+     */
+    private String classId;
+
+    /**
+     *
+     */
+    private String provinceRate;
+
+    /**
+     *
+     */
+    private String cityRate;
+
+    /**
+     *
+     */
+    private String financeCode;
+
+    /**
+     *
+     */
+    private double cost;
+
+
+    private String ywblbm;
+
+    private FeePayparaRespDTO feePayparaRespDTO;
+
+    private String lsh;
+
+    private String xm;
+
+    public String getXm() {
+        return xm;
+    }
+
+    public void setXm(String xm) {
+        this.xm = xm;
+    }
+
+    public String getLsh() {
+        return lsh;
+    }
+
+    public void setLsh(String lsh) {
+        this.lsh = lsh;
+    }
+
+    public String getYwblbm() {
+        return ywblbm;
+    }
+
+    public void setYwblbm(String ywblbm) {
+        this.ywblbm = ywblbm;
+    }
+
+    public FeePayparaRespDTO getFeePayparaRespDTO() {
+        return feePayparaRespDTO;
+    }
+
+    public void setFeePayparaRespDTO(FeePayparaRespDTO feePayparaRespDTO) {
+        this.feePayparaRespDTO = feePayparaRespDTO;
+    }
+
+    public String getZjcx() {
+        return zjcx;
+    }
+
+    public void setZjcx(String zjcx) {
+        this.zjcx = zjcx;
+    }
+
+    public String getYwlx() {
+        return ywlx;
+    }
+
+    public void setYwlx(String ywlx) {
+        this.ywlx = ywlx;
+    }
+
+    public String getYwyy() {
+        return ywyy;
+    }
+
+    public void setYwyy(String ywyy) {
+        this.ywyy = ywyy;
+    }
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
+    }
+
+
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public String getClassId() {
+        return classId;
+    }
+
+    public void setClassId(String classId) {
+        this.classId = classId;
+    }
+
+    public String getProvinceRate() {
+        return provinceRate;
+    }
+
+    public void setProvinceRate(String provinceRate) {
+        this.provinceRate = provinceRate;
+    }
+
+    public String getCityRate() {
+        return cityRate;
+    }
+
+    public void setCityRate(String cityRate) {
+        this.cityRate = cityRate;
+    }
+
+    public String getFinanceCode() {
+        return financeCode;
+    }
+
+    public void setFinanceCode(String financeCode) {
+        this.financeCode = financeCode;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
+    @Override
+    public String toString() {
+        return "FeeDrvjkMeterialRespDTO{" +
+                "zjcx='" + zjcx + '\'' +
+                ", ywlx='" + ywlx + '\'' +
+                ", ywyy='" + ywyy + '\'' +
+                ", projectId='" + projectId + '\'' +
+                ", quantity='" + quantity + '\'' +
+                ", projectName='" + projectName + '\'' +
+                ", unitPrice='" + unitPrice + '\'' +
+                ", classId='" + classId + '\'' +
+                ", provinceRate='" + provinceRate + '\'' +
+                ", cityRate='" + cityRate + '\'' +
+                ", financeCode='" + financeCode + '\'' +
+                ", cost='" + cost + '\'' +
+                '}';
+    }
+}

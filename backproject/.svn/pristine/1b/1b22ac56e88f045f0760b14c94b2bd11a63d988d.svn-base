@@ -1,0 +1,216 @@
+package com.egintra.common.dto;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+/**
+ * 材料信息DTO
+ *
+ * @author zyt
+ * @date 2021/07/28
+ */
+public class VehicleReqDTO extends CommonPage {
+
+    /**
+     * 号牌种类
+     */
+    private String hpzl;
+
+
+    /**
+     * 业务类型
+     */
+    private String ywlx;
+
+    /**
+     * 业务原因
+     */
+    private String ywyy;
+
+    /**
+     * 业务名称
+     */
+    private String ywmc;
+
+    /**
+     * 收费项目明细代码
+     */
+    private String projectId;
+
+    /**
+     * 明细名称
+     */
+    private String projectName;
+
+
+    /**
+     * 收费项目数量
+     */
+    private String quantity;
+
+
+    /**
+     * 收费项目可选必选 0：可选 1：必选
+     */
+    private String options;
+
+
+    /**
+     * 数据状态
+     */
+    private String recordStatus;
+
+
+    /**
+     * 创建人id
+     */
+    private String recordCreateCd;
+
+
+    /**
+     * 创建人
+     */
+    private String recordCreateNm;
+
+    /**
+     * 创建时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private String recordCreateTm;
+
+    /**
+     * 修改人id
+     */
+    private String recordModifyCd;
+
+
+    /**
+     * 修改人
+     */
+    private String recordModifyNm;
+
+    /**
+     * 修改时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private String recordModifyTm;
+
+    public String getHpzl() {
+        return hpzl;
+    }
+
+    public void setHpzl(String hpzl) {
+        this.hpzl = hpzl;
+    }
+
+    public String getYwlx() {
+        return ywlx;
+    }
+
+    public void setYwlx(String ywlx) {
+        this.ywlx = ywlx;
+    }
+
+    public String getYwyy() {
+        return ywyy;
+    }
+
+    public void setYwyy(String ywyy) {
+        this.ywyy = ywyy;
+    }
+
+    public String getYwmc() {
+        return ywmc;
+    }
+
+    public void setYwmc(String ywmc) {
+        this.ywmc = ywmc;
+    }
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getOptions() {
+        return options;
+    }
+
+    public void setOptions(String options) {
+        this.options = options;
+    }
+
+    public String getRecordStatus() {
+        return recordStatus;
+    }
+
+    public void setRecordStatus(String recordStatus) {
+        this.recordStatus = recordStatus;
+    }
+
+    public String getRecordCreateCd() {
+        return recordCreateCd;
+    }
+
+    public void setRecordCreateCd(String recordCreateCd) {
+        this.recordCreateCd = recordCreateCd;
+    }
+
+    public String getRecordCreateNm() {
+        return recordCreateNm;
+    }
+
+    public void setRecordCreateNm(String recordCreateNm) {
+        this.recordCreateNm = recordCreateNm;
+    }
+
+    public String getRecordCreateTm() {
+        return recordCreateTm;
+    }
+
+    public void setRecordCreateTm(String recordCreateTm) {
+        this.recordCreateTm = recordCreateTm;
+    }
+
+    public String getRecordModifyCd() {
+        return recordModifyCd;
+    }
+
+    public void setRecordModifyCd(String recordModifyCd) {
+        this.recordModifyCd = recordModifyCd;
+    }
+
+    public String getRecordModifyNm() {
+        return recordModifyNm;
+    }
+
+    public void setRecordModifyNm(String recordModifyNm) {
+        this.recordModifyNm = recordModifyNm;
+    }
+
+    public String getRecordModifyTm() {
+        return recordModifyTm;
+    }
+
+    public void setRecordModifyTm(String recordModifyTm) {
+        this.recordModifyTm = recordModifyTm;
+    }
+}

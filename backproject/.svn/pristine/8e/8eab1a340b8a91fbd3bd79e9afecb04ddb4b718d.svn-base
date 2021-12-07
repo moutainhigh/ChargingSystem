@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.LoginMapper">
+    <resultMap id="testLoginMapper" type="com.egintra.common.repository.entity.RightUser">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="no" property="no"/>
+        <result column="name" property="name"/>
+        <result column="sex" property="sex"/>
+        <result column="phone" property="phone"/>
+        <result column="password" property="password"/>
+        <result column="record_status" property="recordStatus"/>
+        <result column="record_create_cd" property="recordCreateCd"/>
+        <result column="record_create_nm" property="recordCreateNm"/>
+        <result column="record_create_tm" property="recordCreateTm"/>
+        <result column="record_modify_cd" property="recordModifyCd"/>
+        <result column="record_modify_nm" property="recordModifyNm"/>
+        <result column="record_modify_tm" property="recordModifyTm"/>
+    </resultMap>
+
+    <select id="queryUserInfo" resultMap="testLoginMapper">
+        SELECT
+        id,
+        no,
+        name,
+        sex,
+        password,
+        phone
+        FROM sys_user
+        WHERE
+        1 = 1
+        <if test="req.id != null and req.id != ''">
+            AND id = #{req.id}
+        </if>
+        <if test="req.no != null and req.no != ''">
+            AND no = #{req.no}
+        </if>
+        <if test="req.password != null and req.password != ''">
+            AND password = #{req.password}
+        </if>
+        AND record_status = '0'
+    </select>
+
+    <select id="queryUserInfos" resultMap="testLoginMapper">
+        SELECT id,
+               no,
+               name,
+               sex,
+               phone,
+               record_create_tm,
+               record_modify_tm
+        FROM sys_user
+        WHERE record_status = '0'
+    </select>
+
+    <select id="querySomeUsers" resultMap="testLoginMapper">
+        SELECT id,
+               no,
+               name,
+               sex,
+               phone,
+               record_create_tm,
+               record_modify_tm
+        FROM sys_user
+        WHERE record_status = '0'
+        <if test="req.no != null and req.no != ''">
+            AND no = #{req.no}
+        </if>
+        <if test="req.name != null and req.name != ''">
+            AND name = #{req.name}
+        </if>
+    </select>
+
+    <update id="updatePwd">
+        UPDATE sys_user
+        SET password = #{newPwd}
+        WHERE 1 = 1
+          AND no = #{req.no}
+          AND record_status = '0'
+    </update>
+
+    <update id="batchUpdateUsers">
+        <foreach collection="list" index="index" item="item" open="begin" separator=";" close=";end;">
+            UPDATE sys_user
+               <set>
+                   <if test="item.no != null and item.no != ''">
+                       no = #{item.no}
+                   </if>
+                   <if test="item.name != null and item.name != ''">
+                       ,name = #{item.name}
+                   </if>
+                   <if test="item.sex != null and item.sex != ''">
+                       ,sex = #{item.sex}
+                   </if>
+                   <if test="item.phone != null and item.phone != ''">
+                       ,phone = #{item.phone}
+                   </if>
+               </set>
+            WHERE
+              1 = 1
+              AND id = #{item.id}
+              AND record_status = '0'
+        </foreach>
+    </update>
+
+    <update id="deleteUser">
+        UPDATE sys_user
+        SET record_status = '1'
+        WHERE 1 = 1
+          AND id = #{req.id}
+          AND record_status = '0'
+    </update>
+</mapper>

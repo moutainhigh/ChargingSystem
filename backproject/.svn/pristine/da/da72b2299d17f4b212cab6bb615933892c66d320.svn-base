@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.PubSimplenumberMapper">
+    <resultMap id="pubSimplenumberMapper" type="com.egintra.common.repository.entity.PubSimplenumber">
+        <result column="id" property="id"/>
+        <result column="cate_id" property="cateId"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="expand1" property="expand1"/>
+        <result column="record_status" property="recordStatus"/>
+        <result column="record_create_cd" property="recordCreateCd"/>
+        <result column="record_create_nm" property="recordCreateNm"/>
+        <result column="record_create_tm" property="recordCreateTm"/>
+        <result column="record_modify_cd" property="recordModifyCd"/>
+        <result column="record_modify_nm" property="recordModifyNm"/>
+        <result column="record_modify_tm" property="recordModifyTm"/>
+    </resultMap>
+    <insert id="insertPubSimplenumber">
+        INSERT INTO sys_pub_simplenumber
+          (
+            id,
+            cate_id,
+            name,
+            code,
+            record_status,
+            record_create_tm,
+            record_modify_tm)
+        VALUES
+          (
+            #{req.id},
+            #{req.cateId},
+            #{req.name},
+            #{req.code},
+            #{req.recordStatus},
+            #{req.recordCreateTm},
+            #{req.recordModifyTm})
+    </insert>
+
+    <select id="init" resultType="com.egintra.common.dto.PubSimplenumberRespDTO">
+        SELECT
+          p1.id AS id,
+          p1.cate_id AS cateId,
+          p1.name AS name,
+          p1.code AS code,
+          p1.expand1 AS expand1,
+          p1.record_status AS recordStatus,
+          p1.record_create_tm AS recordCreateTm,
+          p2.name AS cateNm
+        FROM sys_pub_simplenumber p1
+        INNER JOIN sys_pub_simplecate p2 ON p1.cate_id = p2.id
+        AND p2.record_status = '0'
+        WHERE 1 = 1
+          AND p1.record_status = '0'
+          AND p1.cate_id = #{req.cateId}
+          <if test="req.name != null and req.name != ''">
+              AND p1.name like CONCAT(CONCAT('%',#{req.name}),'%')
+          </if>
+        ORDER BY p1.record_create_tm
+    </select>
+
+    <delete id="updateCodeById">
+        delete from sys_pub_simplenumber
+        WHERE id = #{req.id}
+    </delete>
+
+    <update id="batchUpdateCodeById">
+        <foreach collection="list" item="item" index="index" separator=";">
+            UPDATE sys_pub_simplenumber
+            SET record_status = '1'
+            WHERE id = #{item}
+        </foreach>
+    </update>
+
+    <update id="updateCodeInfoById">
+        UPDATE sys_pub_simplenumber
+        SET name=#{req.name},
+            code=#{req.code}
+        WHERE id = #{req.id}
+    </update>
+
+    <select id="queryCodes" resultType="com.egintra.common.dto.PubSimplenumberRespDTO">
+        SELECT
+          id AS id,
+          cate_id AS cateId,
+          name AS name,
+          code AS code,
+          expand1 AS expand1,
+          record_status AS recordStatus,
+          record_create_tm AS recordCreateTm
+        FROM sys_pub_simplenumber
+        WHERE 1 = 1
+          AND record_status = '0'
+          <if test="req.name != null and req.name != ''">
+              AND name = #{req.name}
+          </if>
+          <if test="req.cateId != null and req.cateId != ''">
+              AND cate_id = #{req.cateId}
+          </if>
+        ORDER BY record_create_tm
+    </select>
+
+    <select id="queryCodesByIdAndCd" resultType="com.egintra.common.dto.PubSimplenumberRespDTO">
+        SELECT
+            id AS id,
+            cate_id AS cateId,
+            name AS name,
+            code AS code,
+            expand1 AS expand1,
+            record_status AS recordStatus,
+            record_create_tm AS recordCreateTm
+        FROM sys_pub_simplenumber
+        WHERE 1 = 1
+          AND record_status = '0'
+          AND code = #{req.code}
+          AND id = #{req.id}
+    </select>
+
+    <select id="queryCodesByCd" resultType="com.egintra.common.dto.PubSimplenumberRespDTO">
+        SELECT
+          pu.id AS id,
+          pu.cate_id AS cateId,
+          pu.name AS name,
+          pu.code AS code,
+          pu.expand1 AS expand1,
+          pu.record_status AS recordStatus,
+          pu.record_create_tm AS recordCreateTm
+        FROM sys_pub_simplenumber pu
+        INNER JOIN sys_pub_simplecate pc ON pc.id = pu.cate_id
+        AND pc.id  = #{req.cateId}
+        WHERE 1 = 1
+          AND pu.record_status = '0'
+          AND pu.code = #{req.code}
+        ORDER BY pu.record_create_tm
+    </select>
+
+    <select id="queryNumbersByCateCd" resultType="com.egintra.common.dto.PubSimplenumberRespDTO">
+        SELECT
+        p1.id AS id,
+        p1.cate_id AS cateId,
+        p1.name AS name,
+        p1.code AS code,
+        p1.expand1 AS expand1,
+        p1.record_status AS recordStatus,
+        p1.record_create_tm AS recordCreateTm,
+        p2.name AS cateNm
+        FROM sys_pub_simplenumber p1
+        INNER JOIN sys_pub_simplecate p2 ON p1.cate_id = p2.id
+        AND p2.record_status = '0'
+        WHERE 1 = 1
+        AND p1.record_status = '0'
+        AND p2.code = #{cateCd}
+    </select>
+
+    <select id="getPubSimplenumberRespDTOByParam" resultType="com.egintra.common.dto.PubSimplenumberRespDTO">
+        SELECT
+            p1.id AS id,
+            p1.cate_id AS cateId,
+            p1.name AS name,
+            p1.code AS code,
+            p1.expand1 AS expand1,
+            p1.record_status AS recordStatus,
+            p1.record_create_tm AS recordCreateTm,
+            p2.name AS cateNm
+        FROM sys_pub_simplenumber p1
+                 INNER JOIN sys_pub_simplecate p2 ON p1.cate_id = p2.id
+            AND p2.record_status = '0'
+        WHERE 1 = 1
+          AND p1.record_status = '0'
+          AND p2.code = #{code} and p1.name=#{name}
+    </select>
+
+</mapper>

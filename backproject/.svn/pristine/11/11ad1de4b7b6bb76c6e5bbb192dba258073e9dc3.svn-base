@@ -1,0 +1,53 @@
+package com.egintra.common.repository.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.egintra.common.dto.reportForm.PayTypeReqDTO;
+import com.egintra.common.dto.reportForm.ReportReqDTO;
+import com.egintra.common.repository.entity.FeeInvoice;
+
+import java.util.List;
+
+/**
+ * 报表Mapper
+ *
+ * @author liushihao
+ * @date 2021/9/8
+ */
+public interface ReportMapper extends BaseMapper<FeeInvoice> {
+
+
+    /**
+     * 报表信息查询
+     *
+     * @param reportReqDTO
+     * @return
+     */
+    List<ReportReqDTO> queryReport(ReportReqDTO reportReqDTO);
+
+
+    /**
+     * 获取支付方式列表
+     *
+     * @param reportReqDTO
+     * @return
+     */
+    List<PayTypeReqDTO> getPayTypeList(ReportReqDTO reportReqDTO);
+
+
+    /**
+     * 报表信息查询(省/市)
+     *
+     * @param reportReqDTO
+     * @return
+     */
+    List<ReportReqDTO> queryPCReport(ReportReqDTO reportReqDTO);
+
+
+    /**
+     * 获取支付方式列表（省/市）
+     *
+     * @param reportReqDTO
+     * @return
+     */
+    List<PayTypeReqDTO> getPayPCTypeList(ReportReqDTO reportReqDTO);
+}

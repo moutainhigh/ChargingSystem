@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.RightFunccateMapper">
+    <resultMap id="rightFunccateMapper" type="com.egintra.common.repository.entity.RightFunccate">
+        <result column="id"  property="id"/>
+        <result column="parent_id"  property="parentId"/>
+        <result column="name"  property="name"/>
+        <result column="img"  property="img"/>
+        <result column="order_no"  property="orderNo"/>
+        <result column="record_status"  property="recordStatus"/>
+        <result column="record_create_cd"  property="recordCreateCd"/>
+        <result column="record_create_nm"  property="recordCreateNm"/>
+        <result column="record_create_tm"  property="recordCreateTm"/>
+        <result column="record_modify_cd"  property="recordModifyCd"/>
+        <result column="record_modify_nm"  property="recordModifyNm"/>
+        <result column="record_modify_tm"  property="recordModifyTm"/>
+    </resultMap>
+
+    <select id="queryFunccateInfo"
+            resultType="com.egintra.common.dto.FunctionRespDTO">
+        SELECT
+            f2.id AS id,
+            f2.name AS name,
+            f2.parent_id AS parentId,
+            f2.img AS img,
+            f2.order_no AS orderNo,
+            f2.record_status AS recordStatus,
+            f2.record_create_tm AS recordCreateTm
+        FROM
+        fee_funccate f2
+        WHERE
+            f2.record_status = '0'
+            <if test="req.name != null and req.name != ''">
+                AND f2.name = #{req.name}
+            </if>
+        ORDER BY f2.order_no
+    </select>
+
+    <update id="deleteFunccate">
+        UPDATE fee_funccate
+        SET record_status = '1'
+        WHERE id = #{req.id}
+    </update>
+
+    <update id="updateFunccate">
+        UPDATE fee_funccate
+        SET name = #{req.name},
+            record_modify_tm = #{req.recordModifyTm}
+        WHERE 1 = 1
+          AND id = #{req.id}
+          AND record_status = '0'
+    </update>
+</mapper>

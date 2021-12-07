@@ -1,0 +1,87 @@
+package com.egintra.common.dto;
+
+import java.util.List;
+
+/**
+ * 功能权限请求DTO
+ *
+ * @author liushihao
+ * @date 2021/06/24
+ */
+public class RightFuncrightReqDTO {
+    /**
+     * 内码
+     */
+    private Integer id;
+
+    /**
+     * 角色内码
+     */
+    private Integer roleId;
+
+    /**
+     * 分类内码
+     */
+    private Integer funccateId;
+
+    /**
+     * 功能内码集合
+     */
+    private List<Integer>  funcIds;
+
+    /**
+     * 按钮内码集合
+     */
+    private List<Integer>  actionIds;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
+
+    public List<Integer> getFuncIds() {
+        return funcIds;
+    }
+
+    public void setFuncIds(List<Integer> funcIds) {
+        this.funcIds = funcIds;
+    }
+
+    public Integer getFunccateId() {
+        return funccateId;
+    }
+
+    public void setFunccateId(Integer funccateId) {
+        this.funccateId = funccateId;
+    }
+
+    public List<Integer> getActionIds() {
+        return actionIds;
+    }
+
+    public void setActionIds(List<Integer> actionIds) {
+        this.actionIds = actionIds;
+    }
+
+    @Override
+    public String toString() {
+        return "RightFuncrightReqDTO{" +
+                "id=" + id +
+                ", roleId=" + roleId +
+                ", funccateId=" + funccateId +
+                ", funcIds=" + funcIds +
+                ", actionIds=" + actionIds +
+                '}';
+    }
+}

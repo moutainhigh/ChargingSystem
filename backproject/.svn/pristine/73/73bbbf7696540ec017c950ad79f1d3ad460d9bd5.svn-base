@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.DepartmentMapper">
+    <resultMap id="rightRoleMapper" type="com.egintra.common.repository.entity.Department">
+        <result column="unit_region" property="id"/>
+        <result column="unit_name" property="unitName"/>
+        <result column="unit_level" property="unitLevel"/>
+        <result column="remark" property="remark"/>
+        <result column="record_status" property="recordStatus"/>
+        <result column="record_create_cd" property="recordCreateCd"/>
+        <result column="record_create_nm" property="recordCreateNm"/>
+        <result column="record_create_tm" property="recordCreateTm"/>
+        <result column="record_modify_cd" property="recordModifyCd"/>
+        <result column="record_modify_nm" property="recordModifyNm"/>
+        <result column="record_modify_tm" property="recordModifyTm"/>
+    </resultMap>
+
+    <select id="getDepartmentList"
+            resultType="com.egintra.common.dto.DepartmentReqDTO">
+        SELECT
+        unit_region id,
+        unit_name unitName,
+        unit_level unitLevel,
+        remark remark,
+        record_status,
+        record_create_tm,
+        record_modify_tm
+        FROM
+        fee_department
+        <where>
+            record_status = '0'
+            <if test="unitName != null and unitName != ''">
+                and unit_name like  CONCAT(CONCAT('%',#{unitName}),'%')
+            </if>
+            <if test="unitLevel != null and unitLevel != ''">
+                and unit_level=#{unitLevel}
+            </if>
+        </where>
+        ORDER BY
+        record_create_tm
+    </select>
+
+
+    <insert id="addDepartment" parameterType="com.egintra.common.dto.DepartmentReqDTO">
+        INSERT INTO fee_department(unit_region,
+                                   unit_name,
+                                   unit_level,
+                                   remark,
+                                   record_status,
+                                   record_create_tm,
+                                   record_modify_tm)
+        values (#{id,jdbcType=VARCHAR},
+                #{unitName,jdbcType=VARCHAR},
+                #{unitLevel,jdbcType=VARCHAR},
+                #{remark,jdbcType=VARCHAR},
+                #{recordStatus,jdbcType=VARCHAR},
+                #{recordCreateTm,jdbcType=VARCHAR},
+                #{recordModifyTm,jdbcType=VARCHAR})
+    </insert>
+
+
+    <update id="editDepart">
+        update fee_department
+        <set>
+            <if test="unitName != null and unitName != ''">
+                unit_name=#{unitName},
+            </if>
+            <if test="unitLevel != null and unitLevel != ''">
+                unit_level=#{unitLevel},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark=#{remark},
+            </if>
+
+        </set>
+        where unit_region = #{id}
+    </update>
+
+
+    <update id="deleteById">
+        update fee_department
+        set record_status = '1'
+        where unit_region = #{id}
+    </update>
+</mapper>

@@ -1,0 +1,50 @@
+package com.egintra.feeService.projectclass.service;
+
+import com.egintra.common.dto.ProjectClassReqDTO;
+import com.egintra.common.utils.DataReuslt;
+
+public interface ProjectClassService {
+
+
+    /**
+     * 查看列表
+     *
+     * @return 结果
+     */
+     DataReuslt getProjectClassList(ProjectClassReqDTO projectClassReqDTO);
+
+
+    /**
+     * 查看列表
+     *
+     * @return 结果
+     */
+    DataReuslt getProjectClassLists(ProjectClassReqDTO projectClassReqDTO);
+
+
+    /**
+     * 添加
+     * @param projectClassReqDTO
+     * @return
+     */
+    DataReuslt addProjectClass(ProjectClassReqDTO projectClassReqDTO);
+
+
+
+    /**
+     * 编辑
+     * @param projectClassReqDTO
+     * @return
+     */
+    DataReuslt editProjectClass(ProjectClassReqDTO projectClassReqDTO);
+
+
+    /**
+     * 编辑
+     * @param id
+     * @return
+     */
+    DataReuslt deleteById(String id);
+
+
+}

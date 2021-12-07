@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>行政规费</title>
+    <link rel="shortcut icon" href="#"/>
+    <link rel="stylesheet" href="../static/css/weui.min.css">
+
+    <script src="../static/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="../static/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../static/js/bootstrap-table.min.js" type="text/javascript"></script>
+
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            height: 0;
+        }
+    </style>
+
+</head>
+<body>
+<view class="page__bd">
+    <view class="weui-grids">
+        <navigator url="" class="weui-grid" hover-class="weui-grid_active">
+            <image class="weui-grid__icon" src="../static/image/car.png"
+                   style="width: 50%;height: auto;margin: 0 25%;"/>
+            <view class="weui-grid__label">车管缴费</view>
+        </navigator>
+
+        <navigator url="" class="weui-grid" hover-class="weui-grid_active">
+            <image class="weui-grid__icon" src="../static/image/car.png"
+                   style="width: 50%;height: auto;margin: 0 25%;"/>
+            <view class="weui-grid__label" style="margin-top: 10px;">驾管缴费</view>
+        </navigator>
+
+        <navigator url="" class="weui-grid" hover-class="weui-grid_active">
+            <image class="weui-grid__icon" src="../static/image/car.png"
+                   style="width: 50%;height: auto;margin: 0 25%;"/>
+            <view class="weui-grid__label" style="margin-top: 10px;">初次考试费</view>
+        </navigator>
+
+        <navigator url="" class="weui-grid" hover-class="weui-grid_active">
+            <image class="weui-grid__icon" src="../static/image/car.png"
+                   style="width: 50%;height: auto;margin: 0 25%;"/>
+            <view class="weui-grid__label" style="margin-top: 10px;">补考费</view>
+        </navigator>
+    </view>
+</view>
+
+</body>
+</html>

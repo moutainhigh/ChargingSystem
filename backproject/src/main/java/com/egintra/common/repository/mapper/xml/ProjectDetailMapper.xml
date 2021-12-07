@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.ProjectDetailMapper">
+    <resultMap id="ProjectClassMapper" type="com.egintra.common.repository.entity.ProjectDetail">
+        <result column="project_id" property="projectId"/>
+        <result column="project_name" property="projectName"/>
+        <result column="unit_price" property="unitPrice"/>
+        <result column="class_id" property="classId"/>
+    </resultMap>
+
+    <select id="getProjectDetailList"
+            resultType="com.egintra.common.dto.ProjectDetailReqDTO">
+        SELECT
+        pd.project_id AS projectId,
+        pd.project_name AS projectName,
+        pd.unit_price AS unitPrice,
+        pd.class_id AS classId,
+        pc.class_name AS className
+        FROM
+        fee_project_detail pd
+        LEFT JOIN fee_project_class pc ON pd.class_id = pc.class_id
+        <where>
+            <if test="projectId != null and projectId != ''">
+                and pd.project_id like CONCAT(CONCAT('%',#{projectId}),'%')
+            </if>
+            <if test="projectName != null and projectName != ''">
+                and pd.project_name like CONCAT(CONCAT('%',#{projectName}),'%')
+            </if>
+            <if test="unitPrice != null and unitPrice != ''">
+                and pd.unit_price=#{unitPrice}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addProjectDetail" parameterType="com.egintra.common.dto.ProjectDetailReqDTO">
+        INSERT INTO fee_project_detail(
+          project_id,
+          project_name,
+          unit_price,
+          class_id)
+        VALUES (
+          #{projectId},
+          #{projectName},
+          #{unitPrice},
+          #{classId})
+    </insert>
+
+    <select id="getOne" resultType="com.egintra.common.dto.ProjectDetailReqDTO">
+        SELECT
+          project_id AS projectId,
+          project_name AS projectName,
+          unit_price AS unitPrice,
+          class_id AS classId
+        FROM
+          fee_project_detail
+        WHERE
+          project_id = #{projectId}
+    </select>
+
+    <select id="findByName" resultType="com.egintra.common.dto.ProjectDetailReqDTO">
+        SELECT
+          project_id AS projectId,
+          project_name AS projectName,
+          unit_price AS unitPrice,
+          class_id AS classId
+        FROM
+          fee_project_detail
+        WHERE
+          project_name = #{projectName}
+    </select>
+
+    <select id="findByNameParam" resultType="com.egintra.common.dto.ProjectDetailReqDTO">
+        SELECT
+          project_id AS projectId,
+          project_name AS projectName,
+          UNIT_PRICE AS unitPrice,
+          class_id AS classId
+        FROM
+          fee_project_detail
+        WHERE
+          project_name = #{projectName}
+          AND project_id = #{projectId}
+    </select>
+
+    <select id="getDetailList" resultType="com.egintra.common.dto.ProjectDetailReqDTO">
+        SELECT
+          project_id AS projectId,
+          project_name AS projectName,
+          UNIT_PRICE AS unitPrice,
+          class_id AS classId
+        FROM
+          fee_project_detail
+        WHERE
+          class_id = #{classId}
+    </select>
+
+    <update id="editProjectDetail">
+        <foreach collection="list" index="index" item="item" open="begin" separator=";" close=";end;">
+            update fee_project_detail
+            <set>
+                <if test="item.projectName != null and item.projectName != ''">
+                    project_name=#{item.projectName},
+                </if>
+                <if test="item.unitPrice != null and item.unitPrice != ''">
+                    unit_price=#{item.unitPrice},
+                </if>
+                <if test="item.classId != null and item.classId != ''">
+                    class_id=#{item.classId}
+                </if>
+            </set>
+            where project_id = #{item.projectId}
+        </foreach>
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM fee_project_detail
+        WHERE project_id = #{projectId}
+    </delete>
+</mapper>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.PayInfoMapper">
+
+
+    <insert id="addPayInfo" parameterType="com.egintra.common.dto.pay.PayinfoReqDTO">
+        INSERT INTO fee_payinfo(orderid,
+                                zfwz,
+                                ywlb,
+                                lsh,
+                                je,
+                                ywlx,
+                                ywyy,
+                                glbm,
+                                shdm,
+                                shgtdm,
+                                fhdm,
+                                bizh,
+                                jym,
+                                jklx,
+                                gkey,
+                                wglx,
+                                fzjg,
+                                yhdh,
+                                yhxm,
+                                ip,
+                                dyzt,
+                                jkr,
+                                sfzmhm,
+                                jflb,
+                                zffs,
+                                dates,
+                                zfbj,
+                                zfmsg,
+                                jzbj,
+                                jzmsg,
+                                jsbj,
+                                jsmsg,
+                                gxsj)
+
+        values (#{orderId},
+                #{zfwz},
+                #{ywlb},
+                #{lsh},
+                #{je},
+                #{ywlx},
+                #{ywyy},
+                #{glbm},
+                #{shdm},
+                #{shgtdm},
+                #{fhdm},
+                #{bizh},
+                #{jym},
+                #{jklx},
+                #{gkey},
+                #{wglx},
+                #{fzjg},
+                #{yhdh},
+                #{yhxm},
+                #{ip},
+                #{dyzt},
+                #{jkr},
+                #{sfzmhm},
+                #{jflb},
+                #{zffs},
+                #{dates},
+                #{zfbj},
+                #{zfmsg},
+                #{jzbj},
+                #{jzmsg},
+                #{jsbj},
+                #{jsmsg},
+                #{gxsj})
+
+    </insert>
+
+    <update id="updateStatus">
+        update fee_payinfo
+        set zfbj=#{zfbj}
+        where orderid = #{orderId}
+    </update>
+
+    <select id="getPayInfoList" resultType="com.egintra.common.dto.pay.PayinfoReqDTO">
+        select orderid,
+               zfwz,
+               ywlb,
+               lsh,
+               je,
+               ywlx,
+               ywyy,
+               glbm,
+               shdm,
+               shgtdm,
+               fhdm,
+               bizh,
+               jym,
+               jklx,
+               gkey,
+               wglx,
+               fzjg,
+               yhdh,
+               yhxm,
+               ip,
+               dyzt,
+               jkr,
+               sfzmhm,
+               jflb,
+               zffs,
+               dates,
+               zfbj,
+               zfmsg,
+               jzbj,
+               jzmsg,
+               jsbj,
+               jsmsg,
+               gxsj
+        from fee_payinfo
+        where zfbj = '0'
+    </select>
+
+</mapper>

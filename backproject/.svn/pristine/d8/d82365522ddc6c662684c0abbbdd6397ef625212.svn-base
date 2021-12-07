@@ -1,0 +1,77 @@
+package com.egintra.feeService.user.service.impl;
+
+import com.egintra.common.dto.RightRoleUserReqDTO;
+import com.egintra.common.dto.RightRoleUserResqDTO;
+import com.egintra.common.dto.RightUserDTO;
+import com.egintra.common.exception.ResultCode;
+import com.egintra.common.repository.entity.RightRoleuser;
+import com.egintra.common.repository.mapper.RightRoleMapper;
+import com.egintra.common.repository.mapper.RightRoleuserMapper;
+import com.egintra.common.utils.DataReuslt;
+import com.egintra.feeService.user.service.SysUserService;
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+@Service
+public class SysUserServiceImpl implements SysUserService {
+
+    @Resource
+    private RightRoleMapper rightRoleMapper;
+    @Resource
+    private RightRoleuserMapper rightRoleuserMapper;
+
+    /**
+     * 根据用户ID查询已配置的角色
+     *
+     * @param rightUserDTO 参数
+     * @return 结果
+     */
+    @Override
+    public DataReuslt getUserAllRoles(RightUserDTO rightUserDTO) {
+        // 设置查询条件查询角色用户信息
+        RightRoleUserReqDTO dto = new RightRoleUserReqDTO();
+        dto.setUserId(rightUserDTO.getId());
+        List<RightRoleUserResqDTO> rightRoleUsers = rightRoleuserMapper.queryRoleUsers(dto);
+
+        // 返回结果
+        return DataReuslt.success(rightRoleUsers);
+    }
+
+    /**
+     * 更新用户角色信息
+     *
+     * @param rightRoleUserReqDTO 请求对象
+     * @return 处理结果
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public DataReuslt updateRoleUserInfo(RightRoleUserReqDTO rightRoleUserReqDTO) {
+
+        // 先根据用户ID查询用户角色关系表获取当前用户已经设置的角色权限
+        List<RightRoleUserResqDTO> rightRoleUsers = rightRoleuserMapper.queryRoleUsers(rightRoleUserReqDTO);
+
+
+        // 如果查询当前用户角色关系不为空，删除原已配置的，再保存新的;否则直接保存
+//
+//        // 验证参数，为空则报错
+//        if (null == rightRoleUserReqDTO) {
+//            return DataReuslt.fail(ResultCode.USER_INFO_IS_EMPTY.code(),
+//                    ResultCode.USER_INFO_IS_EMPTY.message());
+//        }
+//        List<RightRoleUserResqDTO> roleUsers = rightRoleuserMapper.queryRoleUsers(rightRoleUserReqDTO);
+//        // 如果当前用户未配置此角色则插入
+//        if (CollectionUtils.isEmpty(roleUsers)) {
+//            RightRoleuser rightRoleuser = new RightRoleuser();
+//            BeanUtils.copyProperties(rightRoleUserReqDTO, rightRoleuser);
+//            rightRoleuserMapper.insert(rightRoleuser);
+//        }
+
+        // 返回结果
+        return DataReuslt.success();
+    }
+}

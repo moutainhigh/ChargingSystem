@@ -1,0 +1,86 @@
+package com.egintra.common.dto;
+
+/**
+ * 用户角色组态请求DTO
+ *
+ * @author liushihao
+ * @date 2021/06/18
+ */
+public class RightRoleUserReqDTO {
+
+    /**
+     * id
+     */
+    private String id;
+
+    /**
+     * 角色ID
+     */
+    private String roleId;
+
+    /**
+     * 用户ID
+     */
+    private String userId;
+
+    /**
+     * 功能菜单ID
+     */
+    private Integer funcMenuId;
+
+    /**
+     * 分类菜单ID
+     */
+    private Integer cateMenuId;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public Integer getFuncMenuId() {
+        return funcMenuId;
+    }
+
+    public void setFuncMenuId(Integer funcMenuId) {
+        this.funcMenuId = funcMenuId;
+    }
+
+    public Integer getCateMenuId() {
+        return cateMenuId;
+    }
+
+    public void setCateMenuId(Integer cateMenuId) {
+        this.cateMenuId = cateMenuId;
+    }
+
+    @Override
+    public String toString() {
+        return "RightRoleUserReqDTO{" +
+                "id='" + id + '\'' +
+                ", roleId='" + roleId + '\'' +
+                ", userId='" + userId + '\'' +
+                ", funcMenuId=" + funcMenuId +
+                ", cateMenuId=" + cateMenuId +
+                '}';
+    }
+}

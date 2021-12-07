@@ -1,0 +1,175 @@
+package com.egintra.common.dto;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+/**
+ * 单位信息DTO
+ *
+ * @author zyt
+ * @date 2021/07/28
+ */
+public class DepartmentReqDTO extends CommonPage {
+
+    /**
+     * 主键
+     */
+    private String unitRegion;
+
+    /**
+     * 单位名称
+     */
+    private String unitName;
+
+    /**
+     * 单位类型
+     */
+    private String unitLevel;
+
+    /**
+     * 单位名称
+     */
+    private String levelName;
+
+    /**
+     * 单位描述
+     */
+    private String remark;
+
+
+    /**
+     * 数据状态
+     */
+    private String recordStatus;
+
+
+    /**
+     * 创建人id
+     */
+    private String recordCreateCd;
+
+
+    /**
+     * 创建人
+     */
+    private String recordCreateNm;
+
+    /**
+     * 创建时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private String recordCreateTm;
+
+    /**
+     * 修改人id
+     */
+    private String recordModifyCd;
+
+
+    /**
+     * 修改人
+     */
+    private String recordModifyNm;
+
+    /**
+     * 修改时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private String recordModifyTm;
+
+
+    public String getUnitRegion() {
+        return unitRegion;
+    }
+
+    public void setUnitRegion(String unitRegion) {
+        this.unitRegion = unitRegion;
+    }
+
+    public String getUnitName() {
+        return unitName;
+    }
+
+    public void setUnitName(String unitName) {
+        this.unitName = unitName;
+    }
+
+    public String getUnitLevel() {
+        return unitLevel;
+    }
+
+    public void setUnitLevel(String unitLevel) {
+        this.unitLevel = unitLevel;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getRecordStatus() {
+        return recordStatus;
+    }
+
+    public void setRecordStatus(String recordStatus) {
+        this.recordStatus = recordStatus;
+    }
+
+    public String getRecordCreateCd() {
+        return recordCreateCd;
+    }
+
+    public void setRecordCreateCd(String recordCreateCd) {
+        this.recordCreateCd = recordCreateCd;
+    }
+
+    public String getRecordCreateNm() {
+        return recordCreateNm;
+    }
+
+    public void setRecordCreateNm(String recordCreateNm) {
+        this.recordCreateNm = recordCreateNm;
+    }
+
+    public String getRecordCreateTm() {
+        return recordCreateTm;
+    }
+
+    public void setRecordCreateTm(String recordCreateTm) {
+        this.recordCreateTm = recordCreateTm;
+    }
+
+    public void setRecordModifyTm(String recordModifyTm) {
+        this.recordModifyTm = recordModifyTm;
+    }
+
+    public String getRecordModifyCd() {
+        return recordModifyCd;
+    }
+
+    public void setRecordModifyCd(String recordModifyCd) {
+        this.recordModifyCd = recordModifyCd;
+    }
+
+    public String getRecordModifyNm() {
+        return recordModifyNm;
+    }
+
+    public void setRecordModifyNm(String recordModifyNm) {
+        this.recordModifyNm = recordModifyNm;
+    }
+
+    public String getRecordModifyTm() {
+        return recordModifyTm;
+    }
+
+    public String getLevelName() {
+        return levelName;
+    }
+
+    public void setLevelName(String levelName) {
+        this.levelName = levelName;
+    }
+}

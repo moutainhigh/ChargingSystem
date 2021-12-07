@@ -1,0 +1,26 @@
+package com.egintra.common.repository.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.egintra.common.dto.pay.FeePayinfoRespDTO;
+import com.egintra.common.dto.pay.PayinfoReqDTO;
+import com.egintra.common.repository.entity.FeePayinfo;
+
+import java.util.List;
+
+public interface PayInfoMapper extends BaseMapper<FeePayinfo> {
+
+    /**
+     * 添加支付请求信息
+     */
+    void addPayInfo(PayinfoReqDTO payinfoReqDTO);
+
+    /**
+     * 根据支付标记、记账标记、解锁标记查询支付信息表
+     *
+     * @param zfbj 支付标记
+     * @param jzbj 记账标记
+     * @param jsbj 解锁标记
+     * @return 查询结果
+     */
+    List<FeePayinfoRespDTO> queryUnpaidInfos(String zfbj, String jzbj, String jsbj);
+}

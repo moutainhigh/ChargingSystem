@@ -1,0 +1,46 @@
+package com.egintra.feeService.business.service.impl;
+
+import com.egintra.common.dto.pay.PayExaminationFeeReqDTO;
+import com.egintra.common.utils.DataReuslt;
+import com.egintra.common.utils.StringUtil;
+import com.egintra.feeService.business.service.ExamPayService;
+import org.springframework.stereotype.Service;
+
+/**
+ * 考试缴费实现
+ *
+ * @author liushihao
+ * @date 2021/9/10
+ */
+@Service
+public class ExamPayServiceImpl implements ExamPayService {
+
+    /**
+     * 查询考试缴费信息
+     *
+     * @param reqDTO 查询条件
+     * @return 查询结果
+     */
+    @Override
+    public DataReuslt queryExamPayInfo(PayExaminationFeeReqDTO reqDTO) {
+
+        if (StringUtil.isEmpty(reqDTO.getNumber())) {
+            return DataReuslt.fail("", "");
+        }
+        String number = reqDTO.getNumber();
+        if (13 == number.length()) {
+            reqDTO.setLsh(number);
+        } else reqDTO.setSfzmhm(number);
+
+        // 获取系统时间和账套工作日期，比较账套工作日期是否大于或者等于系统日期，否则更新账套工作日期，是则进行业务操作
+
+        // 取得获取数据方式
+
+        // 判断是否欠费
+
+        // 调取驾驶证业务缴费信息服务接口,获取收费参数数据
+
+
+        return DataReuslt.success();
+    }
+}

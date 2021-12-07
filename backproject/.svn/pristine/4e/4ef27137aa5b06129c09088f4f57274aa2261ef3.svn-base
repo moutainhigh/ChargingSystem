@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.ProjectClassMapper">
+    <resultMap id="ProjectClassMapper" type="com.egintra.common.repository.entity.ProjectClass">
+        <result column="class_id" property="id"/>
+        <result column="class_name" property="className"/>
+        <result column="province_rate" property="provinceRate"/>
+        <result column="city_rate" property="cityRate"/>
+        <result column="project_property" property="projectProperty"/>
+        <result column="class_property" property="classProperty"/>
+        <result column="finance_code" property="financeCode"/>
+        <result column="record_status" property="recordStatus"/>
+        <result column="record_create_cd" property="recordCreateCd"/>
+        <result column="record_create_nm" property="recordCreateNm"/>
+        <result column="record_create_tm" property="recordCreateTm"/>
+        <result column="record_modify_cd" property="recordModifyCd"/>
+        <result column="record_modify_nm" property="recordModifyNm"/>
+        <result column="record_modify_tm" property="recordModifyTm"/>
+    </resultMap>
+
+    <select id="getProjectClassList"
+            resultType="com.egintra.common.dto.ProjectClassReqDTO">
+        SELECT
+        class_id id,
+        class_name className,
+        province_rate provinceRate,
+        city_rate cityRate,
+        project_property projectProperty,
+        class_property classProperty,
+        finance_code financeCode,
+        record_status,
+        record_create_tm,
+        record_modify_tm
+        FROM
+        fee_project_class
+        <where>
+            record_status = '0'
+            <if test="className != null and className != ''">
+                and class_name like  CONCAT(CONCAT('%',#{className}),'%')
+            </if>
+            <if test="provinceRate != null and provinceRate != ''">
+                and province_rate=#{provinceRate}
+            </if>
+            <if test="cityRate != null and cityRate != ''">
+                and city_rate=#{cityRate}
+            </if>
+            <if test="projectProperty != null and projectProperty != ''">
+                and project_property=#{projectProperty}
+            </if>
+            <if test="classProperty != null and classProperty != ''">
+                and class_property=#{classProperty}
+            </if>
+            <if test="financeCode != null and financeCode != ''">
+                and finance_code=#{financeCode}
+            </if>
+        </where>
+        ORDER BY
+        record_create_tm
+    </select>
+
+
+    <insert id="addProjectClass" parameterType="com.egintra.common.dto.ProjectClassReqDTO">
+        INSERT INTO fee_project_class(class_id,
+                                      class_name,
+                                      province_rate,
+                                      city_rate,
+                                      project_property,
+                                      class_property,
+                                      finance_code,
+                                   record_status,
+                                   record_create_tm,
+                                   record_modify_tm)
+        values (#{id,jdbcType=VARCHAR},
+                #{className,jdbcType=VARCHAR},
+                #{provinceRate,jdbcType=DECIMAL},
+                #{cityRate,jdbcType=DECIMAL},
+                #{projectProperty,jdbcType=VARCHAR},
+                #{classProperty,jdbcType=VARCHAR},
+                #{financeCode,jdbcType=VARCHAR},
+                #{recordStatus,jdbcType=VARCHAR},
+                #{recordCreateTm,jdbcType=VARCHAR},
+                #{recordModifyTm,jdbcType=VARCHAR})
+    </insert>
+
+
+    <update id="editProjectClass">
+        update fee_project_class
+        <set>
+            <if test="className != null and className != ''">
+                class_name=#{className},
+            </if>
+            <if test="provinceRate != null and provinceRate != ''">
+                province_rate=#{provinceRate},
+            </if>
+            <if test="cityRate != null and cityRate != ''">
+                city_rate=#{cityRate},
+            </if>
+            <if test="projectProperty != null and projectProperty != ''">
+                project_property=#{projectProperty},
+            </if>
+            <if test="classProperty != null and classProperty != ''">
+                class_property=#{classProperty},
+            </if>
+            <if test="financeCode != null and financeCode != ''">
+                finance_code=#{financeCode},
+            </if>
+
+        </set>
+        where class_id = #{id}
+    </update>
+
+
+    <update id="deleteById">
+        update fee_project_class
+        set record_status = '1'
+        where class_id = #{id}
+    </update>
+</mapper>

@@ -1,0 +1,230 @@
+package com.egintra.common.dto;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
+
+/**
+ * 账套设置DTO
+ *
+ * @author zyt
+ * @date 2021/08/04
+ */
+public class AccountReqDTO extends CommonPage {
+
+    /**
+     * 单位代码
+     */
+    private String departmentId;
+
+    /**
+     *账套号
+     */
+    private String accountId;
+
+    /**
+     * 状态 1：正常 0：停用 2：暂停
+     */
+    private String status;
+
+    /**
+     * 工作日期
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date workDate;
+
+    /**
+     * 结算标记
+     */
+    private String collectFlag;
+
+    /**
+     * 执收单位编码
+     */
+    private String receiveAccount;
+
+    /**
+     * Pos收银机号
+     */
+    private String posMachineId;
+
+
+    /**
+     *Pos收银员工
+     */
+    private String posPersonId;
+
+    /**
+     * 虚拟发票号 默认0 开票后自增
+     */
+    private String fictitiousId;
+
+
+    /**
+     * 数据状态
+     */
+    private String recordStatus;
+
+
+    /**
+     * 创建人id
+     */
+    private String recordCreateCd;
+
+
+    /**
+     * 创建人
+     */
+    private String recordCreateNm;
+
+    /**
+     * 创建时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date recordCreateTm;
+
+    /**
+     * 修改人id
+     */
+    private String recordModifyCd;
+
+
+    /**
+     * 修改人
+     */
+    private String recordModifyNm;
+
+    /**
+     * 修改时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date recordModifyTm;
+
+    public String getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getWorkDate() {
+        return workDate;
+    }
+
+    public void setWorkDate(Date workDate) {
+        this.workDate = workDate;
+    }
+
+    public String getCollectFlag() {
+        return collectFlag;
+    }
+
+    public void setCollectFlag(String collectFlag) {
+        this.collectFlag = collectFlag;
+    }
+
+    public String getReceiveAccount() {
+        return receiveAccount;
+    }
+
+    public void setReceiveAccount(String receiveAccount) {
+        this.receiveAccount = receiveAccount;
+    }
+
+    public String getPosMachineId() {
+        return posMachineId;
+    }
+
+    public void setPosMachineId(String posMachineId) {
+        this.posMachineId = posMachineId;
+    }
+
+    public String getPosPersonId() {
+        return posPersonId;
+    }
+
+    public void setPosPersonId(String posPersonId) {
+        this.posPersonId = posPersonId;
+    }
+
+    public String getFictitiousId() {
+        return fictitiousId;
+    }
+
+    public void setFictitiousId(String fictitiousId) {
+        this.fictitiousId = fictitiousId;
+    }
+
+    public String getRecordStatus() {
+        return recordStatus;
+    }
+
+    public void setRecordStatus(String recordStatus) {
+        this.recordStatus = recordStatus;
+    }
+
+    public String getRecordCreateCd() {
+        return recordCreateCd;
+    }
+
+    public void setRecordCreateCd(String recordCreateCd) {
+        this.recordCreateCd = recordCreateCd;
+    }
+
+    public String getRecordCreateNm() {
+        return recordCreateNm;
+    }
+
+    public void setRecordCreateNm(String recordCreateNm) {
+        this.recordCreateNm = recordCreateNm;
+    }
+
+    public Date getRecordCreateTm() {
+        return recordCreateTm;
+    }
+
+    public void setRecordCreateTm(Date recordCreateTm) {
+        this.recordCreateTm = recordCreateTm;
+    }
+
+    public String getRecordModifyCd() {
+        return recordModifyCd;
+    }
+
+    public void setRecordModifyCd(String recordModifyCd) {
+        this.recordModifyCd = recordModifyCd;
+    }
+
+    public String getRecordModifyNm() {
+        return recordModifyNm;
+    }
+
+    public void setRecordModifyNm(String recordModifyNm) {
+        this.recordModifyNm = recordModifyNm;
+    }
+
+    public Date getRecordModifyTm() {
+        return recordModifyTm;
+    }
+
+    public void setRecordModifyTm(Date recordModifyTm) {
+        this.recordModifyTm = recordModifyTm;
+    }
+}

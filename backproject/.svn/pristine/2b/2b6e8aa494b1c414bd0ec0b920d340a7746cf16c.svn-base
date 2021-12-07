@@ -1,0 +1,107 @@
+package com.egintra.common.repository.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.egintra.common.dto.DictReqDTO;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+public interface DictMapper extends BaseMapper<DictReqDTO> {
+
+    /**
+     * 查看列表
+     *
+     * @return 查询结果
+     */
+    List<DictReqDTO> getDictList(DictReqDTO dictReqDTO);
+
+
+    /**
+     * 添加
+     *
+     * @param dictReqDTO
+     */
+    void addDict(DictReqDTO dictReqDTO);
+
+
+    /**
+     * 编辑
+     *
+     * @param list
+     */
+    void editDict(@Param("list") List<DictReqDTO> list);
+
+
+    /**
+     * 查看详情
+     *
+     * @param id
+     * @return
+     */
+    DictReqDTO getOne(String id);
+
+    /**
+     * 查看名称是否存在
+     *
+     * @param dictReqDTO
+     * @return
+     */
+    DictReqDTO findByName(DictReqDTO dictReqDTO);
+
+
+    /**
+     * 查看名称是否存在
+     *
+     * @param name
+     * @return
+     */
+    DictReqDTO getOneByName(String name);
+
+    /**
+     * 查看名称是否存在
+     *
+     * @param dictReqDTO
+     * @return
+     */
+    DictReqDTO findByCode(DictReqDTO dictReqDTO);
+
+    /**
+     * 查看编码是否存在
+     *
+     * @param dictReqDTO
+     * @return
+     */
+    DictReqDTO findByCodeParam(DictReqDTO dictReqDTO);
+
+
+    /**
+     * 查看名称是否存在
+     *
+     * @param dictReqDTO
+     * @return
+     */
+    DictReqDTO findByNameParam(DictReqDTO dictReqDTO);
+
+    /**
+     * 查看编码是否存在
+     *
+     * @param code
+     * @return
+     */
+    DictReqDTO getOneByCode(String code);
+
+    /**
+     * 根据类型查看字典
+     *
+     * @param type
+     * @return
+     */
+    List<DictReqDTO> getListByType(String type);
+
+    /**
+     * 删除
+     *
+     * @param id
+     */
+    void deleteById(String id);
+}

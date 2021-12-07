@@ -1,0 +1,13 @@
+package com.egintra.common.repository.mapper;
+
+import com.egintra.common.dto.InvoiceTmpDTO;
+
+public interface InvoiceTmpMapper {
+
+    /**
+     * 添加临时记账
+     * @param invoiceTmp
+     * @return
+     */
+   int addInvoiceTmp(InvoiceTmpDTO invoiceTmp);
+}

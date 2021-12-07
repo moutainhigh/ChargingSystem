@@ -1,0 +1,94 @@
+package com.egintra.common.dto;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+public class UserMesssageRespDTO {
+
+    private String id;
+
+    private String senderId;
+
+    private String senderName;
+
+    private String receiverId;
+
+    private String receiverName;
+
+    private String messageId;
+
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
+
+    /**
+     * 创建时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private String recordCreateTm;
+
+    /**
+     * 修改日期
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private String recordModifyTm;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(String senderId) {
+        this.senderId = senderId;
+    }
+
+    public String getReceiverId() {
+        return receiverId;
+    }
+
+    public void setReceiverId(String receiverId) {
+        this.receiverId = receiverId;
+    }
+
+    public String getRecordCreateTm() {
+        return recordCreateTm;
+    }
+
+    public void setRecordCreateTm(String recordCreateTm) {
+        this.recordCreateTm = recordCreateTm;
+    }
+
+    public String getRecordModifyTm() {
+        return recordModifyTm;
+    }
+
+    public void setRecordModifyTm(String recordModifyTm) {
+        this.recordModifyTm = recordModifyTm;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
+}

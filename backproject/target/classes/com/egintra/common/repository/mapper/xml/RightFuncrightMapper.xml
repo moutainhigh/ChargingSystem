@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.RightFuncrightMapper">
+    <resultMap id="rightFuncrightMapper" type="com.egintra.common.repository.entity.RightFuncright">
+        <result column="id" property="id"/>
+        <result column="role_id" property="roleId"/>
+        <result column="func_id" property="funcId"/>
+        <result column="record_status" property="recordStatus"/>
+        <result column="record_create_cd" property="recordCreateCd"/>
+        <result column="record_create_nm" property="recordCreateNm"/>
+        <result column="record_create_tm"  property="recordCreateTm"/>
+        <result column="record_modify_cd" property="recordModifyCd"/>
+        <result column="record_modify_nm" property="recordModifyNm"/>
+        <result column="record_modify_tm"  property="recordModifyTm"/>
+    </resultMap>
+
+    <insert id="batchInsertFuncrights">
+        INSERT INTO right_funcright
+        (
+         role_id,
+         func_id,
+         record_status,
+         record_create_tm
+         )
+         values
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        #{item.roleId},
+        #{item.funcId},
+        #{item.recordStatus},
+        #{item.recordCreateTm}
+        )
+        </foreach>
+    </insert>
+
+    <update id="batchDeleteFuncrights" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            UPDATE right_funcright
+            SET record_status = #{item.recordStatus}
+            WHERE
+            record_status = '0'
+            AND role_id = #{item.roleId}
+            AND func_id = #{item.funcId}
+        </foreach>
+    </update>
+
+    <select id="queryFuncrights" resultType="com.egintra.common.dto.RightFuncrightRespDTO">
+        SELECT
+          f1.id AS id,
+          f1.role_id AS roleId,
+          f1.func_id AS funcId,
+          f2.funccate_id AS funccateId
+        FROM right_funcright f1
+        INNER JOIN fee_function f2 ON f2.id = f1.func_id
+        AND f2.record_status = '0'
+        WHERE
+          f1.record_status = '0'
+          AND f1.role_id = #{req.roleId}
+    </select>
+
+</mapper>

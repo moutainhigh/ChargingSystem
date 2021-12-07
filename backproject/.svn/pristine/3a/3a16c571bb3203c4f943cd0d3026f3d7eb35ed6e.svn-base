@@ -1,0 +1,183 @@
+package com.egintra.common.dto.finance;
+
+/**
+ * 获取驾驶证业务缴费信息返回DTO
+ *
+ * @author liushihao
+ * @date 2021/8/6
+ */
+public class FeeDrvjkMeterialRespDTO {
+    /**
+     * 准驾车型
+     */
+    private String zjcx;
+
+    /**
+     * 业务类型
+     */
+    private String ywlx;
+
+    /**
+     * 业务原因
+     */
+    private String ywyy;
+
+    /**
+     * 收费项目代码
+     */
+    private String projectId;
+
+    /**
+     * 收费项目数量
+     */
+    private String quantity;
+
+    /**
+     *
+     */
+    private String projectName;
+
+    /**
+     *
+     */
+    private String unitPrice;
+
+    /**
+     *
+     */
+    private String classId;
+
+    /**
+     *
+     */
+    private String provinceRate;
+
+    /**
+     *
+     */
+    private String cityRate;
+
+    /**
+     *
+     */
+    private String financeCode;
+
+    /**
+     *
+     */
+    private String cost;
+
+    public String getZjcx() {
+        return zjcx;
+    }
+
+    public void setZjcx(String zjcx) {
+        this.zjcx = zjcx;
+    }
+
+    public String getYwlx() {
+        return ywlx;
+    }
+
+    public void setYwlx(String ywlx) {
+        this.ywlx = ywlx;
+    }
+
+    public String getYwyy() {
+        return ywyy;
+    }
+
+    public void setYwyy(String ywyy) {
+        this.ywyy = ywyy;
+    }
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(String unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public String getClassId() {
+        return classId;
+    }
+
+    public void setClassId(String classId) {
+        this.classId = classId;
+    }
+
+    public String getProvinceRate() {
+        return provinceRate;
+    }
+
+    public void setProvinceRate(String provinceRate) {
+        this.provinceRate = provinceRate;
+    }
+
+    public String getCityRate() {
+        return cityRate;
+    }
+
+    public void setCityRate(String cityRate) {
+        this.cityRate = cityRate;
+    }
+
+    public String getFinanceCode() {
+        return financeCode;
+    }
+
+    public void setFinanceCode(String financeCode) {
+        this.financeCode = financeCode;
+    }
+
+    public String getCost() {
+        return cost;
+    }
+
+    public void setCost(String cost) {
+        this.cost = cost;
+    }
+
+    @Override
+    public String toString() {
+        return "FeeDrvjkMeterialRespDTO{" +
+                "zjcx='" + zjcx + '\'' +
+                ", ywlx='" + ywlx + '\'' +
+                ", ywyy='" + ywyy + '\'' +
+                ", projectId='" + projectId + '\'' +
+                ", quantity='" + quantity + '\'' +
+                ", projectName='" + projectName + '\'' +
+                ", unitPrice='" + unitPrice + '\'' +
+                ", classId='" + classId + '\'' +
+                ", provinceRate='" + provinceRate + '\'' +
+                ", cityRate='" + cityRate + '\'' +
+                ", financeCode='" + financeCode + '\'' +
+                ", cost='" + cost + '\'' +
+                '}';
+    }
+}

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.FeeDrvjkMapper">
+    <resultMap id="feeDrvjkMapper" type="com.egintra.common.repository.entity.FeeDrvjk">
+        <result column="zjcx" property="zjcx"/>
+        <result column="ywlx" property="ywlx"/>
+        <result column="ywmc" property="ywmc"/>
+        <result column="project_id" property="projectId"/>
+        <result column="quantity" property="quantity"/>
+        <result column="options" property="options"/>
+        <result column="record_status" property="recordStatus"/>
+        <result column="record_create_cd" property="recordCreateCd"/>
+        <result column="record_create_nm" property="recordCreateNm"/>
+        <result column="record_create_tm" property="recordCreateTm"/>
+        <result column="record_modify_cd" property="recordModifyCd"/>
+        <result column="record_modify_nm" property="recordModifyNm"/>
+        <result column="record_modify_tm" property="recordModifyTm"/>
+    </resultMap>
+
+    <select id="feeDrvjksInit" resultType="com.egintra.common.dto.finance.FeeDrvjkRespDTO">
+        SELECT
+          zjcx AS zjcx,
+          ywlx AS ywlx,
+          ywyy AS ywyy,
+          ywmc AS ywmc,
+          project_id AS projectId,
+          quantity AS quantity,
+          options AS options,
+          record_status AS recordStatus,
+          record_create_tm AS recordCreateTm,
+          record_modify_tm ASrecordModifyTm
+        FROM
+          fee_drvjk
+        WHERE
+          record_status = '0'
+        ORDER BY record_create_tm
+    </select>
+
+    <select id="queryFeeDrvjks" resultType="com.egintra.common.dto.finance.FeeDrvjkRespDTO">
+        SELECT
+          zjcx AS zjcx,
+          ywlx AS ywlx,
+          ywyy AS ywyy,
+          ywmc AS ywmc,
+          project_id AS projectId,
+          quantity AS quantity,
+          options AS options,
+          record_status AS recordStatus,
+          record_create_tm AS recordCreateTm,
+          record_modify_tm AS recordModifyTm
+        FROM
+          fee_drvjk
+        WHERE
+          record_status = '0'
+          <if test="req.zjcx != null and req.zjcx != ''">
+              AND zjcx = #{req.zjcx}
+          </if>
+          <if test="req.ywlx != null and req.ywlx != ''">
+              AND ywlx = #{req.ywlx}
+          </if>
+          <if test="req.ywyy != null and req.ywyy != ''">
+              AND ywyy = #{req.ywyy}
+          </if>
+          <if test="req.projectId != null and req.projectId != ''">
+              AND project_id = #{req.projectId}
+          </if>
+        ORDER BY record_create_tm
+    </select>
+
+    <insert id="addFeeDrvjk">
+        INSERT INTO fee_drvjk
+          (
+           zjcx,
+           ywlx,
+           ywyy,
+           ywmc,
+           project_id,
+           quantity,
+           options,
+           record_status,
+           record_create_tm,
+           record_modify_tm)
+        VALUES
+          (
+           #{req.zjcx},
+           #{req.ywlx},
+           #{req.ywyy},
+           #{req.ywmc},
+           #{req.projectId},
+           #{req.quantity},
+           #{req.options},
+           #{req.recordStatus},
+           #{req.recordCreateTm},
+           #{req.recordModifyTm})
+    </insert>
+
+    <update id="deleteFeeDrvjk">
+        UPDATE fee_drvjk
+        SET record_status = '1',
+            record_modify_tm = #{req.recordModifyTm}
+        WHERE
+          1 = 1
+          AND zjcx = #{req.zjcx}
+          AND ywlx = #{req.ywlx}
+          AND ywyy = #{req.ywyy}
+          AND project_id = #{req.projectId}
+    </update>
+
+    <update id="batchUpdateFeeDrvjks">
+        <foreach collection="list" index="index" item="item" open="begin" separator=";" close=";end;">
+            UPDATE fee_drvjk
+            <set>
+                <if test="item.ywmc != null and item.ywmc != ''">
+                    ywmc = #{item.ywmc},
+                </if>
+                <if test="item.quantity != null and item.quantity != ''">
+                    quantity = #{item.quantity},
+                </if>
+                <if test="item.options != null and item.options != ''">
+                    options = #{item.options},
+                </if>
+                <if test="item.recordModifyTm != null">
+                    record_modify_tm = #{item.recordModifyTm}
+                </if>
+            </set>
+            WHERE
+              1 = 1
+              AND zjcx = #{item.zjcx}
+              AND ywlx = #{item.ywlx}
+              AND ywyy = #{item.ywyy}
+              AND project_id = #{item.projectId}
+              AND record_status = '0'
+        </foreach>
+    </update>
+
+    <select id="queryDriverLicensePaymentInfo"
+            resultType="com.egintra.common.dto.finance.FeeDrvjkMeterialRespDTO">
+        SELECT
+          a.*,
+          nvl( b.cost, 0 )  AS cost
+        FROM
+          (
+            SELECT
+              jk.zjcx AS zjcx,
+              jk.ywlx AS ywlx,
+              jk.ywyy AS ywyy,
+              jk.project_id AS projectId,
+              jk.quantity AS quantity,
+              proj.project_name AS projectName,
+              proj.unit_price AS unitPrice,
+              proj.class_id AS classId,
+              class.province_rate AS provinceRate,
+              class.city_rate AS cityRate,
+              class.finance_code AS financeCode
+            FROM
+              FEE_DRVJK jk,
+              fee_project_detail proj,
+              FEE_PROJECT_CLASS class
+            WHERE
+              jk.zjcx = #{req.zjcx}
+              AND jk.ywlx = #{ywlx}
+              AND jk.ywyy = #{ywyy}
+              AND jk.project_id = proj.project_id
+		      AND proj.class_id = class.class_id
+            ) a
+          LEFT JOIN ( SELECT project_id, sum( material_cost ) cost FROM fee_material GROUP BY project_id ) b ON a.projectId = b.project_id
+    </select>
+</mapper>

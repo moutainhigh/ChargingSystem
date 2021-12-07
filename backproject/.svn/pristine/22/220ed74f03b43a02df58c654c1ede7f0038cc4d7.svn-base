@@ -1,0 +1,143 @@
+package com.egintra.feeService.login.controller;
+
+import com.egintra.common.annotation.ResponseResult;
+import com.egintra.common.dto.RightUserDTO;
+import com.egintra.common.dto.SysUserDTO;
+import com.egintra.common.pointcuts.SysToken;
+import com.egintra.common.utils.DataReuslt;
+import com.egintra.feeService.login.service.LoginService;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import javax.validation.Valid;
+
+/**
+ * 系统登录接口
+ *
+ * @author liushihao
+ * @date 2021/06/18
+ */
+@RestController
+@RequestMapping("/login")
+@ResponseResult
+public class LoginController {
+    @Resource
+    private LoginService loginService;
+
+    /**
+     * 登录
+     *
+     * @param sysUserDTO 查询条件
+     * @return 结果
+     */
+    @RequestMapping(value = "/login")
+    public DataReuslt login(@Valid @RequestBody SysUserDTO sysUserDTO) {
+
+        return loginService.login(sysUserDTO);
+    }
+
+    /**
+     * 查询所有用户信息
+     *
+     * @param sysUserDTO 查询条件
+     * @return 结果
+     */
+    @SysToken
+    @RequestMapping(value = "/queryUserInfo")
+    public DataReuslt queryUserInfo(@Valid @RequestBody SysUserDTO sysUserDTO) {
+
+        return loginService.queryUserInfo(sysUserDTO);
+    }
+
+    /**
+     * 查询所有用户信息 不分页
+     *
+     * @param sysUserDTO 查询条件
+     * @return 结果
+     */
+    @RequestMapping(value = "/getUserList")
+    public DataReuslt getUserList(@Valid @RequestBody SysUserDTO sysUserDTO) {
+        return loginService.getUserList(sysUserDTO);
+    }
+
+
+    /**
+     * 根据条件查询用户信息
+     *
+     * @param rightUserDTO 查询条件
+     * @return 结果
+     */
+    @SysToken
+    @RequestMapping(value = "/querySomeUsers")
+    public DataReuslt querySomeUsers(@RequestBody RightUserDTO rightUserDTO) {
+
+        return loginService.querySomeUsers(rightUserDTO);
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param rightUserDTO 请求对象
+     * @return 结果
+     */
+    @SysToken
+    @RequestMapping(value = "/changePwd")
+    public DataReuslt changePwd(@RequestBody RightUserDTO rightUserDTO) {
+
+        return loginService.changePwd(rightUserDTO);
+    }
+
+    /**
+     * 查询当前用户信息
+     *
+     * @param sysUserDTO 入参对象
+     * @return 查询结果
+     */
+    @SysToken
+    @RequestMapping(value = "/getCurUserInfo")
+    public DataReuslt getCurUserInfo(@RequestBody SysUserDTO sysUserDTO) {
+
+        return loginService.getCurUserInfo(sysUserDTO);
+    }
+
+    /**
+     * 更新用户信息
+     *
+     * @param sysUserDTO 参数
+     * @return 结果
+     */
+    @SysToken
+    @RequestMapping(value = "/updateUser")
+    public DataReuslt updateUser(@RequestBody SysUserDTO sysUserDTO) {
+
+        return loginService.updateUser(sysUserDTO);
+    }
+
+    /**
+     * 删除用户信息
+     *
+     * @param sysUserDTO 参数
+     * @return 结果
+     */
+    @SysToken
+    @RequestMapping(value = "/deleteUser")
+    public DataReuslt deleteUser(@RequestBody SysUserDTO sysUserDTO) {
+
+        return loginService.deleteUser(sysUserDTO);
+    }
+
+    /**
+     * 新增用户信息
+     *
+     * @param sysUserDTO 参数
+     * @return 结果
+     */
+    @SysToken
+    @RequestMapping(value = "/addUser")
+    public DataReuslt addUser(@RequestBody SysUserDTO sysUserDTO) {
+
+        return loginService.addUser(sysUserDTO);
+    }
+}

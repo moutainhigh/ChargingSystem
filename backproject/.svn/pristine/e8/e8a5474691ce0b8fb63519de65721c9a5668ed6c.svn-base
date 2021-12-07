@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.FeeGetDataSetMapper">
+    <resultMap id="feeGetDataSetMapper" type="com.egintra.common.repository.entity.FeeGetDataSet">
+        <result column="modelid" property="modelid"/>
+        <result column="xtlb" property="xtlb"/>
+        <result column="jkid" property="jkid"/>
+        <result column="jkmc" property="jkmc"/>
+        <result column="jkxlh" property="jkxlh"/>
+        <result column="yhbz" property="yhbz"/>
+        <result column="dwmc" property="dwmc"/>
+        <result column="dwjgdm" property="dwjgdm"/>
+        <result column="jklb" property="jklb"/>
+        <result column="webip" property="webip"/>
+        <result column="agentip" property="agentip"/>
+        <result column="tables" property="tables"/>
+        <result column="datafrom" property="datafrom"/>
+        <result column="ipfrom" property="ipfrom"/>
+        <result column="fzjg" property="fzjg"/>
+        <result column="bz" property="bz"/>
+    </resultMap>
+
+    <select id="queryDataSet" resultType="com.egintra.common.dto.sysSet.FeeGetDataSetRespDTO">
+        SELECT
+          modelid AS modelid,
+          xtlb AS xtlb,
+          jkid AS jkid,
+          jkmc AS jkmc,
+          jkxlh AS jkxlh,
+          yhbz AS yhbz,
+          dwmc AS dwmc,
+          dwjgdm AS dwjgdm,
+          jklb AS jklb,
+          webip AS webip,
+          tables AS tables,
+          datafrom AS datafrom,
+          ipfrom AS ipfrom,
+          fzjg AS fzjg,
+          bz AS bz
+        FROM
+          FEE_GETDATASET
+        WHERE
+          modelid = #{req.modelid}
+    </select>
+
+    <insert id="insertDataSet">
+        INSERT INTO FEE_GETDATASET
+          (
+            modelid,
+            xtlb,
+            jkid,
+            jkmc,
+            jkxlh,
+            yhbz,
+            dwmc,
+            dwjgdm,
+            jklb,
+            webip,
+            tables,
+            datafrom,
+            ipfrom,
+            fzjg,
+            bz)
+        VALUES
+          (
+            #{req.modelid},
+            #{req.xtlb},
+            #{req.jkid},
+            #{req.ywmc},
+            #{req.jkxlh},
+            #{req.yhbz},
+            #{req.dwmc},
+            #{req.dwjgdm},
+            #{req.jklb},
+            #{req.webip},
+            #{req.tables},
+            #{req.datafrom},
+            #{req.ipfrom},
+            #{req.fzjg},
+            #{req.bz})
+    </insert>
+
+    <update id="batchUpdateDataSets">
+        <foreach collection="list" index="index" item="item" open="begin" separator=";" close=";end;">
+            UPDATE FEE_GETDATASET
+            <set>
+                <if test="item.xtlb != null and item.xtlb != ''">
+                    xtlb = #{item.xtlb},
+                </if>
+                <if test="item.jkid != null and item.jkid != ''">
+                    jkid = #{req.jkid},
+                </if>
+                <if test="item.ywmc != null and item.ywmc != ''">
+                    ywmc = #{req.ywmc}
+                </if>
+                <if test="item.jkxlh != null and item.jkxlh != ''">
+                    jkxlh = #{req.jkxlh},
+                </if>
+                <if test="item.yhbz != null and item.yhbz != ''">
+                    yhbz = #{req.yhbz},
+                </if>
+                <if test="item.dwmc != null and item.dwmc != ''">
+                    dwmc = #{req.dwmc},
+                </if>
+                <if test="item.dwjgdm != null and item.dwjgdm != ''">
+                    dwjgdm = #{req.dwjgdm}
+                </if>
+                <if test="item.jklb != null and item.jklb != ''">
+                    jklb = #{req.jklb},
+                </if>
+                <if test="item.webip != null and item.webip != ''">
+                    webip = #{req.webip},
+                </if>
+                <if test="item.tables != null and item.tables != ''">
+                    tables = #{req.tables},
+                </if>
+                <if test="item.datafrom != null and item.datafrom != ''">
+                    datafrom = #{req.datafrom}
+                </if>
+                <if test="item.ipfrom != null and item.ipfrom != ''">
+                    ipfrom = #{req.ipfrom},
+                </if>
+                <if test="item.fzjg != null and item.fzjg != ''">
+                    fzjg = #{req.fzjg},
+                </if>
+                <if test="item.bz != null and item.bz != ''">
+                    bz = #{req.bz}
+                </if>
+            </set>
+            WHERE
+              modelid = #{item.modelid}
+        </foreach>
+    </update>
+</mapper>

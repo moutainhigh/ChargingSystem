@@ -1,0 +1,55 @@
+#应用名称
+spring.application.name=egintra-fee
+server.servlet.context-path=/egintra-fee
+#访问端口号
+server.port=90
+
+#数据源相关配置
+#spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+#spring.datasource.url=jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+#spring.datasource.username=root
+#spring.datasource.password=
+#spring.datasource.max-idle=10
+#spring.datasource.max-wait=10000
+#spring.datasource.min-idle=5
+#spring.datasource.initial-size=5
+spring.datasource.driverClassName=oracle.jdbc.OracleDriver
+spring.datasource.url=jdbc:oracle:thin:@192.168.8.208:1521:orcl
+spring.datasource.username=fee_user
+spring.datasource.password=fee_mgr
+spring.datasource.max-idle=10
+spring.datasource.max-wait=10000
+spring.datasource.min-idle=5
+spring.datasource.initial-size=5
+
+#日志级别
+logging.level.root=INFO
+#日志对sql打印，提供mapper路径
+logging.level.com.egintra.common.repository.mapper=debug
+#xml文件存放位置
+mybatis-plus.mapper-locations=classpath*:/com/egintra/common/repository/**/*Mapper.xml
+#thymeleaf设置
+spring.thymeleaf.cache=false
+spring.thymeleaf.mode=HTML
+spring.thymeleaf.encoding=UTF-8
+spring.thymeleaf.prefix=classpath:/templates/
+spring.thymeleaf.suffix=.html
+
+# 密码加密解密Key
+user.password.desKey = 12345678
+# 默认密码
+user.passwork.default.password = 1
+#考试费线上缴费模块对应项目模块id
+examination.fee.onLine.modelid = m_feepay-2
+#机动车业务缴费信息模块对应项目模块id
+vOnlinePay.fee.onLine.modelid = vehflow
+#驾驶证缴费信息模块对应项目模块id
+DOnlinePay.fee.onLine.modelid = drvflowall
+# 线下缴费 机动车缴费
+Offline.vehvalidate = vehvalidate
+# 线下缴费 驾驶证缴费
+Offline.drvCheckFee = drv_check_fee
+# 综合平台ip
+webService.ip = http://10.231.3.3/trffweb/services/TmriOutNewAccess?wsdl
+# 序列号
+webService.jkxlh = 791F0909030617040815E6958E9DFF8FFC9E39343238575840746D72692E636E

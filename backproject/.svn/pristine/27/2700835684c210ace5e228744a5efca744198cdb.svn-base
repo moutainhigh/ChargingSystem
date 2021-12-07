@@ -1,0 +1,129 @@
+package com.egintra.common.dto;
+
+import java.util.Date;
+
+/**
+ * 更新用户信息保存参数DTO
+ *
+ * @author liushihao
+ * @date 2021/7/30
+ */
+public class RightUserSaveReqDTO {
+    /**
+     * ID
+     */
+    private String id;
+
+    /**
+     * 账号
+     */
+    private String no;
+
+    /**
+     * 用户名
+     */
+    private String name;
+
+    /**
+     * 性别
+     */
+    private String sex;
+
+    /**
+     * 电话
+     */
+    private String phone;
+
+    /**
+     * 创建时间
+     */
+    private Date recordCreateTm;
+
+    /**
+     * 修改日期
+     */
+    private Date recordModifyTm;
+
+    /**
+     * 状态
+     */
+    private String recordStatus;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNo() {
+        return no;
+    }
+
+    public void setNo(String no) {
+        this.no = no;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Date getRecordCreateTm() {
+        return recordCreateTm;
+    }
+
+    public void setRecordCreateTm(Date recordCreateTm) {
+        this.recordCreateTm = recordCreateTm;
+    }
+
+    public Date getRecordModifyTm() {
+        return recordModifyTm;
+    }
+
+    public void setRecordModifyTm(Date recordModifyTm) {
+        this.recordModifyTm = recordModifyTm;
+    }
+
+    public String getRecordStatus() {
+        return recordStatus;
+    }
+
+    public void setRecordStatus(String recordStatus) {
+        this.recordStatus = recordStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "RightUserSaveReqDTO{" +
+                "id='" + id + '\'' +
+                ", no='" + no + '\'' +
+                ", name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
+                ", phone='" + phone + '\'' +
+                ", recordCreateTm=" + recordCreateTm +
+                ", recordModifyTm=" + recordModifyTm +
+                ", recordStatus='" + recordStatus + '\'' +
+                '}';
+    }
+}

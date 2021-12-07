@@ -1,0 +1,18 @@
+package com.egintra.common.repository.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.egintra.common.dto.pay.FeePayparaReqDTO;
+import com.egintra.common.dto.pay.FeePayparaRespDTO;
+import com.egintra.common.dto.pay.PayinfoReqDTO;
+import com.egintra.common.repository.entity.FeePaypara;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+public interface PayInfoMapper extends BaseMapper<PayinfoReqDTO> {
+
+    /**
+     * 添加支付请求信息
+     */
+   void addPayInfo(PayinfoReqDTO payinfoReqDTO);
+}

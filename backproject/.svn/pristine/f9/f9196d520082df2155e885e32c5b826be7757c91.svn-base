@@ -1,0 +1,72 @@
+package com.egintra.common.dto;
+
+/**
+ * 功能按钮请求DTO
+ *
+ * @author liushihao
+ * @date 2021/7/09
+ */
+public class RightFuncActionReqDTO {
+
+    /**
+     * 内码
+     */
+    private String id;
+
+    /**
+     * 功能内码
+     */
+    private String funcId;
+
+    /**
+     * 按钮名
+     */
+    private String name;
+
+    /**
+     * 按钮标题
+     */
+    private String title;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getFuncId() {
+        return funcId;
+    }
+
+    public void setFuncId(String funcId) {
+        this.funcId = funcId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return "RightFuncActionReqDTO{" +
+                "id=" + id +
+                ", funcId=" + funcId +
+                ", name='" + name + '\'' +
+                ", title='" + title + '\'' +
+                '}';
+    }
+}

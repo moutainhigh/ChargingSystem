@@ -1,0 +1,68 @@
+package com.egintra.feeService.dict.service;
+
+import com.egintra.common.dto.DictReqDTO;
+import com.egintra.common.utils.DataReuslt;
+
+import java.util.List;
+
+public interface DictService {
+
+    /**
+     * 查看列表
+     *
+     * @return 结果
+     */
+    DataReuslt getDictList(DictReqDTO dictReqDTO);
+
+    /**
+     * 查看列表
+     *
+     * @return 结果
+     */
+    DataReuslt getDictLists(DictReqDTO dictReqDTO);
+
+
+    /**
+     * 添加
+     *
+     * @param dictReqDTO
+     */
+    DataReuslt addDict(DictReqDTO dictReqDTO);
+
+
+    /**
+     * 编辑
+     *
+     * @param dictReqDTO
+     */
+    DataReuslt editDict(List<DictReqDTO> dictReqDTO);
+
+
+    /**
+     * 查看详情
+     *
+     * @param id
+     * @return
+     */
+    DataReuslt getOne(String id);
+
+
+
+
+    /**
+     * 删除
+     *
+     * @param id
+     */
+    DataReuslt deleteById(String id);
+
+
+
+    /**
+     * 根据类别查看数据
+     *
+     * @param type
+     */
+    DataReuslt getListByType(String type);
+
+}

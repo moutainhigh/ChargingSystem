@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.ProjectDetailMapper">
+    <resultMap id="ProjectClassMapper" type="com.egintra.common.repository.entity.ProjectDetail">
+        <result column="project_id" property="id"/>
+        <result column="project_name" property="projectName"/>
+        <result column="unit_price" property="unitPrice"/>
+        <result column="class_id" property="classId"/>
+        <result column="record_status" property="recordStatus"/>
+        <result column="record_create_cd" property="recordCreateCd"/>
+        <result column="record_create_nm" property="recordCreateNm"/>
+        <result column="record_create_tm" property="recordCreateTm"/>
+        <result column="record_modify_cd" property="recordModifyCd"/>
+        <result column="record_modify_nm" property="recordModifyNm"/>
+        <result column="record_modify_tm" property="recordModifyTm"/>
+    </resultMap>
+
+    <select id="getProjectDetailList"
+            resultType="com.egintra.common.dto.ProjectDetailReqDTO">
+        SELECT
+        pd.project_id projectId,
+        pd.project_name projectName,
+        pd.UNIT_PRICE unitPrice,
+        pd.class_id classId,
+        pd.record_status,
+        pd.record_create_tm,
+        pd.record_modify_tm,
+        pc.CLASS_NAME className
+        FROM
+        fee_project_detail pd
+        LEFT JOIN FEE_PROJECT_CLASS pc ON pd.class_id = pc.class_id
+        <where>
+            pd.record_status = '0'
+            <if test="projectName != null and projectName != ''">
+                and pd.project_name like CONCAT(CONCAT('%',#{projectName}),'%')
+            </if>
+            <if test="unitPrice != null and unitPrice != '' and unitPrice!='0'">
+                and pd.unit_price=#{unitPrice}
+            </if>
+        </where>
+        ORDER BY
+        pd.record_create_tm
+    </select>
+
+
+    <insert id="addProjectDetail" parameterType="com.egintra.common.dto.ProjectDetailReqDTO">
+        INSERT INTO fee_project_detail(project_id,
+                                       project_name,
+                                       unit_price,
+                                       class_id,
+                                       record_status,
+                                       record_create_tm,
+                                       record_modify_tm)
+        values (#{projectId,jdbcType=VARCHAR},
+                #{projectName,jdbcType=VARCHAR},
+                #{unitPrice,jdbcType=DECIMAL},
+                #{classId,jdbcType=VARCHAR},
+                #{recordStatus,jdbcType=VARCHAR},
+                #{recordCreateTm,jdbcType=VARCHAR},
+                #{recordModifyTm,jdbcType=VARCHAR})
+    </insert>
+
+
+    <update id="editProjectDetail">
+        update fee_project_detail
+        <set>
+            <if test="projectName != null and projectName != ''">
+                project_name=#{projectName},
+            </if>
+            <if test="unitPrice != null and unitPrice != ''">
+                unit_price=#{unitPrice},
+            </if>
+
+        </set>
+        where project_id = #{projectId}
+    </update>
+
+
+    <update id="deleteById">
+        update fee_project_detail
+        set record_status = '1'
+        where project_id = #{projectId}
+    </update>
+</mapper>

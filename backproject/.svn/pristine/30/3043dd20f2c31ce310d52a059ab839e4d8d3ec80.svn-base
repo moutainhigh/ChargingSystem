@@ -1,0 +1,105 @@
+package com.egintra.feeService.account.service.impl;
+
+import com.egintra.common.dto.AccountReqDTO;
+import com.egintra.common.repository.mapper.AccountMapper;
+import com.egintra.common.utils.DataReuslt;
+import com.egintra.common.utils.DateUtils;
+import com.egintra.common.utils.PageHelperUtils;
+import com.egintra.feeService.account.service.AccountService;
+import com.egintra.feeService.config.PageResult;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.util.Date;
+import java.util.List;
+
+@Service
+public class AccountServiceImpl implements AccountService {
+
+    @Resource
+    private AccountMapper accountMapper;
+
+
+    /**
+     * 查看 列表 （分页）
+     *
+     * @param accountReqDTO
+     * @return
+     */
+    @Override
+    public DataReuslt getAccountList(AccountReqDTO accountReqDTO) {
+        Page ps = PageHelper.startPage(accountReqDTO.getPage(), accountReqDTO.getSize());
+        List<AccountReqDTO> accountList = accountMapper.getAccountList(accountReqDTO);
+        PageResult<AccountReqDTO> result = PageHelperUtils.getPagingData(accountList, ps);
+        return DataReuslt.success(result);
+    }
+
+
+    /**
+     * 添加单位
+     *
+     * @param accountReqDTO
+     * @return
+     */
+    @Override
+    @Transactional
+    public DataReuslt addAccount(AccountReqDTO accountReqDTO) {
+        AccountReqDTO account= accountMapper.getOne(accountReqDTO.getAccountId());
+        if(account!=null){
+            return DataReuslt.fail("1", "账套号已经存在");
+        }
+        accountReqDTO.setRecordStatus("0");
+        Date curDate = DateUtils.getCurrentDate();
+        accountReqDTO.setRecordCreateTm(curDate);
+        accountReqDTO.setRecordModifyTm(curDate);
+        accountMapper.addAccount(accountReqDTO);
+        return DataReuslt.success(accountReqDTO);
+    }
+
+    /**
+     * 编辑账套
+     *
+     * @param dictReqDTOs
+     * @return
+     */
+    @Override
+    @Transactional
+    public DataReuslt editAccount(List<AccountReqDTO> dictReqDTOs) {
+        for (AccountReqDTO accountReqDTO : dictReqDTOs) {
+            Date curDate = DateUtils.getCurrentDate();
+            accountReqDTO.setRecordCreateTm(curDate);
+            accountReqDTO.setRecordModifyTm(curDate);
+
+        }
+        accountMapper.editAccount(dictReqDTOs);
+        return DataReuslt.success(dictReqDTOs);
+    }
+
+    /**
+     * 删除账套
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public DataReuslt deleteById(String id) {
+        accountMapper.deleteById(id);
+        return DataReuslt.success("删除成功");
+    }
+
+    /**
+     * 查看账套详情
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public DataReuslt getOne(String id) {
+        AccountReqDTO accountReqDTO = accountMapper.getOne(id);
+        return DataReuslt.success(accountReqDTO);
+    }
+}
+

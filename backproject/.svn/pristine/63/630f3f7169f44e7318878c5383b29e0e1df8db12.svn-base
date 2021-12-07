@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.ReportMapper">
+
+
+    <select id="queryReport" resultType="com.egintra.common.dto.reportForm.ReportReqDTO">
+        SELECT
+        bqsr.bh,
+        bqsr.mc,
+        bqsr.bqje,
+        ljsr.ljje
+        FROM
+        (
+        SELECT
+        a.class_id bh,
+        a.class_name mc,
+        nvl( b.je, 0 ) bqje
+        FROM
+        ( SELECT class_id, class_name FROM FEE_PROJECT_CLASS ) a
+        LEFT JOIN (
+        SELECT
+        class_id,
+        sum( unit_price * quantity ) je
+        FROM
+        FEE_INVOICE_DETAIL
+        <where>
+            status = '1'
+            <if test="department != null and department != ''">
+                AND department = #{department}
+            </if>
+            <if test="accountId != null and accountId != ''">
+                AND account_id = #{accountId}
+            </if>
+            <if test="bqStartTime != null and bqStartTime!=''">
+                AND dates  <![CDATA[ >= ]]> TO_DATE(#{bqStartTime, jdbcType = VARCHAR},'yyyymmdd')
+            </if>
+            <if test="bqEndTime != null and bqEndTime!=''">
+                AND dates  <![CDATA[ <= ]]> TO_DATE(#{bqEndTime, jdbcType = VARCHAR},'yyyymmdd')
+            </if>
+        </where>
+
+        GROUP BY
+        class_id
+        ) b ON a.class_id = b.class_id
+        ) bqsr,
+        (
+        SELECT
+        a.class_id bh,
+        a.class_name mc,
+        nvl( b.je, 0 ) ljje
+        FROM
+        ( SELECT class_id, class_name FROM FEE_PROJECT_CLASS ) a
+        LEFT JOIN (
+        SELECT
+        class_id,
+        sum( unit_price * quantity ) je
+        FROM
+        FEE_INVOICE_DETAIL
+        <where>
+            status = '1'
+            <if test="department != null and department != ''">
+                AND department = #{department}
+            </if>
+            <if test="accountId != null and accountId != ''">
+                AND account_id = #{accountId}
+            </if>
+            <if test="ljStartTime != null and ljStartTime!=''">
+                AND dates  <![CDATA[ >= ]]> TO_DATE(#{ljStartTime},'yyyymmdd')
+            </if>
+            <if test="ljEndTime != null and ljEndTime!=''">
+                AND dates  <![CDATA[ <= ]]> TO_DATE(#{ljEndTime},'yyyymmdd')
+            </if>
+        </where>
+        GROUP BY
+        class_id
+        ) b ON a.class_id = b.class_id
+        ) ljsr
+        WHERE
+        bqsr.bh = ljsr.bh
+        ORDER BY
+        to_number( bh )
+    </select>
+    <select id="getPayTypeList" resultType="com.egintra.common.dto.reportForm.PayTypeReqDTO">
+        SELECT
+        a.code,
+        a.name,
+        nvl( b.je, 0 ) nvl
+        FROM
+        ( SELECT code, name FROM SYS_PUB_SIMPLENUMBER WHERE cate_id = '503d715463f84c768af314591212770f' ) a
+        LEFT JOIN (
+        SELECT
+        pay_way,
+        sum( total_money ) je
+        FROM
+        fee_invoice
+        <where>
+            status = '1'
+            <if test="department != null and department != ''">
+                AND department = #{department}
+            </if>
+            <if test="accountId != null and accountId != ''">
+                AND account_id = #{accountId}
+            </if>
+            <if test="ljStartTime != null and ljStartTime!=''">
+                AND dates  <![CDATA[ >= ]]> TO_DATE(#{ljStartTime},'yyyymmdd')
+            </if>
+            <if test="ljEndTime != null and ljEndTime!=''">
+                AND dates  <![CDATA[ <= ]]> TO_DATE(#{ljEndTime},'yyyymmdd')
+            </if>
+        </where>
+        GROUP BY
+        pay_way
+        ) b ON a.code = b.pay_way
+        ORDER BY
+        1
+    </select>
+    <select id="queryPCReport" resultType="com.egintra.common.dto.reportForm.ReportReqDTO">
+        SELECT
+        bqsr.bh,
+        bqsr.mc,
+        bqsr.p_je bpje,
+        bqsr.c_je bcje,
+        bqsr.bqje,
+        ljsr.p_je lpje,
+        ljsr.c_je lcje,
+        ljsr.ljje
+        FROM
+        (
+        SELECT
+        a.class_id bh,
+        a.class_name mc,
+        nvl( a.province_rate * b.je, 0 ) p_je,
+        nvl( a.city_rate * b.je, 0 ) c_je,
+        nvl( b.je, 0 ) bqje
+        FROM
+        ( SELECT class_id, class_name, province_rate, city_rate FROM FEE_PROJECT_CLASS ) a
+        LEFT JOIN (
+        SELECT
+        class_id,
+        sum( unit_price * quantity ) je
+        FROM
+        FEE_INVOICE_DETAIL
+        <where>
+            status = '1'
+            <if test="department != null and department != ''">
+                AND department = #{department}
+            </if>
+            <if test="accountId != null and accountId != ''">
+                AND account_id = #{accountId}
+            </if>
+            <if test="bqStartTime != null and bqStartTime!=''">
+                AND dates  <![CDATA[ >= ]]> TO_DATE(#{bqStartTime, jdbcType = VARCHAR},'yyyymmdd')
+            </if>
+            <if test="bqEndTime != null and bqEndTime!=''">
+                AND dates  <![CDATA[ <= ]]> TO_DATE(#{bqEndTime, jdbcType = VARCHAR},'yyyymmdd')
+            </if>
+        </where>
+        GROUP BY
+        class_id
+        ) b ON a.class_id = b.class_id
+        ) bqsr,
+        (
+        SELECT
+        a.class_id bh,
+        a.class_name mc,
+        nvl( a.province_rate * b.je, 0 ) p_je,
+        nvl( a.city_rate * b.je, 0 ) c_je,
+        nvl( b.je, 0 ) ljje
+        FROM
+        ( SELECT class_id, class_name, province_rate, city_rate FROM FEE_PROJECT_CLASS ) a
+        LEFT JOIN (
+        SELECT
+        class_id,
+        sum( unit_price * quantity ) je
+        FROM
+        FEE_INVOICE_DETAIL
+        <where>
+            status = '1'
+            <if test="department != null and department != ''">
+                AND department = #{department}
+            </if>
+            <if test="accountId != null and accountId != ''">
+                AND account_id = #{accountId}
+            </if>
+            <if test="bqStartTime != null and bqStartTime!=''">
+                AND dates  <![CDATA[ >= ]]> TO_DATE(#{bqStartTime, jdbcType = VARCHAR},'yyyymmdd')
+            </if>
+            <if test="bqEndTime != null and bqEndTime!=''">
+                AND dates  <![CDATA[ <= ]]> TO_DATE(#{bqEndTime, jdbcType = VARCHAR},'yyyymmdd')
+            </if>
+        </where>
+        GROUP BY
+        class_id
+        ) b ON a.class_id = b.class_id
+        ) ljsr
+        WHERE
+        bqsr.bh = ljsr.bh
+        ORDER BY
+        to_number( bh )
+    </select>
+    <select id="getPayPCTypeList" resultType="com.egintra.common.dto.reportForm.PayTypeReqDTO">
+        SELECT
+            a.code,
+            a.name,
+            nvl( b.je, 0 ) nvl
+        FROM
+            ( SELECT code, name FROM SYS_PUB_SIMPLENUMBER WHERE cate_id = '503d715463f84c768af314591212770f' ) a
+                LEFT JOIN ( SELECT pay_way, sum( total_money ) je FROM fee_invoice
+        <where>
+        status = '1'
+        <if test="department != null and department != ''">
+            AND department = #{department}
+        </if>
+        <if test="accountId != null and accountId != ''">
+            AND account_id = #{accountId}
+        </if>
+        <if test="bqStartTime != null and bqStartTime!=''">
+            AND dates  <![CDATA[ >= ]]> TO_DATE(#{bqStartTime, jdbcType = VARCHAR},'yyyymmdd')
+        </if>
+        <if test="bqEndTime != null and bqEndTime!=''">
+            AND dates  <![CDATA[ <= ]]> TO_DATE(#{bqEndTime, jdbcType = VARCHAR},'yyyymmdd')
+        </if>
+       </where>
+        GROUP BY pay_way ) b ON a.code = b.pay_way
+        ORDER BY
+            1
+    </select>
+</mapper>

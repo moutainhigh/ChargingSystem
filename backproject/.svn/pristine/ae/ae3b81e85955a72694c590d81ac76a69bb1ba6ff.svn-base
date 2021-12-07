@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.DictMapper">
+    <!--    <resultMap id="rightRoleMapper" type="com.egintra.common.repository.entity.Department">-->
+    <!--        <result column="unit_region" property="id"/>-->
+    <!--        <result column="unit_name" property="unitName"/>-->
+    <!--        <result column="unit_level" property="unitLevel"/>-->
+    <!--        <result column="remark" property="remark"/>-->
+    <!--        <result column="record_status" property="recordStatus"/>-->
+    <!--        <result column="record_create_cd" property="recordCreateCd"/>-->
+    <!--        <result column="record_create_nm" property="recordCreateNm"/>-->
+    <!--        <result column="record_create_tm" property="recordCreateTm"/>-->
+    <!--        <result column="record_modify_cd" property="recordModifyCd"/>-->
+    <!--        <result column="record_modify_nm" property="recordModifyNm"/>-->
+    <!--        <result column="record_modify_tm" property="recordModifyTm"/>-->
+    <!--    </resultMap>-->
+
+    <select id="getDictList"
+            resultType="com.egintra.common.dto.DictReqDTO">
+        SELECT
+        id,
+        name,
+        code,
+        TYPE,
+        type_name typeName,
+        record_status,
+        record_create_tm,
+        record_modify_tm
+        FROM
+        fee_dict
+        <where>
+            record_status = '0'
+            <if test="name != null and name != ''">
+                and name like CONCAT(CONCAT('%',#{name}),'%')
+            </if>
+            <if test="code != null and code != ''">
+                and code like CONCAT(CONCAT('%',#{code}),'%')
+            </if>
+            <if test="type != null and type != ''">
+                and type like CONCAT(CONCAT('%',#{type}),'%')
+            </if>
+        </where>
+        ORDER BY
+        record_create_tm desc
+    </select>
+
+    <select id="getOne" resultType="com.egintra.common.dto.DictReqDTO">
+        SELECT id,
+               name,
+               code,
+               TYPE,
+               type_name typeName,
+               record_status,
+               record_create_tm,
+               record_modify_tm
+        FROM fee_dict
+        where id = #{id}
+    </select>
+
+    <select id="findByName" resultType="com.egintra.common.dto.DictReqDTO">
+        SELECT id,
+               name,
+               code,
+               TYPE,
+               type_name typeName,
+               record_status,
+               record_create_tm,
+               record_modify_tm
+        FROM fee_dict
+        where name = #{name}
+          and type = #{type}
+    </select>
+
+
+    <select id="getOneByName" resultType="com.egintra.common.dto.DictReqDTO">
+        SELECT id,
+               name,
+               code,
+               TYPE,
+               type_name typeName,
+               record_status,
+               record_create_tm,
+               record_modify_tm
+        FROM fee_dict
+        where name = #{name}
+    </select>
+
+
+    <select id="findByCode" resultType="com.egintra.common.dto.DictReqDTO">
+        SELECT id,
+               name,
+               code,
+               TYPE,
+               type_name typeName,
+               record_status,
+               record_create_tm,
+               record_modify_tm
+        FROM fee_dict
+        where code = #{code}
+          and type = #{type}
+    </select>
+
+    <select id="findByCodeParam" resultType="com.egintra.common.dto.DictReqDTO">
+        SELECT id,
+               name,
+               code,
+               TYPE,
+               type_name typeName,
+               record_status,
+               record_create_tm,
+               record_modify_tm
+        FROM fee_dict
+        where code = #{code}
+          and type = #{type}
+          and id = #{id}
+    </select>
+
+    <select id="findByNameParam" resultType="com.egintra.common.dto.DictReqDTO">
+        SELECT id,
+               name,
+               code,
+               TYPE,
+               type_name typeName,
+               record_status,
+               record_create_tm,
+               record_modify_tm
+        FROM fee_dict
+        where name = #{name}
+          and type = #{type}
+          and id = #{id}
+    </select>
+
+
+    <select id="getOneByCode" resultType="com.egintra.common.dto.DictReqDTO">
+        SELECT id,
+               name,
+               code,
+               TYPE,
+               type_name typeName,
+               record_status,
+               record_create_tm,
+               record_modify_tm
+        FROM fee_dict
+        where code = #{code}
+    </select>
+
+
+    <select id="getListByType" resultType="com.egintra.common.dto.DictReqDTO">
+        SELECT id,
+               name,
+               code,
+               TYPE,
+               type_name typeName,
+               record_status,
+               record_create_tm,
+               record_modify_tm
+        FROM fee_dict
+        where type = #{type}
+    </select>
+
+
+    <insert id="addDict" parameterType="com.egintra.common.dto.DictReqDTO">
+        INSERT INTO fee_dict(id,
+                             name,
+                             code,
+                             type,
+                             type_name,
+                             record_status,
+                             record_create_tm,
+                             record_modify_tm)
+        values (#{id},
+                #{name},
+                #{code},
+                #{type},
+                #{typeName},
+                #{recordStatus},
+                #{recordCreateTm},
+                #{recordModifyTm})
+    </insert>
+
+    <update id="editDict">
+        <foreach collection="list" index="index" item="item" open="begin" separator=";" close=";end;">
+            update fee_dict
+            <set>
+                <if test="item.name != null and item.name != ''">
+                    name=#{item.name},
+                </if>
+                <if test="item.code != null and item.code != ''">
+                    code=#{item.code},
+                </if>
+                <if test="item.type != null and item.type != ''">
+                    type=#{item.type},
+                </if>
+                <if test="item.typeName != null and item.typeName != ''">
+                    type_name=#{item.typeName},
+                </if>
+                record_modify_tm=#{item.recordModifyTm},
+
+            </set>
+            where id = #{item.id}
+        </foreach>
+
+
+    </update>
+
+
+    <update id="deleteById">
+        update fee_dict
+        set record_status = '1'
+        where id = #{id}
+    </update>
+</mapper>

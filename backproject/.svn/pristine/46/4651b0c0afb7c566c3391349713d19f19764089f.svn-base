@@ -1,0 +1,152 @@
+package com.egintra.common.dto;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+public class ProjectClassReqDTO extends CommonPage {
+
+    private String id;
+
+    private String className;
+
+    private double provinceRate;
+
+    private double cityRate;
+
+    private String projectProperty;
+
+    private String classProperty;
+
+    private String financeCode;
+
+    private String recordStatus;
+
+
+    private String recordCreateCd;
+
+
+    private String recordCreateNm;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private String recordCreateTm;
+
+    private String recordModifyCd;
+
+
+    private String recordModifyNm;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private String recordModifyTm;
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public double getProvinceRate() {
+        return provinceRate;
+    }
+
+    public void setProvinceRate(double provinceRate) {
+        this.provinceRate = provinceRate;
+    }
+
+    public double getCityRate() {
+        return cityRate;
+    }
+
+    public void setCityRate(double cityRate) {
+        this.cityRate = cityRate;
+    }
+
+    public String getProjectProperty() {
+        return projectProperty;
+    }
+
+    public void setProjectProperty(String projectProperty) {
+        this.projectProperty = projectProperty;
+    }
+
+    public String getClassProperty() {
+        return classProperty;
+    }
+
+    public void setClassProperty(String classProperty) {
+        this.classProperty = classProperty;
+    }
+
+    public String getFinanceCode() {
+        return financeCode;
+    }
+
+    public void setFinanceCode(String financeCode) {
+        this.financeCode = financeCode;
+    }
+
+    public String getRecordStatus() {
+        return recordStatus;
+    }
+
+    public void setRecordStatus(String recordStatus) {
+        this.recordStatus = recordStatus;
+    }
+
+    public String getRecordCreateCd() {
+        return recordCreateCd;
+    }
+
+    public void setRecordCreateCd(String recordCreateCd) {
+        this.recordCreateCd = recordCreateCd;
+    }
+
+    public String getRecordCreateNm() {
+        return recordCreateNm;
+    }
+
+    public void setRecordCreateNm(String recordCreateNm) {
+        this.recordCreateNm = recordCreateNm;
+    }
+
+    public String getRecordCreateTm() {
+        return recordCreateTm;
+    }
+
+    public void setRecordCreateTm(String recordCreateTm) {
+        this.recordCreateTm = recordCreateTm;
+    }
+
+    public String getRecordModifyCd() {
+        return recordModifyCd;
+    }
+
+    public void setRecordModifyCd(String recordModifyCd) {
+        this.recordModifyCd = recordModifyCd;
+    }
+
+    public String getRecordModifyNm() {
+        return recordModifyNm;
+    }
+
+    public void setRecordModifyNm(String recordModifyNm) {
+        this.recordModifyNm = recordModifyNm;
+    }
+
+    public String getRecordModifyTm() {
+        return recordModifyTm;
+    }
+
+    public void setRecordModifyTm(String recordModifyTm) {
+        this.recordModifyTm = recordModifyTm;
+    }
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.FeeInvoiceGiveUpMapper">
+    <resultMap id="feeInvoiceGiveUpMapper" type="com.egintra.common.repository.entity.FeeInvoiceGiveUp">
+        <result column="department" property="department"/>
+        <result column="account_id" property="accountId"/>
+        <result column="invoice_id" property="invoiceId"/>
+        <result column="paper_id" property="paperId"/>
+        <result column="total_money" property="totalMoney"/>
+        <result column="dates" property="dates"/>
+        <result column="userid" property="userid"/>
+        <result column="username" property="username"/>
+        <result column="ip" property="ip"/>
+        <result column="cause" property="cause"/>
+        <result column="giveupdates" property="giveupdates"/>
+    </resultMap>
+
+    <insert id="insertInvoiceGiveUpData">
+        INSERT INTO FEE_INVOICE_GIVEUP
+          (
+              department,
+              account_id,
+              invoice_id,
+              paper_id,
+              total_money,
+              dates,
+              userid,
+              username,
+              ip,
+              cause,
+              giveupdates)
+        VALUES
+          (
+            #{req.department},
+            #{req.accountId},
+            #{req.invoiceId},
+            #{req.paperId},
+            #{req.totalMoney},
+            #{req.dates},
+            #{req.userid},
+            #{req.username},
+            #{req.ip},
+            #{req.cause},
+            #{req.giveupdates})
+    </insert>
+</mapper>

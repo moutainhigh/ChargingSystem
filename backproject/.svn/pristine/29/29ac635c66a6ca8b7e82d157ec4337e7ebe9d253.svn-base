@@ -1,0 +1,55 @@
+package com.egintra.common.dto.sys;
+
+import com.egintra.common.dto.PubSimplenumberRespDTO;
+
+import java.util.List;
+
+/**
+ * 机动车、驾驶证初始参数返回DTO
+ *
+ * @author liushihao
+ * @date 2021/8/18
+ */
+public class VehDrvParamsRespDTO {
+
+    /**
+     * 号牌种类集合
+     */
+    private List<PubSimplenumberRespDTO> hpzl;
+
+    /**
+     * 业务类型集合
+     */
+    private List<PubSimplenumberRespDTO> ywlx;
+
+
+    /**
+     * 准驾车型集合
+     */
+    private List<PubSimplenumberRespDTO> zjcx;
+
+    public List<PubSimplenumberRespDTO> getHpzl() {
+        return hpzl;
+    }
+
+    public void setHpzl(List<PubSimplenumberRespDTO> hpzl) {
+        this.hpzl = hpzl;
+    }
+
+    public List<PubSimplenumberRespDTO> getYwlx() {
+        return ywlx;
+    }
+
+    public void setYwlx(List<PubSimplenumberRespDTO> ywlx) {
+        this.ywlx = ywlx;
+    }
+
+    @Override
+    public String toString() {
+        return "VehjkParamsRespDTO{" +
+                "hpzl=" + hpzl +
+                ", ywlx=" + ywlx +
+                ", zjcx=" + zjcx +
+                '}';
+    }
+}

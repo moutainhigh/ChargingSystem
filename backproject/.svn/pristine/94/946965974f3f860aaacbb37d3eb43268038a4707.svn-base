@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.PubSimplecateMapper">
+    <resultMap id="pubSimplecateMapper" type="com.egintra.common.repository.entity.PubSimplecate">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="record_status" property="recordStatus"/>
+        <result column="record_create_cd" property="recordCreateCd"/>
+        <result column="record_create_nm" property="recordCreateNm"/>
+        <result column="record_create_tm" property="recordCreateTm"/>
+        <result column="record_modify_cd" property="recordModifyCd"/>
+        <result column="record_modify_nm" property="recordModifyNm"/>
+        <result column="record_modify_tm" property="recordModifyTm"/>
+    </resultMap>
+    <insert id="insertPubSimplecate">
+        INSERT INTO sys_pub_simplecate
+        (
+          id,
+          name,
+          code,
+          record_status,
+          record_create_tm,
+          record_modify_tm)
+        VALUES
+        (
+          #{req.id},
+          #{req.name},
+          #{req.code},
+          #{req.recordStatus},
+          #{req.recordCreateTm},
+          #{req.recordModifyTm})
+    </insert>
+
+    <select id="init" resultType="com.egintra.common.dto.PubSimplecateRespDTO">
+        SELECT
+        id AS id,
+        name AS name,
+        code AS code,
+        record_status AS recordStatus,
+        record_create_tm AS recordCreateTm
+        FROM sys_pub_simplecate
+        WHERE 1 = 1
+        AND record_status = '0'
+        ORDER BY record_create_tm
+    </select>
+    
+    <select id="queryCodeSortByNm" resultType="com.egintra.common.dto.PubSimplecateRespDTO">
+        SELECT
+          id AS id,
+          name AS name,
+          code AS code,
+          record_status AS recordStatus,
+          record_create_tm AS recordCreateTm
+        FROM sys_pub_simplecate
+        WHERE 1 = 1
+          <if test="req.name != null and req.name != ''">
+              AND name = #{req.name}
+          </if>
+          AND record_status = '0'
+        ORDER BY record_create_tm
+    </select>
+
+    <select id="queryCodeSortByCd" resultType="com.egintra.common.dto.PubSimplecateRespDTO">
+        SELECT
+          id AS id,
+          name AS name,
+          code AS code,
+          record_status AS recordStatus,
+          record_create_tm AS recordCreateTm
+        FROM sys_pub_simplecate
+        WHERE 1 = 1
+          <if test="req.code != null and req.code != ''">
+              AND code = #{req.code}
+          </if>
+          AND record_status = '0'
+        ORDER BY record_create_tm
+    </select>
+
+    <select id="initParams" resultType="com.egintra.common.dto.PubSimplecateRespDTO">
+        SELECT
+          id AS id,
+          name AS name,
+          code AS code,
+          record_status AS recordStatus,
+          record_create_tm AS recordCreateTm
+        FROM sys_pub_simplecate
+        WHERE 1 = 1
+          <if test="name != null and name != ''">
+              AND name like CONCAT(CONCAT('%',#{name}),'%')
+          </if>
+          AND record_status = '0'
+        ORDER BY record_create_tm
+    </select>
+
+    <delete id="updateCodeSortById">
+        delete  from  sys_pub_simplecate
+        WHERE id = #{req.id}
+    </delete>
+</mapper>

@@ -1,0 +1,235 @@
+package com.egintra.common.dto;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.validation.constraints.NotNull;
+import java.util.Date;
+
+/**
+ * 用户请求DTO
+ *
+ * @author liushihao
+ * @date 2021/06/24
+ */
+public class SysUserDTO extends CommonPage {
+
+    /**
+     * ID
+     */
+    private String id;
+
+    /**
+     * 账号
+     */
+    @NotNull(message = "账号不能为空")
+    private String no;
+
+    /**
+     * 用户名
+     */
+    private String name;
+
+    /**
+     * 密码
+     */
+    @NotNull(message = "密码不能为空")
+    private String password;
+
+    /**
+     * 电话
+     */
+    private String phone;
+
+    /**
+     * 创建人编码
+     */
+    private String recordCreateCd;
+
+    /**
+     * 创建人名称
+     */
+    private String recordCreateNm;
+
+    /**
+     * 创建时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date recordCreateTm;
+
+    /**
+     * 修改人编码
+     */
+    private String recordModifyCd;
+
+    /**
+     * 修改人名称
+     */
+    private String recordModifyNm;
+
+    /**
+     * 修改日期
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date recordModifyTm;
+
+    /**
+     * 状态
+     */
+    private String recordStatus;
+
+    /**
+     * 性别
+     */
+    private String sex;
+
+    /**
+     * 部门ID
+     */
+    private String departId;
+
+    /**
+     * 单位ID
+     */
+    private String departmentId;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNo() {
+        return no;
+    }
+
+    public void setNo(String no) {
+        this.no = no;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getRecordCreateCd() {
+        return recordCreateCd;
+    }
+
+    public void setRecordCreateCd(String recordCreateCd) {
+        this.recordCreateCd = recordCreateCd;
+    }
+
+    public String getRecordCreateNm() {
+        return recordCreateNm;
+    }
+
+    public void setRecordCreateNm(String recordCreateNm) {
+        this.recordCreateNm = recordCreateNm;
+    }
+
+    public Date getRecordCreateTm() {
+        return recordCreateTm;
+    }
+
+    public void setRecordCreateTm(Date recordCreateTm) {
+        this.recordCreateTm = recordCreateTm;
+    }
+
+    public String getRecordModifyCd() {
+        return recordModifyCd;
+    }
+
+    public void setRecordModifyCd(String recordModifyCd) {
+        this.recordModifyCd = recordModifyCd;
+    }
+
+    public String getRecordModifyNm() {
+        return recordModifyNm;
+    }
+
+    public void setRecordModifyNm(String recordModifyNm) {
+        this.recordModifyNm = recordModifyNm;
+    }
+
+    public Date getRecordModifyTm() {
+        return recordModifyTm;
+    }
+
+    public void setRecordModifyTm(Date recordModifyTm) {
+        this.recordModifyTm = recordModifyTm;
+    }
+
+    public String getRecordStatus() {
+        return recordStatus;
+    }
+
+    public void setRecordStatus(String recordStatus) {
+        this.recordStatus = recordStatus;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getDepartId() {
+        return departId;
+    }
+
+    public void setDepartId(String departId) {
+        this.departId = departId;
+    }
+
+    public String getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    @Override
+    public String toString() {
+        return "SysUserDTO{" +
+                "id='" + id + '\'' +
+                ", no='" + no + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", recordCreateCd='" + recordCreateCd + '\'' +
+                ", recordCreateNm='" + recordCreateNm + '\'' +
+                ", recordCreateTm=" + recordCreateTm +
+                ", recordModifyCd='" + recordModifyCd + '\'' +
+                ", recordModifyNm='" + recordModifyNm + '\'' +
+                ", recordModifyTm=" + recordModifyTm +
+                ", recordStatus='" + recordStatus + '\'' +
+                ", sex='" + sex + '\'' +
+                ", departId='" + departId + '\'' +
+                ", departmentId='" + departmentId + '\'' +
+                '}';
+    }
+}

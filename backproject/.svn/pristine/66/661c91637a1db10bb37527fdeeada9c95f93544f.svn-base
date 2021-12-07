@@ -1,0 +1,86 @@
+package com.egintra.common.dto;
+
+/**
+ * 项目明细信息DTO
+ *
+ * @author zyt
+ * @date 2021/07/28
+ */
+public class ProjectDetailReqDTO extends CommonPage {
+
+    /**
+     * 明细id
+     */
+    private String projectId;
+
+    /**
+     * 明细名称
+     */
+    private String projectName;
+
+    /**
+     * 大类名称
+     */
+    private String className;
+
+    /**
+     * 价格
+     */
+    private double unitPrice;
+
+    /**
+     * 大类id
+     */
+    private String classId;
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public String getClassId() {
+        return classId;
+    }
+
+    public void setClassId(String classId) {
+        this.classId = classId;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    @Override
+    public String toString() {
+        return "ProjectDetailReqDTO{" +
+                "projectId='" + projectId + '\'' +
+                ", projectName='" + projectName + '\'' +
+                ", className='" + className + '\'' +
+                ", unitPrice=" + unitPrice +
+                ", classId='" + classId + '\'' +
+                '}';
+    }
+}

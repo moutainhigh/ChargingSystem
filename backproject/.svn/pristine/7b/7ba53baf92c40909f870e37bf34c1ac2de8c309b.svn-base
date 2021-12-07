@@ -1,0 +1,63 @@
+package com.egintra.feeService.department.service.impl;
+
+import com.egintra.common.dto.DepartmentReqDTO;
+import com.egintra.common.repository.mapper.DepartmentMapper;
+import com.egintra.common.utils.DataReuslt;
+import com.egintra.feeService.config.PageResult;
+import com.egintra.feeService.department.service.DepartmentService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.UUID;
+
+@Service
+public class DepartmentServiceImpl implements DepartmentService {
+
+    @Resource
+    private DepartmentMapper departmentMapper;
+
+
+    @Override
+    public DataReuslt getDepartmentList(DepartmentReqDTO department) {
+        Page ps = PageHelper.startPage(department.getPage(), department.getSize());
+        List<DepartmentReqDTO> departments =departmentMapper.getDepartmentList(department);
+        PageResult<DepartmentReqDTO> result = new PageResult<DepartmentReqDTO>();
+        result.setRows(departments);
+        result.setTotal(ps.getTotal());
+        result.setPages(ps.getPages());
+        result.setCurrentPage(department.getPage());
+        return DataReuslt.success(result);
+    }
+
+    @Override
+    public DataReuslt getDepartmentLists(DepartmentReqDTO department) {
+        List<DepartmentReqDTO> departments =departmentMapper.getDepartmentList(department);
+        return DataReuslt.success(departments);
+    }
+
+    @Override
+    @Transactional
+    public DataReuslt addDepartment(DepartmentReqDTO departmentReqDTO) {
+        departmentReqDTO.setId(UUID.randomUUID().toString());
+        departmentReqDTO.setRecordStatus("0");
+        departmentMapper.addDepartment(departmentReqDTO);
+        return DataReuslt.success(departmentReqDTO);
+    }
+
+    @Override
+    @Transactional
+    public DataReuslt editDepartment(DepartmentReqDTO departmentReqDTO) {
+        departmentMapper.editDepart(departmentReqDTO);
+        return DataReuslt.success(departmentReqDTO);
+    }
+
+    @Override
+    public DataReuslt deleteById(String id) {
+        departmentMapper.deleteById(id);
+        return DataReuslt.success("删除成功");
+    }
+}

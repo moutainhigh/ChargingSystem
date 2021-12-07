@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.RightFunctionMapper">
+    <resultMap id="rightFunctionMapper" type="com.egintra.common.repository.entity.RightFunction">
+        <result column="id"  property="id" />
+        <result column="name"  property="name" />
+        <result column="img"  property="img" />
+        <result column="url"  property="url" />
+        <result column="param"  property="param" />
+        <result column="funccate_id"  property="funccateId" />
+        <result column="order_no"  property="orderNo" />
+        <result column="record_status"  property="recordStatus" />
+        <result column="record_create_cd"  property="recordCreateCd" />
+        <result column="record_create_nm"  property="recordCreateNm" />
+        <result column="record_create_tm"  property="recordCreateTm" />
+        <result column="record_modify_cd"  property="recordModifyCd" />
+        <result column="record_modify_nm"  property="recordModifyNm" />
+        <result column="record_modify_tm"  property="recordModifyTm" />
+    </resultMap>
+
+    <select id="queryFunctionInfo"
+            resultType="com.egintra.common.dto.FunctionRespDTO">
+        SELECT
+            f1.id AS id,
+            f1.name AS name,
+            f1.url AS url,
+            f1.img AS img,
+            f1.order_no AS orderNo,
+            f1.funccate_id AS funccateId,
+            f1.record_status AS recordStatus,
+            f1.record_modify_tm AS recordCreateTm,
+            f2.name AS funccateNm,
+            f2.order_no AS orderNo2
+        FROM
+            fee_function f1
+            INNER JOIN fee_funccate f2 ON f2.id = f1.funccate_id
+            AND f2.record_status = '0'
+        WHERE
+            f1.record_status = '0'
+            <if test="req.name != null and req.name != ''">
+                AND f1.name = #{req.name}
+            </if>
+            <if test="req.funccateId != null and req.funccateId != ''">
+                AND f1.funccate_id = #{req.funccateId}
+            </if>
+        ORDER BY f2.order_no, f1.order_no
+    </select>
+    
+    <update id="batchDeleteFunctions">
+        <foreach collection="list" item="item" index="index" separator=";">
+            UPDATE fee_function
+            SET record_status = #{recordStatus}
+            WHERE
+              1 = 1
+              and id = #{item}
+        </foreach>
+    </update>
+
+    <update id="deleteFunction">
+        UPDATE fee_function
+        SET record_status = '1'
+        WHERE id = #{req.id}
+    </update>
+
+    <update id="updateFunction">
+        UPDATE fee_function
+        SET
+          <if test="req.name != null and req.name != ''">
+              name = #{req.name},
+          </if>
+          <if test="req.url != null and req.url != ''">
+              url = #{req.url},
+          </if>
+          <if test="req.funccateId != null and req.funccateId != ''">
+              funccate_id = #{req.funccateId},
+          </if>
+          <if test="req.recordModifyTm != null and req.recordModifyTm != ''">
+              record_modify_tm = #{req.recordModifyTm},
+          </if>
+        WHERE 1 = 1
+          AND id = #{req.id}
+          AND record_status = '0'
+    </update>
+</mapper>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.DrvPreasignMapper">
+    <resultMap id="rightRoleMapper" type="com.egintra.common.repository.entity.Vehicle">
+        <result column="hpzl" property="hpzl"/>
+        <result column="ywlx" property="ywlx"/>
+        <result column="ywyy" property="ywyy"/>
+        <result column="ywmc" property="ywmc"/>
+        <result column="project_id" property="projectId"/>
+        <result column="quantity" property="quantity"/>
+        <result column="options" property="options"/>
+    </resultMap>
+
+    <select id="getDrvPreasignParam" resultType="com.egintra.common.dto.DrvPreasignReqDTO">
+        SELECT lsh,
+        kskm,
+        zkzmbh,
+        sfzmmc,
+        sfzmhm,
+        xm,
+        ksyy,
+        xxsj,
+        yyrq,
+        ykrq,
+        kscx,
+        ksdd,
+        kscc,
+        kchp,
+        jbr,
+        glbm,
+        dlr,
+        kscj,
+        ksrq,
+        kscs,
+        ksy1,
+        ksy2,
+        jyw,
+        zt,
+        pxshrq,
+        sfyk,
+        zkykrq,
+        zksfhg,
+        clzl,
+        jly,
+        zkkf,
+        ckyy,
+        zwh,
+        ywblbm,
+        yycs,
+        bcyykscs,
+        gxsj,
+        fzjg,
+        sjlsh,
+        jyw2
+        FROM DRV_PREASIGN
+        <where>
+            <if test="lsh!=null and lsh !=''">
+                lsh =#{req.lsh}
+            </if>
+            <if test="sfzmhm!=null and sfzmhm !=''">
+                sfzmhm =#{req.sfzmhm}
+            </if>
+        </where>
+    </select>
+
+    <select id="checkExamPay" resultType="java.lang.Integer" statementType="CALLABLE">
+        select fun_getksfcs(#{ksflb,mode=IN,jdbcType=NUMERIC},
+                            #{lsh,mode=IN,jdbcType=NUMERIC},
+                            #{sfzmhm,mode=IN,jdbcType=NUMERIC},
+                            #{kskm,mode=IN,jdbcType=NUMERIC},
+                            #{kscx,mode=IN,jdbcType=NUMERIC},
+                            #{yycs,mode=IN,jdbcType=NUMERIC},
+                            #{kscs,mode=IN,jdbcType=NUMERIC},
+                            #{ksdd,mode=IN,jdbcType=NUMERIC}, '', '') ksfcs
+        from dual
+    </select>
+
+</mapper>

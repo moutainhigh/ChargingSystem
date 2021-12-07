@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.InvoiceMapper">
+    <resultMap id="invoiceMapper" type="com.egintra.common.repository.entity.FeeInvoice">
+        <result column="id" property="id"/>
+        <result column="department" property="department"/>
+        <result column="account_id" property="accountId"/>
+        <result column="invoice_id" property="invoiceId"/>
+        <result column="paper_id" property="paperId"/>
+        <result column="pay_unit" property="payUnit"/>
+        <result column="pay_way" property="payWay"/>
+        <result column="total_money" property="totalMoney"/>
+        <result column="total_pure" property="totalPure"/>
+        <result column="receiver_id" property="receiverId"/>
+        <result column="receiver" property="receiver"/>
+        <result column="posid" property="posid"/>
+        <result column="dates" property="dates"/>
+        <result column="dtimes" property="dtimes"/>
+        <result column="receive_account" property="receiveAccount"/>
+        <result column="check_number" property="checkNumber"/>
+        <result column="pos_info" property="posInfo"/>
+        <result column="status" property="status"/>
+        <result column="types" property="types"/>
+        <result column="sfzmhm" property="sfzmhm"/>
+        <result column="lsh" property="lsh"/>
+        <result column="cxhp" property="cxhp"/>
+        <result column="ywlx" property="ywlx"/>
+        <result column="ywyy" property="ywyy"/>
+    </resultMap>
+
+    <select id="isPaymentNot" resultType="com.egintra.common.dto.InvoiceReqDTO">
+        SELECT
+          id AS id,
+          department AS department,
+          account_id AS accountId,
+          invoice_id AS invoiceId,
+          paper_id AS paperId,
+          pay_unit AS payUnit,
+          pay_way AS payWay,
+          total_money AS totalMoney,
+          total_pure AS totalPure,
+          receiver_id AS receiverId,
+          receiver AS receiver,
+          posid AS posId,
+          dates AS dates,
+          dtimes AS dtimes,
+          receive_account AS receiveAccount,
+          check_number AS checkNumber,
+          pos_info AS posInfo,
+          status AS status,
+          types AS types,
+          sfzmhm AS sfzmhm,
+          lsh AS lsh,
+          cxhp AS cxhp,
+          ywlx AS ywlx,
+          ywyy AS ywyy
+        FROM FEE_INVOICE
+        WHERE lsh = #{lsh}
+    </select>
+
+    <insert id="batchInsertInvoices">
+        INSERT all
+        <foreach collection="list" item="item" separator="  " open=" " close=" " index="index">
+            INTO FEE_INVOICE(
+              id,
+              department,
+              account_id,
+              invoice_id,
+              paper_id,
+              pay_unit,
+              pay_way,
+              total_money,
+              total_pure,
+              receiver_id,
+              receiver,
+              posid,
+              dates,
+              dtimes,
+              receive_account,
+              check_number,
+              pos_info,
+              status,
+              types,
+              sfzmhm,
+              lsh,
+              cxhp,
+              ywlx,
+              ywyy,
+              ywlb)
+            VALUES(
+              #{item.id},
+              #{item.department},
+              #{item.accountId},
+              #{item.invoiceId},
+              #{item.paperId},
+              #{item.payUnit},
+              #{item.payWay},
+              #{item.totalMoney},
+              #{item.totalPure},
+              #{item.receiverId},
+              #{item.receiver},
+              #{item.posid},
+              #{item.dates},
+              #{item.dtimes},
+              #{item.receiveAccount},
+              #{item.checkNumber},
+              #{item.posInfo},
+              #{item.status},
+              #{item.types},
+              #{item.sfzmhm},
+              #{item.lsh},
+              #{item.cxhp},
+              #{item.ywlx},
+              #{item.ywyy},
+              #{item.ywlb})
+        </foreach>
+        select 1 from dual
+    </insert>
+
+    <select id="queryInvoiceList" resultType="com.egintra.common.dto.business.FeeInvoiceGiveUpQueryRespDTO">
+        SELECT
+          id AS id,
+          department AS department,
+          account_id AS accountId,
+          invoice_id AS invoiceId,
+          paper_id AS paperId,
+          pay_unit AS payUnit,
+          total_money AS totalMoney,
+          sfzmhm AS sfzmhm,
+          lsh AS lsh,
+          dates AS dates,
+          receiver AS receiver
+        FROM FEE_INVOICE
+        WHERE
+          1 = 1
+          AND status = '1'
+          <if test="req.lsh != null and req.lsh != ''">
+              AND lsh = #{req.lsh}
+          </if>
+          <if test="req.sfzmhm != null and req.sfzmhm != ''">
+              AND sfzmhm = #{req.sfzmhm}
+          </if>
+          <if test="req.accountId != null and req.accountId != ''">
+              AND account_id = #{req.accountId}
+          </if>
+          <if test="req.department != null and req.department != ''">
+              AND department = #{req.department}
+          </if>
+          <if test="req.invoiceId != null and req.invoiceId != ''">
+              AND invoice_id = #{req.invoiceId}
+          </if>
+    </select>
+
+    <select id="queryInvoiceById" resultType="com.egintra.common.dto.business.FeeInvoiceGiveUpQueryRespDTO">
+        SELECT
+          id AS id,
+          department AS department,
+          account_id AS accountId,
+          invoice_id AS invoiceId,
+          paper_id AS paperId,
+          pay_unit AS payUnit,
+          total_money AS totalMoney,
+          sfzmhm AS sfzmhm,
+          lsh AS lsh,
+          dates AS dates,
+          receiver AS receiver
+        FROM FEE_INVOICE
+        WHERE
+          1 = 1
+          AND id = #{req.id}
+    </select>
+
+    <update id="updateStatusById">
+        UPDATE FEE_INVOICE
+        SET status = #{status}
+        WHERE id = #{id}
+    </update>
+</mapper>

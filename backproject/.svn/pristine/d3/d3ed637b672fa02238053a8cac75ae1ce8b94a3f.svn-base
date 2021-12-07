@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.PayInfoMapper">
+    <resultMap id="payInfoMapper" type="com.egintra.common.repository.entity.FeePayinfo">
+        <result column="orderid" property="orderid"/>
+        <result column="zfwz" property="zfwz"/>
+        <result column="ywlb" property="ywlb"/>
+        <result column="lsh" property="lsh"/>
+        <result column="je" property="je"/>
+        <result column="ywlx" property="ywlx"/>
+        <result column="ywyy" property="ywyy"/>
+        <result column="glbm" property="glbm"/>
+        <result column="shdm" property="shdm"/>
+        <result column="shgtdm" property="shgtdm"/>
+        <result column="fhdm" property="fhdm"/>
+        <result column="bizh" property="bizh"/>
+        <result column="jym" property="jym"/>
+        <result column="jklx" property="jklx"/>
+        <result column="gkey" property="gkey"/>
+        <result column="wglx" property="wglx"/>
+        <result column="fzjg" property="fzjg"/>
+        <result column="yhdh" property="yhdh"/>
+        <result column="yhxm" property="yhxm"/>
+        <result column="ip" property="ip"/>
+        <result column="dyzt" property="dyzt"/>
+        <result column="jkr" property="jkr"/>
+        <result column="sfzmhm" property="sfzmhm"/>
+        <result column="jflb" property="jflb"/>
+        <result column="zffs" property="zffs"/>
+        <result column="dates" property="dates"/>
+        <result column="zfbj" property="zfbj"/>
+        <result column="zfmsg" property="zfmsg"/>
+        <result column="jzbj" property="jzbj"/>
+        <result column="jzmsg" property="jzmsg"/>
+        <result column="jsbj" property="jsbj"/>
+        <result column="jsmsg" property="jsmsg"/>
+        <result column="gxsj" property="gxsj"/>
+    </resultMap>
+
+    <insert id="addPayInfo" parameterType="com.egintra.common.dto.pay.PayinfoReqDTO">
+        INSERT INTO fee_payinfo (
+          orderid,
+          zfwz,
+          ywlb,
+          lsh,
+          je,
+          ywlx,
+          ywyy,
+          glbm,
+          shdm,
+          shgtdm,
+          fhdm,
+          bizh,
+          jym,
+          jklx,
+          gkey,
+          wglx,
+          fzjg,
+          yhdh,
+          yhxm,
+          ip,
+          dyzt,
+          jkr,
+          sfzmhm,
+          jflb,
+          zffs,
+          dates,
+          zfbj,
+          zfmsg,
+          jzbj,
+          jzmsg,
+          jsbj,
+          jsmsg,
+          gxsj)
+        VALUES (
+          #{orderid},
+          #{zfwz},
+          #{ywlb},
+          #{lsh},
+          #{je},
+          #{ywlx},
+          #{ywyy},
+          #{glbm},
+          #{shdm},
+          #{shgtdm},
+          #{fhdm},
+          #{bizh},
+          #{jym},
+          #{jklx},
+          #{gkey},
+          #{wglx},
+          #{fzjg},
+          #{yhdh},
+          #{yhxm},
+          #{ip},
+          #{dyzt},
+          #{jkr},
+          #{sfzmhm},
+          #{jflb},
+          #{zffs},
+          #{dates},
+          #{zfbj},
+          #{zfmsg},
+          #{jzbj},
+          #{jzmsg},
+          #{jsbj},
+          #{jsmsg},
+          #{gxsj})
+    </insert>
+
+    <update id="updateStatus">
+        update fee_payinfo
+        set zfbj=#{zfbj}
+        where orderid = #{orderid}
+    </update>
+
+    <select id="getPayInfoList" resultType="com.egintra.common.dto.pay.PayinfoReqDTO">
+        select orderid,
+               zfwz,
+               ywlb,
+               lsh,
+               je,
+               ywlx,
+               ywyy,
+               glbm,
+               shdm,
+               shgtdm,
+               fhdm,
+               bizh,
+               jym,
+               jklx,
+               gkey,
+               wglx,
+               fzjg,
+               yhdh,
+               yhxm,
+               ip,
+               dyzt,
+               jkr,
+               sfzmhm,
+               jflb,
+               zffs,
+               dates,
+               zfbj,
+               zfmsg,
+               jzbj,
+               jzmsg,
+               jsbj,
+               jsmsg,
+               gxsj
+        from fee_payinfo
+        where zfbj = '0'
+    </select>
+
+</mapper>

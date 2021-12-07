@@ -1,0 +1,32 @@
+package com.egintra.feeService.pay.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+/**
+ * 银行对接接口类
+ *
+ * @author liushihao
+ * @date 2021/8/12
+ */
+@Controller
+@RequestMapping(value = "/dockingBank")
+public class DockingBankController {
+
+    /**
+     * 考试费线上缴费打开H5页面
+     *
+     * @return 结果
+     */
+    @RequestMapping(value = "/openExamination")
+    public String openPay() {
+
+        return "examination";
+    }
+
+    @RequestMapping(value = "/queryExamination")
+    public String queryExamination() {
+
+        return "我是查询结果";
+    }
+}

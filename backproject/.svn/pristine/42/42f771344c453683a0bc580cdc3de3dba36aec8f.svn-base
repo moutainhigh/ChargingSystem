@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.AccountMapper">
+    <!--    <resultMap id="rightRoleMapper" type="com.egintra.common.repository.entity.Department">-->
+    <!--        <result column="unit_region" property="id"/>-->
+    <!--        <result column="unit_name" property="unitName"/>-->
+    <!--        <result column="unit_level" property="unitLevel"/>-->
+    <!--        <result column="remark" property="remark"/>-->
+    <!--        <result column="record_status" property="recordStatus"/>-->
+    <!--        <result column="record_create_cd" property="recordCreateCd"/>-->
+    <!--        <result column="record_create_nm" property="recordCreateNm"/>-->
+    <!--        <result column="record_create_tm" property="recordCreateTm"/>-->
+    <!--        <result column="record_modify_cd" property="recordModifyCd"/>-->
+    <!--        <result column="record_modify_nm" property="recordModifyNm"/>-->
+    <!--        <result column="record_modify_tm" property="recordModifyTm"/>-->
+    <!--    </resultMap>-->
+
+    <select id="getAccountList"
+            resultType="com.egintra.common.dto.AccountReqDTO">
+        SELECT
+        department departmentId,
+        account_id accountId,
+        status,
+        work_date workDate,
+        collect_flag collectFlag,
+        receive_account receiveAccount,
+        pos_machineid posMachineId,
+        pos_personid posPersonid,
+        fictitious_id fictitiousId
+        FROM
+        fee_account
+        <where>
+            <if test="accountId != null and accountId != ''">
+                and account_id like CONCAT(CONCAT('%',#{accountId}),'%')
+            </if>
+            <if test="status != null and status != ''">
+                and status like CONCAT(CONCAT('%',#{status}),'%')
+            </if>
+            <if test="workDate != null">
+                and work_date = #{workDate,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+        ORDER BY
+        account_id desc
+    </select>
+
+    <select id="getOne" resultType="com.egintra.common.dto.AccountReqDTO">
+        SELECT department      departmentId,
+               account_id      accountId,
+               status,
+               work_date       workDate,
+               collect_flag    collectFlag,
+               receive_account receiveAccount,
+               pos_machineid   posMachineId,
+               pos_personid    posPersonid,
+               fictitious_id   fictitiousId
+        FROM fee_account
+        where account_id = #{accountId}
+    </select>
+
+    <insert id="addAccount" parameterType="com.egintra.common.dto.AccountReqDTO">
+        INSERT INTO fee_account(department,
+                                account_id,
+                                status,
+                                work_date,
+                                collect_flag,
+                                receive_account,
+                                pos_machineid,
+                                pos_personid,
+                                fictitious_id)
+        values (#{departmentId},
+                #{accountId},
+                #{status},
+                #{workDate},
+                #{collectFlag},
+                #{receiveAccount},
+                #{posMachineId},
+                #{posPersonId},
+                #{fictitiousId})
+    </insert>
+
+    <update id="editAccount">
+        <foreach collection="list" index="index" item="item" open="begin" separator=";" close=";end;">
+            update fee_account
+            <set>
+                <if test="item.departmentId != null and item.departmentId != ''">
+                    department=#{item.departmentId},
+                </if>
+                <if test="item.status != null and item.status != ''">
+                    status=#{item.status},
+                </if>
+                <choose>
+                    <when test="item.workDate==null">
+                        work_date = null,
+                    </when>
+                    <otherwise>
+                        work_date=#{item.workDate},
+                    </otherwise>
+                </choose>
+                collect_flag=#{item.collectFlag},
+                receive_account=#{item.receiveAccount},
+                pos_machineid=#{item.posMachineId},
+                pos_personid=#{item.posPersonId},
+                <if test="item.fictitiousId != null and item.fictitiousId != ''">
+                    fictitious_id=#{item.fictitiousId},
+                </if>
+            </set>
+            where account_id = #{item.accountId}
+        </foreach>
+
+
+    </update>
+
+    <select id="findByName" resultType="com.egintra.common.dto.AccountReqDTO">
+        SELECT id,
+               name,
+               code,
+               TYPE,
+               type_name typeName
+        FROM fee_dict
+        where name = #{name}
+          and type = #{type}
+    </select>
+
+    <delete id="deleteById">
+        delete from fee_account
+        where account_id = #{accountId}
+    </delete>
+
+    <select id="getAccountListByDeptId" resultType="com.egintra.common.dto.AccountReqDTO">
+        SELECT department      departmentId,
+               account_id      accountId,
+               status,
+               work_date       workDate,
+               collect_flag    collectFlag,
+               receive_account receiveAccount,
+               pos_machineid   posMachineId,
+               pos_personid    posPersonid,
+               fictitious_id   fictitiousId
+        FROM fee_account
+        where department = #{departmentId}
+    </select>
+</mapper>

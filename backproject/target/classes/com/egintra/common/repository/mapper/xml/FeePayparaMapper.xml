@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.FeePayparaMapper">
+    <resultMap id="feePayparaMapper" type="com.egintra.common.repository.entity.FeePaypara">
+        <result column="department" property="department"/>
+        <result column="accountid" property="accountid"/>
+        <result column="zfwz" property="zfwz"/>
+        <result column="shdm" property="shdm"/>
+        <result column="shgtdm" property="shgtdm"/>
+        <result column="fhdm" property="fhdm"/>
+        <result column="bizh" property="bizh"/>
+        <result column="jym" property="jym"/>
+        <result column="jklx" property="jklx"/>
+        <result column="gkey" property="gkey"/>
+        <result column="wglx" property="wglx"/>
+        <result column="fzjg" property="fzjg"/>
+    </resultMap>
+
+    <select id="queryFeePaypara" resultType="com.egintra.common.dto.pay.FeePayparaRespDTO">
+        SELECT
+          department AS department,
+          accountid AS accountid,
+          zfwz AS zfwz,
+          shdm AS shdm,
+          shgtdm AS shgtdm,
+          fhdm AS fhdm,
+          bizh AS bizh,
+          jym AS jym,
+          jklx AS jklx,
+          gkey AS gkey,
+          wglx AS wglx,
+          fzjg AS fzjg
+        FROM
+          FEE_PAYPARA
+        WHERE
+          department = #{req.glbm}
+    </select>
+</mapper>

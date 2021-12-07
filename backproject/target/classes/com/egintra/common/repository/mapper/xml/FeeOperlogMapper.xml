@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.FeeOperlogMapper">
+    <resultMap id="feeOperlogMapper" type="com.egintra.common.repository.entity.FeeOperlog">
+        <result column="orderid" property="orderid"/>
+        <result column="czlb" property="czlb"/>
+        <result column="zt" property="zt"/>
+        <result column="msg" property="msg"/>
+        <result column="dates" property="dates"/>
+    </resultMap>
+
+    <insert id="batchInsertFeeOperlogs">
+        INSERT all
+        <foreach collection="list" item="item" separator="  " open=" " close=" " index="index">
+            INTO FEE_OPERLOG(
+            orderid,
+            czlb
+            zt,
+            msg,
+            dates)
+            VALUES(
+            #{item.orderid},
+            #{item.czlb},
+            #{item.zt},
+            #{item.msg},
+            #{item.dates})
+        </foreach>
+        select 1 from dual
+    </insert>
+</mapper>

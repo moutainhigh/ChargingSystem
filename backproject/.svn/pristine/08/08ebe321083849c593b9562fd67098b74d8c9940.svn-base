@@ -1,0 +1,41 @@
+package com.egintra.common.repository.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.egintra.common.dto.ProjectClassReqDTO;
+import com.egintra.common.dto.ProjectDetailReqDTO;
+
+import java.util.List;
+
+public interface ProjectDetailMapper extends BaseMapper<ProjectClassReqDTO> {
+
+    /**
+     * 查看列表
+     *
+     * @return 查询结果
+     */
+    List<ProjectDetailReqDTO> getProjectDetailList(ProjectDetailReqDTO projectDetailReqDTO);
+
+
+    /**
+     * 添加
+     *
+     * @param projectDetailReqDTO
+     */
+    void addProjectDetail(ProjectDetailReqDTO projectDetailReqDTO);
+
+
+    /**
+     * 编辑
+     *
+     * @param projectDetailReqDTO
+     */
+    void editProjectDetail(ProjectDetailReqDTO projectDetailReqDTO);
+
+
+    /**
+     * 删除
+     *
+     * @param id
+     */
+    void deleteById(String id);
+}

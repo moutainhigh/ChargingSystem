@@ -1,0 +1,24 @@
+package com.egintra.common.repository.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.egintra.common.repository.entity.FeeInvoiceDetail;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+/**
+ * 发票明细表Mapper接口
+ *
+ * @author liushihao
+ * @date 2021/8/11
+ */
+public interface FeeInvoiceDetailMapper extends BaseMapper<FeeInvoiceDetail> {
+
+    /**
+     * 批量插入发票明细表
+     *
+     * @param details 参数
+     * @return 结果
+     */
+    int batchInsertDetails(@Param("list") List<FeeInvoiceDetail> details);
+}

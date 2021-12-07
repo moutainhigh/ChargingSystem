@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.RightRoleMapper">
+    <resultMap id="rightRoleMapper" type="com.egintra.common.repository.entity.RightRole">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="record_status" property="recordStatus"/>
+        <result column="record_create_cd" property="recordCreateCd"/>
+        <result column="record_create_nm" property="recordCreateNm"/>
+        <result column="record_create_tm" property="recordCreateTm"/>
+        <result column="record_modify_cd" property="recordModifyCd"/>
+        <result column="record_modify_nm" property="recordModifyNm"/>
+        <result column="record_modify_tm" property="recordModifyTm"/>
+    </resultMap>
+
+    <select id="queryAllRoles"
+            resultType="com.egintra.common.dto.RightRoleRespDTO">
+        SELECT id,
+               name,
+               record_status,
+               record_create_tm,
+               record_modify_tm
+        FROM sys_role
+        WHERE record_status = '0'
+        ORDER BY record_create_tm
+    </select>
+
+    <select id="queryRole"
+            resultType="com.egintra.common.dto.RightRoleRespDTO">
+        SELECT
+          id,
+          name,
+          record_status,
+          record_create_tm,
+          record_modify_tm
+        FROM sys_role
+        WHERE record_status = '0'
+        <if test="req.id != null and req.id != ''">
+            AND id = #{req.id}
+        </if>
+        <if test="req.name != null and req.name != ''">
+            AND name like CONCAT(CONCAT('%', #{req.name}), '%')
+        </if>
+        ORDER BY record_create_tm
+    </select>
+
+    <update id="deleteRole">
+        UPDATE sys_role
+        SET record_status = '1'
+        WHERE 1 = 1
+          AND id = #{req.id}
+    </update>
+
+    <update id="batchUpdateRole">
+        <foreach collection="list" index="index" item="item" open="begin" separator=";" close=";end;">
+            UPDATE sys_role
+              <set>
+                  name = #{item.name},
+                  record_modify_tm = #{item.recordModifyTm}
+              </set>
+            WHERE
+              1 = 1
+              AND id = #{item.id}
+              AND record_status = '0'
+        </foreach>
+    </update>
+
+    <insert id="insertRole">
+        INSERT INTO sys_role
+        (
+         id,
+         name,
+         record_status,
+         record_create_tm,
+         record_modify_tm
+         )
+        VALUES
+        (
+         #{req.id},
+         #{req.name},
+         #{req.recordStatus},
+         #{req.recordCreateTm},
+         #{req.recordModifyTm}
+        )
+    </insert>
+</mapper>

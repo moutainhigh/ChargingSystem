@@ -1,0 +1,132 @@
+package com.egintra.common.dto;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+public class MaterialReqDTO extends CommonPage {
+
+    private String materialId;
+
+    private String materialName;
+
+    private String projectName;
+
+    private double materialCost;
+
+    private String projectId;
+
+
+    private String recordStatus;
+
+
+    private String recordCreateCd;
+
+
+    private String recordCreateNm;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private String recordCreateTm;
+
+    private String recordModifyCd;
+
+
+    private String recordModifyNm;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private String recordModifyTm;
+
+    public String getMaterialId() {
+        return materialId;
+    }
+
+    public void setMaterialId(String materialId) {
+        this.materialId = materialId;
+    }
+
+    public String getMaterialName() {
+        return materialName;
+    }
+
+    public void setMaterialName(String materialName) {
+        this.materialName = materialName;
+    }
+
+    public double getMaterialCost() {
+        return materialCost;
+    }
+
+    public void setMaterialCost(double materialCost) {
+        this.materialCost = materialCost;
+    }
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getRecordStatus() {
+        return recordStatus;
+    }
+
+    public void setRecordStatus(String recordStatus) {
+        this.recordStatus = recordStatus;
+    }
+
+    public String getRecordCreateCd() {
+        return recordCreateCd;
+    }
+
+    public void setRecordCreateCd(String recordCreateCd) {
+        this.recordCreateCd = recordCreateCd;
+    }
+
+    public String getRecordCreateNm() {
+        return recordCreateNm;
+    }
+
+    public void setRecordCreateNm(String recordCreateNm) {
+        this.recordCreateNm = recordCreateNm;
+    }
+
+    public String getRecordCreateTm() {
+        return recordCreateTm;
+    }
+
+    public void setRecordCreateTm(String recordCreateTm) {
+        this.recordCreateTm = recordCreateTm;
+    }
+
+    public String getRecordModifyCd() {
+        return recordModifyCd;
+    }
+
+    public void setRecordModifyCd(String recordModifyCd) {
+        this.recordModifyCd = recordModifyCd;
+    }
+
+    public String getRecordModifyNm() {
+        return recordModifyNm;
+    }
+
+    public void setRecordModifyNm(String recordModifyNm) {
+        this.recordModifyNm = recordModifyNm;
+    }
+
+    public String getRecordModifyTm() {
+        return recordModifyTm;
+    }
+
+    public void setRecordModifyTm(String recordModifyTm) {
+        this.recordModifyTm = recordModifyTm;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+}

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.VehicleMapper">
+    <resultMap id="rightRoleMapper" type="com.egintra.common.repository.entity.Vehicle">
+        <result column="hpzl" property="hpzl"/>
+        <result column="ywlx" property="ywlx"/>
+        <result column="ywyy" property="ywyy"/>
+        <result column="ywmc" property="ywmc"/>
+        <result column="project_id" property="projectId"/>
+        <result column="quantity" property="quantity"/>
+        <result column="options" property="options"/>
+        <result column="record_status" property="recordStatus"/>
+        <result column="record_create_cd" property="recordCreateCd"/>
+        <result column="record_create_nm" property="recordCreateNm"/>
+        <result column="record_create_tm" property="recordCreateTm"/>
+        <result column="record_modify_cd" property="recordModifyCd"/>
+        <result column="record_modify_nm" property="recordModifyNm"/>
+        <result column="record_modify_tm" property="recordModifyTm"/>
+    </resultMap>
+
+    <select id="getVehicleList"
+            resultType="com.egintra.common.dto.VehicleReqDTO">
+        SELECT
+        v.hpzl hpzl,
+        v.ywlx ywlx,
+        v.ywyy ywyy,
+        v.ywmc ywmc,
+        v.project_id projectId,
+        p.PROJECT_NAME projectName,
+        v.quantity quantity,
+        v.options options,
+        v.record_create_tm,
+        v.record_modify_tm
+        FROM
+        FEE_VEHJK v
+        LEFT JOIN FEE_PROJECT_DETAIL p ON v.PROJECT_ID = p.PROJECT_ID
+        <where>
+            v.record_status = '0'
+            <if test="hpzl!= null and hpzl != ''">
+                and v.hpzl=#{hpzl}
+            </if>
+            <if test="ywlx != null and ywlx != ''">
+                and v.ywlx=#{ywlx}
+            </if>
+            <if test="ywyy != null and ywyy != ''">
+                and v.ywyy=#{ywyy}
+            </if>
+            <if test="ywmc != null and ywmc != ''">
+                and v.ywmc like CONCAT(CONCAT('%',#{ywmc}),'%')
+            </if>
+            <if test="quantity != null and quantity != ''">
+                and v.quantity=#{quantity}
+            </if>
+            <if test="options != null and options != ''">
+                and v.options=#{options}
+            </if>
+        </where>
+        ORDER BY
+        v.record_create_tm asc
+    </select>
+
+    <select id="getOne" resultType="com.egintra.common.dto.VehicleReqDTO">
+        SELECT v.hpzl       hpzl,
+               v.ywlx       ywlx,
+               v.ywyy       ywyy,
+               v.ywmc       ywmc,
+               v.project_id projectId,
+               v.quantity   quantity,
+               v.options    options
+        FROM FEE_VEHJK v
+        where v.hpzl = #{hpzl}
+          and v.ywlx = #{ywlx}
+          and v.ywyy = #{ywyy}
+          and v.project_id = #{projectId}
+    </select>
+
+
+    <insert id="addVehicle" parameterType="com.egintra.common.dto.VehicleReqDTO">
+        INSERT INTO FEE_VEHJK(hpzl,
+                              ywlx,
+                              ywyy,
+                              ywmc,
+                              project_id,
+                              quantity,
+                              options,
+                              record_status,
+                              record_create_tm,
+                              record_modify_tm)
+        values (#{ywlx},
+                #{ywlx},
+                #{ywyy,jdbcType=DECIMAL},
+                #{ywmc},
+                #{projectId},
+                #{quantity},
+                #{options},
+                #{recordStatus},
+                #{recordCreateTm},
+                #{recordModifyTm})
+    </insert>
+
+
+    <update id="editVehicleReqDTO">
+        <foreach collection="list" index="index" item="item" open="begin" separator=";" close=";end;">
+            update FEE_VEHJK
+            <set>
+                <if test="item.quantity != null and item.quantity != ''">
+                    quantity=#{item.quantity},
+                </if>
+                <if test="item.options != null and item.options != ''">
+                    options=#{item.options},
+                </if>
+                    record_modify_tm=#{item.recordModifyTm},
+            </set>
+            where hpzl = #{item.hpzl}
+            and ywlx = #{item.ywlx}
+            and ywyy = #{item.ywyy}
+            and project_id= #{item.projectId}
+        </foreach>
+    </update>
+
+
+    <update id="deleteById">
+        update FEE_VEHJK
+        set record_status = '1'
+        where hpzl = #{hpzl,jdbcType=VARCHAR}
+          and ywlx = #{ywlx,jdbcType=VARCHAR}
+          and ywyy = #{ywyy,jdbcType=VARCHAR}
+          and project_id = #{projectId,jdbcType=VARCHAR}
+    </update>
+</mapper>

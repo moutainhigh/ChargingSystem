@@ -1,0 +1,4 @@
+package com.egintra.common.dto.pay;
+
+public class FeeInvoiceDetailRespDTO {
+}

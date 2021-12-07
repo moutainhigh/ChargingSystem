@@ -1,0 +1,24 @@
+package com.egintra.feeService.user.service;
+
+import com.egintra.common.dto.RightRoleUserReqDTO;
+import com.egintra.common.dto.RightUserDTO;
+import com.egintra.common.utils.DataReuslt;
+
+public interface SysUserService {
+
+    /**
+     * 根据用户ID查询已配置的角色
+     *
+     * @param rightUserDTO 参数
+     * @return 结果
+     */
+    public DataReuslt getUserAllRoles(RightUserDTO rightUserDTO);
+
+    /**
+     * 更新用户角色信息
+     *
+     * @param rightRoleUserReqDTO 请求对象
+     * @return 处理结果
+     */
+    public DataReuslt updateRoleUserInfo(RightRoleUserReqDTO rightRoleUserReqDTO);
+}

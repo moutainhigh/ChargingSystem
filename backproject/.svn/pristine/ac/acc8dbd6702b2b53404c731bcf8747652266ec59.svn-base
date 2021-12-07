@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.PayInfoMapper">
+
+
+    <insert id="addPayInfo" parameterType="com.egintra.common.dto.pay.PayinfoReqDTO">
+        INSERT INTO fee_payinfo(orderid,
+                                zfwz,
+                                ywlb,
+                                lsh,
+                                je,
+                                ywlx,
+                                ywyy,
+                                glbm,
+                                shdm,
+                                shgtdm,
+                                fhdm,
+                                bizh,
+                                jym,
+                                jklx,
+                                gkey,
+                                wglx,
+                                fzjg,
+                                yhdh,
+                                yhxm,
+                                ip,
+                                dyzt,
+                                jkr,
+                                sfzmhm,
+                                jflb,
+                                zffs,
+                                dates,
+                                zfbj,
+                                zfmsg,
+                                jzbj,
+                                jzmsg,
+                                jsbj,
+                                jsmsg,
+                                gxsj)
+
+        values (#{orderId,jdbcType=VARCHAR},
+                #{zfwz,jdbcType=VARCHAR},
+                #{ywlb,jdbcType=DECIMAL},
+                #{lsh,jdbcType=VARCHAR},
+                #{je,jdbcType=VARCHAR},
+                #{ywlx,jdbcType=VARCHAR},
+                #{ywyy,jdbcType=VARCHAR},
+                #{glbm,jdbcType=VARCHAR},
+                #{shdm,jdbcType=VARCHAR},
+                #{shgtdm,jdbcType=VARCHAR},
+                #{fhdm,jdbcType=VARCHAR},
+                #{bizh,jdbcType=VARCHAR},
+                #{jym,jdbcType=VARCHAR},
+                #{jklx,jdbcType=VARCHAR},
+                #{gkey,jdbcType=VARCHAR},
+                #{wglx,jdbcType=VARCHAR},
+                #{fzjg,jdbcType=VARCHAR},
+                #{yhdh,jdbcType=VARCHAR},
+                #{yhxm,jdbcType=VARCHAR},
+                #{ip,jdbcType=VARCHAR},
+                #{dyzt,jdbcType=VARCHAR},
+                #{jkr,jdbcType=VARCHAR},
+                #{sfzmhm,jdbcType=VARCHAR},
+                #{jflb,jdbcType=VARCHAR},
+                #{zffs,jdbcType=VARCHAR},
+                #{dates,jdbcType=VARCHAR},
+                #{zfbj,jdbcType=VARCHAR},
+                #{zfmsg,jdbcType=VARCHAR},
+                #{jzbj,jdbcType=VARCHAR},
+                #{jzmsg,jdbcType=VARCHAR},
+                #{jsbj,jdbcType=VARCHAR},
+                #{jsmsg,jdbcType=VARCHAR},
+                #{gxsj,jdbcType=VARCHAR})
+
+    </insert>
+
+</mapper>

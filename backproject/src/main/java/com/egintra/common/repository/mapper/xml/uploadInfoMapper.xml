@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.UploadinfoMapper">
+
+    <insert id="saveUploadinfo" parameterType="com.egintra.common.dto.business.UploadinfoReqDTO">
+        INSERT INTO FEE_UPLOADINFO
+          (department,
+           account_id,
+           invoice_id,
+           ywlb,
+           lsh,
+           sfxm,
+           total_money,
+           user_id,
+           user_ip,
+           dates,
+           code,
+           msg,
+           gxsj,
+           id)
+        values
+          (#{departId},
+           #{accountId},
+           #{invoiceId},
+           #{ywlb},
+           #{lsh},
+           #{sfxm},
+           #{totalMoney},
+           #{userId},
+           #{userIp},
+           #{date},
+           #{code},
+           #{msg},
+           #{gxsj},
+           #{id})
+    </insert>
+</mapper>

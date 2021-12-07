@@ -1,0 +1,272 @@
+package com.egintra.feeService.role.service.impl;
+
+import com.egintra.common.dto.BaseFuncDTO;
+import com.egintra.common.dto.RightFuncrightReqDTO;
+import com.egintra.common.dto.RightRoleReqDTO;
+import com.egintra.common.dto.RightRoleRespDTO;
+import com.egintra.common.dto.RightRoleUserReqDTO;
+import com.egintra.common.dto.RightRoleUserResqDTO;
+import com.egintra.common.enums.RoleStatusEnum;
+import com.egintra.common.exception.ResultCode;
+import com.egintra.common.repository.entity.RightRoleuser;
+import com.egintra.common.repository.mapper.RightFunctionMapper;
+import com.egintra.common.repository.mapper.RightRoleMapper;
+import com.egintra.common.repository.mapper.RightRoleuserMapper;
+import com.egintra.common.utils.DataReuslt;
+import com.egintra.common.utils.DateUtils;
+import com.egintra.feeService.config.PageResult;
+import com.egintra.feeService.role.service.RightRoleService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+@Service
+public class RightRoleServiceImpl implements RightRoleService {
+
+    @Resource
+    private RightRoleMapper rightRoleMapper;
+    @Resource
+    private RightRoleuserMapper rightRoleuserMapper;
+    @Resource
+    private RightFunctionMapper rightFunctionMapper;
+
+    /**
+     * 查询所有角色信息
+     *
+     * @return 结果
+     */
+    @Override
+    public DataReuslt queryAllRoles(RightRoleReqDTO rightRoleReqDTO) {
+
+        // 查询所有角色信息
+        Page ps = PageHelper.startPage(rightRoleReqDTO.getPage(), rightRoleReqDTO.getSize());
+        List<RightRoleRespDTO> rightRoleRespDTOS = rightRoleMapper.queryAllRoles();
+        PageResult<RightRoleRespDTO> result = new PageResult<RightRoleRespDTO>();
+        result.setRows(rightRoleRespDTOS);
+        result.setTotal(ps.getTotal());
+        result.setPages(ps.getPages());
+        result.setCurrentPage(0);
+
+        return DataReuslt.success(result);
+    }
+
+    /**
+     * 查询所有角色信息
+     *
+     * @param baseFuncDTO 参数
+     * @return 结果
+     */
+    @Override
+    public DataReuslt getRoleList(BaseFuncDTO baseFuncDTO) {
+
+        List<RightRoleRespDTO> rightRoleRespDTOS = rightRoleMapper.queryAllRoles();
+
+        return DataReuslt.success(rightRoleRespDTOS);
+    }
+
+    /**
+     * 查询角色信息
+     *
+     * @param rightRoleReqDTO 请求对象
+     * @return 结果
+     */
+    @Override
+    public DataReuslt queryRole(RightRoleReqDTO rightRoleReqDTO) {
+        // 验证参数，为空则报错
+        if (null == rightRoleReqDTO) {
+            return DataReuslt.fail(ResultCode.USER_INFO_IS_EMPTY.code(),
+                    ResultCode.USER_INFO_IS_EMPTY.message());
+        }
+
+        // 查询角色信息
+        List<RightRoleRespDTO> rightRoleRespDTOS = rightRoleMapper.queryRole(rightRoleReqDTO);
+
+        // 返回结果
+        return DataReuslt.success(rightRoleRespDTOS);
+    }
+
+    /**
+     * 新增角色信息
+     *
+     * @param rightRoleReqDTO 请求对象
+     * @return 结果
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public DataReuslt addRole(RightRoleReqDTO rightRoleReqDTO) {
+        // 验证参数，为空则报错
+        if (null == rightRoleReqDTO) {
+            return DataReuslt.fail(ResultCode.USER_INFO_IS_EMPTY.code(),
+                    ResultCode.USER_INFO_IS_EMPTY.message());
+        }
+
+        rightRoleReqDTO.setRecordStatus(RoleStatusEnum.NO.getCode());
+        String curDate = DateUtils.getCurDate();
+        rightRoleReqDTO.setRecordCreateTm(curDate);
+        rightRoleReqDTO.setRecordModifyTm(curDate);
+        // 新增角色
+        rightRoleMapper.insertRole(rightRoleReqDTO);
+
+        // 返回结果
+        return DataReuslt.success();
+    }
+
+    /**
+     * 删除角色信息
+     *
+     * @param rightRoleReqDTO 请求对象
+     * @return 结果
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public DataReuslt deleteRole(RightRoleReqDTO rightRoleReqDTO) {
+        // 验证参数，为空则报错
+        if (null == rightRoleReqDTO.getId()) {
+            return DataReuslt.fail(ResultCode.USER_INFO_IS_EMPTY.code(),
+                    ResultCode.USER_INFO_IS_EMPTY.message());
+        }
+
+        String curDate = DateUtils.getCurDate();
+        rightRoleReqDTO.setRecordModifyTm(curDate);
+        // 根据ID删除数据
+        rightRoleMapper.deleteRole(rightRoleReqDTO);
+
+        // 返回结果
+        return DataReuslt.success("删除成功");
+    }
+
+    /**
+     * 修改角色信息
+     *
+     * @param rightRoleReqDTO 请求对象
+     * @return 结果
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public DataReuslt updateRole(RightRoleReqDTO rightRoleReqDTO) {
+        // 验证参数，为空则报错
+        if (null == rightRoleReqDTO) {
+            return DataReuslt.fail(ResultCode.USER_INFO_IS_EMPTY.code(),
+                    ResultCode.USER_INFO_IS_EMPTY.message());
+        }
+
+        String curDate = DateUtils.getCurDate();
+        rightRoleReqDTO.setRecordModifyTm(curDate);
+        // 根据ID修改数据
+        rightRoleMapper.updateRole(rightRoleReqDTO);
+
+        // 返回结果
+        return DataReuslt.success();
+    }
+
+    /**
+     * 更新用户角色信息
+     *
+     * @param rightRoleUserReqDTO 请求对象
+     * @return 处理结果
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public DataReuslt updateRoleUserInfo(RightRoleUserReqDTO rightRoleUserReqDTO) {
+        // 验证参数，为空则报错
+        if (null == rightRoleUserReqDTO) {
+            return DataReuslt.fail(ResultCode.USER_INFO_IS_EMPTY.code(),
+                    ResultCode.USER_INFO_IS_EMPTY.message());
+        }
+        List<RightRoleUserResqDTO> roleUsers = rightRoleuserMapper.queryRoleUsers(rightRoleUserReqDTO);
+        // 如果当前用户未配置此角色则插入
+        if (CollectionUtils.isEmpty(roleUsers)) {
+            RightRoleuser rightRoleuser = new RightRoleuser();
+            BeanUtils.copyProperties(rightRoleUserReqDTO, rightRoleuser);
+            rightRoleuserMapper.insert(rightRoleuser);
+        }
+
+        // 返回结果
+        return DataReuslt.success();
+    }
+
+    /**
+     * 保存功能权限
+     *
+     * @param rightFuncrightReqDTO 请求对象
+     * @return 保存结果
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public DataReuslt saveRightFuncRight(RightFuncrightReqDTO rightFuncrightReqDTO) {
+//
+//        // 根据角色ID查询功能权限数据
+//        List<RightFuncrightRespDTO> rightFuncrights = rightFuncrightMapper.queryFuncrights(rightFuncrightReqDTO);
+//        // 获取当前分类下当前角色已经设立的功能权限
+//        if (!CollectionUtils.isEmpty(rightFuncrights)) {
+//            rightFuncrights.removeIf(p -> !rightFuncrightReqDTO.getFunccateId().equals(p.getFunccateId()));
+//        }
+//
+//        // 当前角色保存的功能集合
+//        List<Integer> insertFuncIds = rightFuncrightReqDTO.getFuncIds();
+//
+//        // 生成保存数据集合
+//        List<RightFuncright> inserts = new ArrayList<>();
+//        List<RightFuncright> deletes = new ArrayList<>();
+//        RightFuncright rightFuncright;
+//        // 设置插入对象集合或删除对象集合
+//        if (!CollectionUtils.isEmpty(insertFuncIds)) {
+//            Date currentDate = DateUtils.getCurrentDate();
+//            for (Integer insertFuncId : insertFuncIds) {
+//                rightFuncright = new RightFuncright();
+//                rightFuncright.setRoleId(String.valueOf(rightFuncrightReqDTO.getRoleId()));
+//                rightFuncright.setFuncId(String.valueOf(insertFuncId));
+//                rightFuncright.setRecordStatus(RecordStatusEnum.NO.getCode());
+//                rightFuncright.setRecordCreateTm(currentDate);
+//                inserts.add(rightFuncright);
+//            }
+//        }
+//        if (!CollectionUtils.isEmpty(rightFuncrights)) {
+//            for (RightFuncrightRespDTO dto : rightFuncrights) {
+//                rightFuncright = new RightFuncright();
+//                rightFuncright.setRoleId(String.valueOf(rightFuncrightReqDTO.getRoleId()));
+//                rightFuncright.setFuncId(String.valueOf(dto.getFuncId()));
+//                rightFuncright.setRecordStatus(RecordStatusEnum.YES.getCode());
+//                deletes.add(rightFuncright);
+//            }
+//        }
+//
+//        // 批量插入
+//        if (!CollectionUtils.isEmpty(inserts)) {
+//            rightFuncrightMapper.batchInsertFuncrights(inserts);
+//        }
+//        // 批量删除
+//        if (!CollectionUtils.isEmpty(deletes)) {
+//            rightFuncrightMapper.batchDeleteFuncrights(deletes);
+//        }
+//
+//        // 根据功能菜单ID查询按钮表
+//        FunctionReqDTO functionReqDTO = new FunctionReqDTO();
+//        functionReqDTO.setId(String.valueOf(rightFuncrightReqDTO.getId()));
+//        List<RightFuncActionRespDTO> curFuncActions = rightFuncActionMapper.getCurFuncActions(functionReqDTO);
+//
+//        // 如果前端要设置的按钮集合为空，更新功能表"actions"为空；否则更新"actions"
+//        if (!CollectionUtils.isEmpty(curFuncActions)) {
+//            if (!CollectionUtils.isEmpty(rightFuncrightReqDTO.getActionIds())) {
+//                List<String> actinNms = curFuncActions.stream()
+//                        .filter(p -> rightFuncrightReqDTO.getActionIds().contains(p.getId()))
+//                        .map(RightFuncActionRespDTO::getName).collect(Collectors.toList());
+//                String actions = actinNms.stream().collect(Collectors.joining(","));
+//                functionReqDTO.setActions(actions);
+//            } else {
+//                functionReqDTO.setActions("");
+//            }
+//            // 根据功能菜单ID更新
+//            rightFunctionMapper.updateFunction(functionReqDTO);
+//        }
+
+        // 返回结果
+        return DataReuslt.success("保存成功");
+    }
+}

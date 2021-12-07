@@ -1,0 +1,63 @@
+package com.egintra.feeService.projectdetail.service.impl;
+
+import com.egintra.common.dto.ProjectDetailReqDTO;
+import com.egintra.common.repository.mapper.ProjectDetailMapper;
+import com.egintra.common.utils.DataReuslt;
+import com.egintra.feeService.config.PageResult;
+import com.egintra.feeService.projectdetail.service.ProjectDetailService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.UUID;
+
+@Service
+public class ProjectDetailServiceImpl implements ProjectDetailService {
+
+    @Resource
+    private ProjectDetailMapper projectDetailMapper;
+
+
+    @Override
+    public DataReuslt getProjectDetailList(ProjectDetailReqDTO projectDetailReqDTO) {
+        Page ps = PageHelper.startPage(projectDetailReqDTO.getPage(), projectDetailReqDTO.getSize());
+        List<ProjectDetailReqDTO> detailReqDTOS =projectDetailMapper.getProjectDetailList(projectDetailReqDTO);
+        PageResult<ProjectDetailReqDTO> result = new PageResult<ProjectDetailReqDTO>();
+        result.setRows(detailReqDTOS);
+        result.setTotal(ps.getTotal());
+        result.setPages(ps.getPages());
+        result.setCurrentPage(projectDetailReqDTO.getPage());
+        return DataReuslt.success(result);
+    }
+
+    @Override
+    public DataReuslt getProjectDetailLists(ProjectDetailReqDTO projectDetailReqDTO) {
+        List<ProjectDetailReqDTO> departments =projectDetailMapper.getProjectDetailList(projectDetailReqDTO);
+        return DataReuslt.success(departments);
+    }
+
+    @Override
+    @Transactional
+    public DataReuslt addProjectDetail(ProjectDetailReqDTO projectDetailReqDTO) {
+        projectDetailReqDTO.setProjectId(UUID.randomUUID().toString());
+        projectDetailReqDTO.setRecordStatus("0");
+        projectDetailMapper.addProjectDetail(projectDetailReqDTO);
+        return DataReuslt.success(projectDetailReqDTO);
+    }
+
+    @Override
+    @Transactional
+    public DataReuslt editProjectDetail(ProjectDetailReqDTO projectDetailReqDTO) {
+        projectDetailMapper.editProjectDetail(projectDetailReqDTO);
+        return DataReuslt.success(projectDetailReqDTO);
+    }
+
+    @Override
+    public DataReuslt deleteById(String id) {
+        projectDetailMapper.deleteById(id);
+        return DataReuslt.success("删除成功");
+    }
+}

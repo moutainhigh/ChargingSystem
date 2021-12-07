@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.FeeInvoiceDetailMapper">
+    <resultMap id="feeInvoiceDetailMapper" type="com.egintra.common.repository.entity.FeeInvoiceDetail">
+        <result column="id" property="id"/>
+        <result column="fee_invoice_id" property="feeInvoiceId"/>
+        <result column="department" property="department"/>
+        <result column="account_id" property="accountId"/>
+        <result column="invoice_id" property="invoiceId"/>
+        <result column="paper_id" property="paperId"/>
+        <result column="dates" property="dates"/>
+        <result column="status" property="status"/>
+        <result column="project_id" property="projectId"/>
+        <result column="project_name" property="projectName"/>
+        <result column="unit_price" property="unitPrice"/>
+        <result column="quantity" property="quantity"/>
+        <result column="class_id" property="classId"/>
+        <result column="province_rate" property="provinceRate"/>
+        <result column="city_rate" property="cityRate"/>
+        <result column="material_cost" property="materialCost"/>
+        <result column="finance_code" property="financeCode"/>
+        <result column="pay_way" property="payWay"/>
+    </resultMap>
+
+    <insert id="batchInsertDetails">
+        INSERT all
+        <foreach collection="list" item="item" separator="  " open=" " close=" " index="index">
+            INTO FEE_INVOICE_DETAIL(
+            id,
+            fee_invoice_id,
+            department,
+            account_id,
+            invoice_id,
+            paper_id,
+            dates,
+            status,
+            project_id,
+            project_name,
+            unit_price,
+            quantity,
+            class_id,
+            province_rate,
+            city_rate,
+            material_cost,
+            finance_code,
+            pay_way)
+            VALUES(
+            #{item.id},
+            #{item.feeInvoiceId},
+            #{item.department},
+            #{item.accountId},
+            #{item.invoiceId},
+            #{item.paperId},
+            #{item.dates},
+            #{item.status},
+            #{item.projectId},
+            #{item.projectName},
+            #{item.unitPrice},
+            #{item.quantity},
+            #{item.classId},
+            #{item.provinceRate},
+            #{item.cityRate},
+            #{item.materialCost},
+            #{item.financeCode},
+            #{item.payWay})
+        </foreach>
+        select 1 from dual
+    </insert>
+
+</mapper>

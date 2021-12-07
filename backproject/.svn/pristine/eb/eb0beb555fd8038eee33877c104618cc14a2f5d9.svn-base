@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.MaterialMapper">
+    <resultMap id="rightRoleMapper" type="com.egintra.common.repository.entity.Material">
+        <result column="material_id" property="materialId"/>
+        <result column="material_name" property="materialName"/>
+        <result column="material_cost" property="materialCost"/>
+        <result column="project_id" property="projectId"/>
+    </resultMap>
+
+    <select id="getMaterialList"
+            resultType="com.egintra.common.dto.MaterialReqDTO">
+        SELECT
+        m.material_id materialId,
+        m.material_name materialName,
+        m.material_cost materialCost,
+        m.project_id projectId,
+        d.PROJECT_NAME projectName
+        FROM
+        fee_material m LEFT JOIN FEE_PROJECT_DETAIL d on
+        m.PROJECT_ID = d.PROJECT_ID
+        <where>
+            <if test="materialId!= null and materialId != ''">
+                and m.material_id like CONCAT(CONCAT('%',#{materialId}),'%')
+            </if>
+            <if test="materialName != null and materialName != ''">
+                and m.material_name like CONCAT(CONCAT('%',#{materialName}),'%')
+            </if>
+            <if test="materialCost != null and materialCost != ''">
+                and m.material_cost=#{materialCost}
+            </if>
+        </where>
+        ORDER BY
+        m.material_id desc
+    </select>
+
+    <select id="getMaterialListByParam" resultType="com.egintra.common.dto.MaterialReqDTO">
+        SELECT material_id   materialId,
+               material_name materialName,
+               material_cost materialCost,
+               project_id    projectId
+        FROM fee_material
+        where project_id = #{projectId}
+    </select>
+    <select id="getOne" resultType="com.egintra.common.dto.MaterialReqDTO">
+        SELECT material_id   materialId,
+               material_name materialName,
+               material_cost materialCost,
+               project_id    projectId
+        FROM fee_material
+        where material_id = #{materialId}
+    </select>
+
+    <select id="findByName" resultType="com.egintra.common.dto.MaterialReqDTO">
+        SELECT material_id   materialId,
+               material_name materialName,
+               material_cost materialCost,
+               project_id    projectId
+        FROM fee_material
+        where material_name = #{materialName}
+    </select>
+
+    <select id="findByNameParam" resultType="com.egintra.common.dto.MaterialReqDTO">
+        SELECT material_id   materialId,
+               material_name materialName,
+               material_cost materialCost,
+               project_id    projectId
+        FROM fee_material
+        where material_name = #{materialName} and material_id=#{materialId}
+    </select>
+
+    <insert id="addMaterial" parameterType="com.egintra.common.dto.MaterialReqDTO">
+        INSERT INTO fee_material(material_id,
+                                 material_name,
+                                 material_cost,
+                                 project_id
+        values (#{materialId},
+                #{materialName},
+                #{materialCost},
+                #{projectId})
+    </insert>
+
+    <update id="editMaterial">
+        <foreach collection="list" index="index" item="item" open="begin" separator=";" close=";end;">
+            update fee_material
+            <set>
+                <if test="item.materialName != null and item.materialName != ''">
+                    material_name=#{item.materialName},
+                </if>
+                <if test="item.materialCost != null and item.materialCost != ''">
+                    material_cost=#{item.materialCost},
+                </if>
+                    record_modify_tm=#{item.recordModifyTm},
+                <if test="item.projectId != null and item.projectId != ''">
+                    project_id=#{item.projectId},
+                </if>
+            </set>
+            where material_id = #{item.materialId}
+        </foreach>
+    </update>
+
+    <update id="deleteById">
+        delete from fee_material
+        where material_id = #{materialId,jdbcType=VARCHAR}
+    </update>
+</mapper>

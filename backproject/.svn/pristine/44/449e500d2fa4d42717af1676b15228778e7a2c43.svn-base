@@ -1,0 +1,63 @@
+package com.egintra.feeService.projectclass.service.impl;
+
+import com.egintra.common.dto.ProjectClassReqDTO;
+import com.egintra.common.repository.mapper.ProjectClassMapper;
+import com.egintra.common.utils.DataReuslt;
+import com.egintra.feeService.config.PageResult;
+import com.egintra.feeService.projectclass.service.ProjectClassService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.UUID;
+
+@Service
+public class ProjectClassServiceImpl implements ProjectClassService {
+
+    @Resource
+    private ProjectClassMapper projectClassMapper;
+
+
+    @Override
+    public DataReuslt getProjectClassList(ProjectClassReqDTO projectClassReqDTO) {
+        Page ps = PageHelper.startPage(projectClassReqDTO.getPage(), projectClassReqDTO.getSize());
+        List<ProjectClassReqDTO> projectClassList =projectClassMapper.getProjectClassList(projectClassReqDTO);
+        PageResult<ProjectClassReqDTO> result = new PageResult<ProjectClassReqDTO>();
+        result.setRows(projectClassList);
+        result.setTotal(ps.getTotal());
+        result.setPages(ps.getPages());
+        result.setCurrentPage(projectClassReqDTO.getPage());
+        return DataReuslt.success(result);
+    }
+
+    @Override
+    public DataReuslt getProjectClassLists(ProjectClassReqDTO projectClassReqDTO) {
+        List<ProjectClassReqDTO> departments =projectClassMapper.getProjectClassList(projectClassReqDTO);
+        return DataReuslt.success(departments);
+    }
+
+    @Override
+    @Transactional
+    public DataReuslt addProjectClass(ProjectClassReqDTO projectClassReqDTO) {
+        projectClassReqDTO.setId(UUID.randomUUID().toString());
+        projectClassReqDTO.setRecordStatus("0");
+        projectClassMapper.addProjectClass(projectClassReqDTO);
+        return DataReuslt.success(projectClassReqDTO);
+    }
+
+    @Override
+    @Transactional
+    public DataReuslt editProjectClass(ProjectClassReqDTO projectClassReqDTO) {
+        projectClassMapper.editProjectClass(projectClassReqDTO);
+        return DataReuslt.success(projectClassReqDTO);
+    }
+
+    @Override
+    public DataReuslt deleteById(String id) {
+        projectClassMapper.deleteById(id);
+        return DataReuslt.success("删除成功");
+    }
+}

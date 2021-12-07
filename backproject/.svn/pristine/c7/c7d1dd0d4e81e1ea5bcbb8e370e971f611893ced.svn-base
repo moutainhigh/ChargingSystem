@@ -1,0 +1,151 @@
+package com.egintra.feeService.dict.service.impl;
+
+import com.egintra.common.dto.DictReqDTO;
+import com.egintra.common.repository.mapper.DictMapper;
+import com.egintra.common.utils.DataReuslt;
+import com.egintra.common.utils.DateUtils;
+import com.egintra.common.utils.PageHelperUtils;
+import com.egintra.feeService.config.PageResult;
+import com.egintra.feeService.dict.service.DictService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+@Service
+public class DictServiceImpl implements DictService {
+
+    @Resource
+    private DictMapper dictMapper;
+
+
+    /**
+     * 查看 列表 （分页）
+     *
+     * @param dictReqDTO
+     * @return
+     */
+    @Override
+    public DataReuslt getDictList(DictReqDTO dictReqDTO) {
+        Page ps = PageHelper.startPage(dictReqDTO.getPage(), dictReqDTO.getSize());
+        List<DictReqDTO> dictList = dictMapper.getDictList(dictReqDTO);
+        PageResult<DictReqDTO> result = PageHelperUtils.getPagingData(dictList, ps);
+        return DataReuslt.success(result);
+    }
+
+    /**
+     * 查看列表(不分页)
+     *
+     * @param dictReqDTO
+     * @return
+     */
+    @Override
+    public DataReuslt getDictLists(DictReqDTO dictReqDTO) {
+        List<DictReqDTO> dictList = dictMapper.getDictList(dictReqDTO);
+        return DataReuslt.success(dictList);
+    }
+
+    /**
+     * 添加单位
+     *
+     * @param dictReqDTO
+     * @return
+     */
+    @Override
+    @Transactional
+    public DataReuslt addDict(DictReqDTO dictReqDTO) {
+        DictReqDTO dictCode = dictMapper.findByCode(dictReqDTO);
+        if (dictCode != null) {
+            return DataReuslt.fail("1", "字典编码已经存在");
+        }
+        DictReqDTO dictName = dictMapper.findByName(dictReqDTO);
+        if (dictName != null) {
+            return DataReuslt.fail("1", "字典名称已经存在");
+        }
+        dictReqDTO.setRecordStatus("0");
+        String curDate = DateUtils.getCurDate();
+        dictReqDTO.setRecordCreateTm(curDate);
+        dictReqDTO.setRecordModifyTm(curDate);
+        dictMapper.addDict(dictReqDTO);
+        return DataReuslt.success(dictReqDTO);
+    }
+
+    /**
+     * 编辑单位
+     *
+     * @param dictReqDTOs
+     * @return
+     */
+    @Override
+    @Transactional
+    public DataReuslt editDict(List<DictReqDTO> dictReqDTOs) {
+        boolean codeResult = false;
+        boolean nameResult = false;
+        StringBuffer code = new StringBuffer();
+        StringBuffer name = new StringBuffer();
+        for (DictReqDTO dictReqDTO : dictReqDTOs) {
+            String curDate = DateUtils.getCurDate();
+            dictReqDTO.setRecordCreateTm(curDate);
+            dictReqDTO.setRecordModifyTm(curDate);
+            DictReqDTO dictReqDTO1 = dictMapper.findByCodeParam(dictReqDTO);
+            if (dictReqDTO1 == null) {
+                DictReqDTO dictReqDTO2 = dictMapper.findByCode(dictReqDTO);
+                if (dictReqDTO2 != null) {
+                    code.append(dictReqDTO2.getCode());
+                    codeResult = true;
+                }
+            }
+            DictReqDTO dictReqDTO3 = dictMapper.findByNameParam(dictReqDTO);
+            if (dictReqDTO3 == null) {
+                DictReqDTO dictReqDTO4 = dictMapper.findByName(dictReqDTO);
+                if (dictReqDTO4 != null) {
+                    name.append(dictReqDTO4.getName());
+                    nameResult = true;
+                }
+            }
+        }
+        if (codeResult == true) {
+            return DataReuslt.fail("1", "字典编码已经重复:" + code.toString());
+        }
+        if (nameResult == true) {
+            return DataReuslt.fail("1", "字典名称已经重复:" + name.toString());
+        }
+
+        dictMapper.editDict(dictReqDTOs);
+        return DataReuslt.success(dictReqDTOs);
+    }
+
+    /**
+     * 删除单位
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public DataReuslt deleteById(String id) {
+        dictMapper.deleteById(id);
+        return DataReuslt.success("删除成功");
+    }
+
+    /**
+     * 查看单位详情
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public DataReuslt getOne(String id) {
+        DictReqDTO departmentReqDTO = dictMapper.getOne(id);
+        return DataReuslt.success(departmentReqDTO);
+    }
+
+
+    @Override
+    public DataReuslt getListByType(String type) {
+        List<DictReqDTO> dictList = dictMapper.getListByType(type);
+        return DataReuslt.success(dictList);
+    }
+}

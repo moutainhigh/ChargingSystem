@@ -1,0 +1,94 @@
+package com.egintra.feeService.finance.driverLicense.controller;
+
+import com.egintra.common.annotation.ResponseResult;
+import com.egintra.common.dto.CommonPage;
+import com.egintra.common.dto.finance.FeeDrvjkReqDTO;
+import com.egintra.common.pointcuts.SysToken;
+import com.egintra.common.utils.DataReuslt;
+import com.egintra.feeService.finance.driverLicense.service.FeeDriverLicenseService;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+/**
+ * 驾驶证业务收费信息设置：初始化、新增、修改、删除、查询
+ *
+ * @author liushihao
+ * @date 2021/7/28
+ */
+@RestController
+@RequestMapping("/driverLicense")
+@ResponseResult
+public class FeeDriverLicenseController {
+
+    @Resource
+    private FeeDriverLicenseService feeDriverLicenseService;
+
+    /**
+     * 初始化
+     *
+     * @param feeDrvjkReqDTO 参数
+     * @return 初始化结果
+     */
+    @SysToken
+    @RequestMapping(value = "/driverLicensesInit")
+    public DataReuslt driverLicenseInit(@RequestBody FeeDrvjkReqDTO feeDrvjkReqDTO) {
+
+        return feeDriverLicenseService.driverLicenseInit(feeDrvjkReqDTO);
+    }
+
+    /**
+     * 新增
+     *
+     * @param feeDrvjkReqDTO 请求对象
+     * @return 返回结果
+     */
+    @SysToken
+    @RequestMapping(value = "/addDriverLicense")
+    public DataReuslt addDriverLicense(@RequestBody FeeDrvjkReqDTO feeDrvjkReqDTO) {
+
+        return feeDriverLicenseService.addDriverLicense(feeDrvjkReqDTO);
+    }
+
+    /**
+     * 修改
+     *
+     * @param feeDrvjks 请求对象
+     * @return 返回结果
+     */
+    @SysToken
+    @RequestMapping(value = "/updateDriverLicenses")
+    public DataReuslt updateDriverLicense(@RequestBody List<FeeDrvjkReqDTO> feeDrvjks) {
+
+        return feeDriverLicenseService.updateDriverLicense(feeDrvjks);
+    }
+
+    /**
+     * 删除
+     *
+     * @param feeDrvjkReqDTO 请求对象
+     * @return 返回结果
+     */
+    @SysToken
+    @RequestMapping(value = "/deleteDriverLicense")
+    public DataReuslt deleteDriverLicense(@RequestBody FeeDrvjkReqDTO feeDrvjkReqDTO) {
+
+        return feeDriverLicenseService.deleteDriverLicense(feeDrvjkReqDTO);
+    }
+
+    /**
+     * 查询
+     *
+     * @param feeDrvjkReqDTO 请求对象
+     * @return 返回结果
+     */
+    @SysToken
+    @RequestMapping(value = "/queryDriverLicenses")
+    public DataReuslt queryDriverLicense(@RequestBody FeeDrvjkReqDTO feeDrvjkReqDTO) {
+
+        return feeDriverLicenseService.queryDriverLicense(feeDrvjkReqDTO);
+    }
+}

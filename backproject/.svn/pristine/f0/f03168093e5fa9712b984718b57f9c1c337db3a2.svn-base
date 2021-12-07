@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.VehicleOnlinePayMapper">
+
+    <select id="getGenerateOrder" resultType="java.lang.String" statementType="CALLABLE">
+        SELECT fun_getidbylsh(#{lsh,mode=IN,jdbcType=NUMERIC}) FROM DUAL
+    </select>
+
+
+    <select id="getTmpId" resultType="java.lang.String" statementType="CALLABLE">
+        select SEQ_invoice.nextval from dual
+    </select>
+
+    <select id="getTmpDetailId" resultType="java.lang.String" statementType="CALLABLE">
+        select SEQ_invoice_detail.nextval from dual
+    </select>
+
+
+</mapper>

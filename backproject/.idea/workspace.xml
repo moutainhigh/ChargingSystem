@@ -1,0 +1,845 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="feeService:war" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0408e425-874b-4970-b694-6f30c36432f1" name="Default Changelist" comment="1-修改bug问题">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/egintra/common/utils/Demo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/egintra/common/utils/ValidatorUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/egintra/common/utils/bank/Constant.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/egintra/common/utils/bank/HttpUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/egintra/common/utils/bank/HttpsPostRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/egintra/common/utils/bank/Test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/egintra/common/utils/bank/ZxBankUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/egintra/common/utils/test" afterDir="true" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/egintra/common/utils/test/EMSTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/egintra/common/utils/test/OrderVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/egintra/common/utils/test/PictureUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/egintra/common/utils/test/Prient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/egintra/common/utils/test/PrintTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/egintra/common/utils/test/ProductVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/egintra/common/utils/test/RedeemConfirmationModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/egintra/common/utils/test/TextTable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap" afterDir="true" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap/css" afterDir="true" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap/css/bootstrap-theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap/css/bootstrap-theme.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap/css/bootstrap-theme.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap/css/bootstrap-theme.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap/css/bootstrap.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap/css/bootstrap.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap/fonts" afterDir="true" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap/fonts/glyphicons-halflings-regular.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap/fonts/glyphicons-halflings-regular.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap/js" afterDir="true" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap/js/bootstrap-table.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/bootstrap/js/npm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/image/5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/jquery-1.10.2.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/jquery-1.9.1.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/jquery-2.1.1.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/jquery-3.3.1.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui" afterDir="true" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example" afterDir="true" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/example.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/example.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images" afterDir="true" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images/icon_footer.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images/icon_footer_link.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images/icon_intro.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images/icon_nav_feedback.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images/icon_nav_form.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images/icon_nav_layout.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images/icon_nav_nav.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images/icon_nav_search.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images/icon_nav_special.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images/icon_nav_z-index.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images/icon_tabbar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images/layers" afterDir="true" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images/layers/content.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images/layers/navigation.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images/layers/popout.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images/layers/transparent.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images/pic_160.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images/pic_article.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/images/vcode.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/wah.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/example/zepto.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/weui.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/weui/weui.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/businessPay.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/feeService.iml" beforeDir="false" afterPath="$PROJECT_DIR$/feeService.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/egintra/common/utils/bank/BankAutographUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/egintra/common/utils/bank/BankAutographUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/egintra/common/utils/bank/CryptUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/egintra/common/utils/bank/CryptUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/egintra/feeService/business/service/impl/OtherPayServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/egintra/feeService/business/service/impl/OtherPayServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/egintra/feeService/pay/controller/DockingBankController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/egintra/feeService/pay/controller/DockingBankController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lib" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/image" beforeDir="true" afterPath="$PROJECT_DIR$/src/main/resources/static/image" afterDir="true" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/busPaymentAction.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/busPaymentAction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/examPaymentAction.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/examPaymentAction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/examination.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/examination.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/config/AuthenticationInterceptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/config/AuthenticationInterceptor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/BaseFuncDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/BaseFuncDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/CommonPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/CommonPage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/FunctionReqDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/FunctionReqDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/RightFunccateReqDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/RightFunccateReqDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/RightFuncrightReqDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/RightFuncrightReqDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/RightFuncrightRespDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/RightFuncrightRespDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/RightRoleReqDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/RightRoleReqDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/RightRoleRespDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/RightRoleRespDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/RightRoleUserReqDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/RightRoleUserReqDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/RightUserDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/RightUserDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/SysInfoDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/SysInfoDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/SysUserDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/dto/SysUserDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/exception/ResultCode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/exception/ResultCode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/interceptor/ResponseResultInterceptor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/interceptor/ResponseResultInterceptor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/entity/RightFuncAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/entity/RightFuncAction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/entity/RightFuncright.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/entity/RightFuncright.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/entity/RightRole.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/entity/RightRole.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/entity/RightRoleuser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/entity/RightRoleuser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/entity/RightUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/entity/RightUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/mapper/LoginMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/mapper/LoginMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/mapper/RightFunctionMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/mapper/RightFunctionMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/mapper/RightRoleMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/mapper/RightRoleMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/mapper/RightRoleuserMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/mapper/RightRoleuserMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/mapper/xml/LoginMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/mapper/xml/LoginMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/mapper/xml/RightFunccateMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/mapper/xml/RightFunccateMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/mapper/xml/RightFunctionMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/mapper/xml/RightFunctionMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/mapper/xml/RightRoleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/mapper/xml/RightRoleMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/mapper/xml/RightRoleuserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/repository/mapper/xml/RightRoleuserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/utils/DataReuslt.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/utils/DataReuslt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/utils/DateUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/utils/DateUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/utils/DesUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/utils/DesUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/common/utils/HttpContextUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/common/utils/HttpContextUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/feeService/AzcFeeApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/feeService/AzcFeeApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/feeService/login/controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/feeService/login/controller/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/feeService/login/service/LoginService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/feeService/login/service/LoginService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/egintra/feeService/login/service/impl/LoginServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/egintra/feeService/login/service/impl/LoginServiceImpl.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="F:\apache-maven-3.3.9" />
+        <option name="userSettingsFile" value="F:\apache-maven-3.3.9\conf\settings(1).xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1vexGrz8P1wSasbCBaLx1HyFSmx" />
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="2" id="Remove" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder4" value="4" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder5" value="5" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="124" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="124" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="124" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="124" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4" value="125" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5" value="124" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4" value="4" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5" value="5" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth0" value="126" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth1" value="126" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="126" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth3" value="126" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4" value="126" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth5" value="125" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15429688" />
+    <property name="project.structure.side.proportion" value="0.2229885" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\backproject\src\main\resources\templates" />
+      <recent name="G:\backproject\src\main\resources\static\image" />
+      <recent name="G:\backproject\src\main\resources\static\weui" />
+      <recent name="G:\backproject\src\main\resources\static\js" />
+      <recent name="G:\backproject\src\main\resources\static\bootstrap\js" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\工具类\java\netpay\WEB-INF\lib" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.egintra.feeService.config" />
+      <recent name="com.egintra.common.config" />
+      <recent name="com.egintra.feeService.reportForm.service.impl" />
+      <recent name="com.egintra.feeService.reportForm.service" />
+      <recent name="com.egintra.feeService.reportForm.controller" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.AzcFeeApplication">
+    <configuration name="EMSTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.egintra.common.utils.test.EMSTest" />
+      <module name="feeService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.egintra.common.utils.test.OrderVo" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PictureUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.egintra.common.utils.test.PictureUtil" />
+      <module name="feeService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.egintra.common.utils.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Prient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.egintra.common.utils.test.Prient" />
+      <module name="feeService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.egintra.common.utils.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PrintTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.egintra.common.utils.test.PrintTest" />
+      <module name="feeService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.egintra.common.utils.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WebServiceUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.egintra.common.utils.WebServiceUtil" />
+      <module name="feeService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.egintra.common.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AzcFeeApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="feeService" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.egintra.feeService.AzcFeeApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.WebServiceUtil" />
+        <item itemvalue="Application.EMSTest" />
+        <item itemvalue="Application.PictureUtil" />
+        <item itemvalue="Application.Prient" />
+        <item itemvalue="Application.PrintTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>C:\Users\Administrator\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="G:\backproject" />
+          <option name="myCopyRoot" value="G:\backproject" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="G:\backproject" />
+          <option name="myCopyRoot" value="G:\backproject" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0408e425-874b-4970-b694-6f30c36432f1" name="Default Changelist" comment="" />
+      <created>1626936263297</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1626936263297</updated>
+      <workItem from="1626936264408" duration="9869000" />
+      <workItem from="1627000199685" duration="23342000" />
+      <workItem from="1627258162307" duration="7687000" />
+      <workItem from="1627286834806" duration="2619000" />
+      <workItem from="1627345234715" duration="12375000" />
+      <workItem from="1627432131478" duration="18081000" />
+      <workItem from="1627518617495" duration="23724000" />
+      <workItem from="1627605066485" duration="18878000" />
+      <workItem from="1627864204371" duration="12837000" />
+      <workItem from="1627950768407" duration="2722000" />
+      <workItem from="1628037246723" duration="19896000" />
+      <workItem from="1628123156163" duration="19120000" />
+      <workItem from="1628209825226" duration="19344000" />
+      <workItem from="1628469335465" duration="31266000" />
+      <workItem from="1628555347199" duration="29692000" />
+      <workItem from="1628641988202" duration="29126000" />
+      <workItem from="1628727695694" duration="272000" />
+      <workItem from="1628727979970" duration="3271000" />
+      <workItem from="1628731300786" duration="28049000" />
+      <workItem from="1628814521765" duration="21896000" />
+      <workItem from="1628843101710" duration="15000" />
+      <workItem from="1628846514381" duration="4122000" />
+      <workItem from="1629074023286" duration="1195000" />
+      <workItem from="1629075236611" duration="24232000" />
+      <workItem from="1629106898879" duration="25000" />
+      <workItem from="1629160300335" duration="26057000" />
+      <workItem from="1629246832203" duration="18380000" />
+      <workItem from="1629278987473" duration="291000" />
+      <workItem from="1629332937468" duration="23138000" />
+      <workItem from="1629419324879" duration="27044000" />
+      <workItem from="1629452126006" duration="1000" />
+      <workItem from="1629678236658" duration="18897000" />
+      <workItem from="1629764449924" duration="6490000" />
+      <workItem from="1629851540265" duration="16140000" />
+      <workItem from="1629938473874" duration="23152000" />
+      <workItem from="1630023817372" duration="16860000" />
+      <workItem from="1630283570504" duration="11118000" />
+      <workItem from="1630369776142" duration="13953000" />
+      <workItem from="1630455684669" duration="14523000" />
+      <workItem from="1630542939905" duration="7698000" />
+      <workItem from="1630629373278" duration="27471000" />
+      <workItem from="1630887752756" duration="1013000" />
+      <workItem from="1630888855009" duration="91000" />
+      <workItem from="1630888954834" duration="24856000" />
+      <workItem from="1630919258647" duration="13000" />
+      <workItem from="1630974267914" duration="12663000" />
+      <workItem from="1631061329091" duration="20342000" />
+      <workItem from="1631148265497" duration="7837000" />
+      <workItem from="1631233691891" duration="12967000" />
+      <workItem from="1631493009152" duration="5534000" />
+      <workItem from="1631579253236" duration="7212000" />
+      <workItem from="1631666068015" duration="19360000" />
+      <workItem from="1631751976494" duration="20840000" />
+      <workItem from="1631783273196" duration="8000" />
+      <workItem from="1631838491249" duration="8470000" />
+      <workItem from="1631924881521" duration="15837000" />
+      <workItem from="1632270629752" duration="2921000" />
+      <workItem from="1632274921174" duration="2924000" />
+      <workItem from="1632280133316" duration="1311000" />
+      <workItem from="1632282840995" duration="1266000" />
+      <workItem from="1632714231727" duration="1460000" />
+      <workItem from="1632895389437" duration="416000" />
+      <workItem from="1633915738601" duration="1759000" />
+      <workItem from="1633998970192" duration="613000" />
+      <workItem from="1634007577987" duration="255000" />
+      <workItem from="1635228315581" duration="3250000" />
+      <workItem from="1635317247289" duration="1388000" />
+      <workItem from="1635470919730" duration="3311000" />
+      <workItem from="1635727819681" duration="4366000" />
+      <workItem from="1635812835379" duration="5125000" />
+      <workItem from="1635900960436" duration="3587000" />
+      <workItem from="1635987214011" duration="8270000" />
+      <workItem from="1636071931351" duration="2049000" />
+      <workItem from="1636420604812" duration="5394000" />
+      <workItem from="1636503966052" duration="15390000" />
+      <workItem from="1636590329457" duration="10180000" />
+      <workItem from="1636676506735" duration="4246000" />
+      <workItem from="1636703026864" duration="2166000" />
+      <workItem from="1637540875755" duration="3025000" />
+      <workItem from="1637627203484" duration="2513000" />
+      <workItem from="1637649690266" duration="1617000" />
+      <workItem from="1637716711283" duration="9666000" />
+      <workItem from="1637800000149" duration="13755000" />
+      <workItem from="1637892963263" duration="9846000" />
+      <workItem from="1638146285342" duration="2903000" />
+      <workItem from="1638232009350" duration="7244000" />
+      <workItem from="1638263806125" duration="13000" />
+      <workItem from="1638318478943" duration="6314000" />
+      <workItem from="1638326861918" duration="661000" />
+      <workItem from="1638327554315" duration="9752000" />
+      <workItem from="1638405029090" duration="12597000" />
+      <workItem from="1638491392154" duration="17059000" />
+      <workItem from="1638756784989" duration="13041000" />
+      <workItem from="1638837086504" duration="1793000" />
+    </task>
+    <task id="LOCAL-00011" summary="1-修改问题">
+      <created>1627639358672</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1627639358672</updated>
+    </task>
+    <task id="LOCAL-00012" summary="1-账套功能">
+      <created>1628152131250</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1628152131250</updated>
+    </task>
+    <task id="LOCAL-00013" summary="1-获取机动车业务缴费信息服务接口&#10;2-车驾管业务收费核查接口&#10;3-考试费收费核查接口">
+      <created>1628241989139</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1628241989139</updated>
+    </task>
+    <task id="LOCAL-00014" summary="1-根据modelid查询模块">
+      <created>1628502960985</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1628502960985</updated>
+    </task>
+    <task id="LOCAL-00015" summary="1-机动车线上缴费模块">
+      <created>1628504098451</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1628504098451</updated>
+    </task>
+    <task id="LOCAL-00016" summary="1-机动车支付接口">
+      <created>1628576415983</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1628576415983</updated>
+    </task>
+    <task id="LOCAL-00017" summary="1-驾驶证支付接口&#10;2-解析xml字符串方法">
+      <created>1628651450473</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1628651450473</updated>
+    </task>
+    <task id="LOCAL-00018" summary="1-驾驶证支付接口">
+      <created>1628651699244</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1628651699244</updated>
+    </task>
+    <task id="LOCAL-00019" summary="1-订单状态查询&#10;2-机动车驾驶证查询，缴费接口">
+      <created>1628667217576</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1628667217576</updated>
+    </task>
+    <task id="LOCAL-00020" summary="1-修改实体名称">
+      <created>1628669531679</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1628669531679</updated>
+    </task>
+    <task id="LOCAL-00021" summary="1-修改mapper文件">
+      <created>1628670991365</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1628670991365</updated>
+    </task>
+    <task id="LOCAL-00022" summary="1-驾驶证支付接口">
+      <created>1628674054032</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1628674054032</updated>
+    </task>
+    <task id="LOCAL-00023" summary="1-支付接口">
+      <created>1628759605692</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1628759605692</updated>
+    </task>
+    <task id="LOCAL-00024" summary="1-pom相关的文件">
+      <created>1629074706835</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1629074706835</updated>
+    </task>
+    <task id="LOCAL-00025" summary="1-工具类,实体">
+      <created>1629075102063</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1629075102063</updated>
+    </task>
+    <task id="LOCAL-00026" summary="1-修改mapper文件改为物理删除">
+      <created>1629172167843</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1629172167843</updated>
+    </task>
+    <task id="LOCAL-00027" summary="1-修改实体字段">
+      <created>1629188077186</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1629188077186</updated>
+    </task>
+    <task id="LOCAL-00028" summary="1-打成war包">
+      <created>1629257423657</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1629257423657</updated>
+    </task>
+    <task id="LOCAL-00029" summary="1-修改数据表结构相关的代码">
+      <created>1629269559865</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1629269559865</updated>
+    </task>
+    <task id="LOCAL-00030" summary="1-去掉多余的字符">
+      <created>1629269691073</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1629269691073</updated>
+    </task>
+    <task id="LOCAL-00031" summary="1-修改mapper文件">
+      <created>1629272963742</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1629272963742</updated>
+    </task>
+    <task id="LOCAL-00032" summary="1-修改mapper文件">
+      <created>1629278088049</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1629278088049</updated>
+    </task>
+    <task id="LOCAL-00033" summary="1-修改机动车功能">
+      <created>1629451926449</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1629451926449</updated>
+    </task>
+    <task id="LOCAL-00034" summary="1-注释说明&#10;2-机动车添加功能">
+      <created>1629688204718</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1629688204718</updated>
+    </task>
+    <task id="LOCAL-00035" summary="1-优化代码">
+      <created>1629690696780</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1629690696780</updated>
+    </task>
+    <task id="LOCAL-00036" summary="1-修改bug问题">
+      <created>1629709232686</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1629709232686</updated>
+    </task>
+    <task id="LOCAL-00037" summary="1-添加注释说明">
+      <created>1629766513758</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1629766513758</updated>
+    </task>
+    <task id="LOCAL-00038" summary="1-账套新增问题">
+      <created>1630053227494</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1630053227494</updated>
+    </task>
+    <task id="LOCAL-00039" summary="1-实体添加toString方法">
+      <created>1630289134064</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1630289134064</updated>
+    </task>
+    <task id="LOCAL-00040" summary="1-修改机动车业务信息查询条件">
+      <created>1630313103544</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1630313103544</updated>
+    </task>
+    <task id="LOCAL-00041" summary="1-删除字典管理功能&#10;2-将字典管理功能的数据移动到码表中">
+      <created>1630377193499</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1630377193499</updated>
+    </task>
+    <task id="LOCAL-00042" summary="1-其他缴费&#10;2-业务缴费&#10;3-工作时间设置">
+      <created>1631255459523</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1631255459523</updated>
+    </task>
+    <task id="LOCAL-00043" summary="1-修改模块名称">
+      <created>1631256334810</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1631256334810</updated>
+    </task>
+    <task id="LOCAL-00044" summary="1-修改webSerivce工具类">
+      <created>1631258099496</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1631258099496</updated>
+    </task>
+    <task id="LOCAL-00045" summary="1-代码格式化">
+      <created>1631259395960</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1631259395960</updated>
+    </task>
+    <task id="LOCAL-00046" summary="1-修改bug问题">
+      <created>1631668587094</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1631668587094</updated>
+    </task>
+    <task id="LOCAL-00047" summary="1-修改bug问题">
+      <created>1631668899155</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1631668899155</updated>
+    </task>
+    <task id="LOCAL-00048" summary="1-修改bug问题">
+      <created>1631696999433</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1631696999433</updated>
+    </task>
+    <task id="LOCAL-00049" summary="1-发票查询功能">
+      <created>1631844863138</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1631844863138</updated>
+    </task>
+    <task id="LOCAL-00050" summary="1-当前Pos不支持支付&#10;2-去掉无用代码">
+      <created>1631846631985</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1631846631985</updated>
+    </task>
+    <task id="LOCAL-00051" summary="1-去掉多余字段">
+      <created>1631931035377</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1631931035378</updated>
+    </task>
+    <task id="LOCAL-00052" summary="1-修改线上支付问题">
+      <created>1631946234019</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1631946234019</updated>
+    </task>
+    <task id="LOCAL-00053" summary="1-修改bug问题">
+      <created>1631947929339</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1631947929340</updated>
+    </task>
+    <task id="LOCAL-00054" summary="1-专项查询列表">
+      <created>1636444458857</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1636444458857</updated>
+    </task>
+    <task id="LOCAL-00055" summary="1-新建实体类">
+      <created>1636523945548</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1636523945549</updated>
+    </task>
+    <task id="LOCAL-00056" summary="1-修改bug问题">
+      <created>1636527015565</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1636527015565</updated>
+    </task>
+    <task id="LOCAL-00057" summary="1-收入总表功能">
+      <created>1636534084910</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1636534084910</updated>
+    </task>
+    <task id="LOCAL-00058" summary="1-报表功能">
+      <created>1636687066198</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1636687066198</updated>
+    </task>
+    <task id="LOCAL-00059" summary="1-获取pos支付方式类型">
+      <created>1638343410425</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1638343410425</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="1-注释说明&#10;2-机动车添加功能" />
+    <MESSAGE value="1-优化代码" />
+    <MESSAGE value="1-修改Bug" />
+    <MESSAGE value="1-添加注释说明" />
+    <MESSAGE value="1-账套新增问题" />
+    <MESSAGE value="1-实体添加toString方法" />
+    <MESSAGE value="1-修改机动车业务信息查询条件" />
+    <MESSAGE value="1-删除字典管理功能&#10;2-将字典管理功能的数据移动到码表中" />
+    <MESSAGE value="1-业务缴费功能&#10;2-其他缴费功能&#10;3-工作时间设置" />
+    <MESSAGE value="1-其他缴费功能&#10;2-业务缴费功能&#10;3-工作时间设置" />
+    <MESSAGE value="1-其他缴费&#10;2-业务缴费&#10;3-工作时间设置" />
+    <MESSAGE value="1-修改模块名称" />
+    <MESSAGE value="1-修改WebSerivce工具类" />
+    <MESSAGE value="1-修改webSerivce工具类" />
+    <MESSAGE value="1-代码格式化" />
+    <MESSAGE value="1-发票查询功能" />
+    <MESSAGE value="1-当前Pos不支持支付&#10;2-去掉无用代码" />
+    <MESSAGE value="1-去掉多余字段" />
+    <MESSAGE value="1-修改线上支付问题" />
+    <MESSAGE value="1-专项查询列表" />
+    <MESSAGE value="1-新建实体类" />
+    <MESSAGE value="1-修改bug问题" />
+    <MESSAGE value="1-收入总表功能" />
+    <MESSAGE value="1-报表功能" />
+    <MESSAGE value="1-获取pos支付方式类型" />
+    <option name="LAST_COMMIT_MESSAGE" value="1-获取pos支付方式类型" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.egintra.common.repository.entity.FeeInvoice" memberName="log" />
+        <PinnedItemInfo parentTag="java.lang.Long" memberName="value" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/feeService$AzcFeeApplication.ic" NAME="AzcFeeApplication Coverage Results" MODIFIED="1638348992069" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/feeService$EMSTest.ic" NAME="EMSTest Coverage Results" MODIFIED="1630027803013" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.egintra.common.utils.test.OrderVo</FILTER>
+    </SUITE>
+  </component>
+</project>

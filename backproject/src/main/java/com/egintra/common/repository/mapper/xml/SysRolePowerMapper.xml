@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.SysRolePowerMapper">
+    <resultMap id="sysRolePowerMapper" type="com.egintra.common.repository.entity.SysRolePower">
+        <result column="id"  property="id"/>
+        <result column="role_id"  property="roleId"/>
+        <result column="power_id"  property="powerId"/>
+        <result column="record_status"  property="recordStatus"/>
+        <result column="record_create_cd"  property="recordCreateCd"/>
+        <result column="record_create_nm"  property="recordCreateNm"/>
+        <result column="record_create_tm"  property="recordCreateTm"/>
+        <result column="record_modify_cd"  property="recordModifyCd"/>
+        <result column="record_modify_nm"  property="recordModifyNm"/>
+        <result column="record_modify_tm"  property="recordModifyTm"/>
+    </resultMap>
+
+    <select id="queryRolePower" resultType="com.egintra.common.dto.SysRolePowerRespDTO">
+        SELECT
+          id AS id,
+          role_id AS roleId,
+          power_id AS powerId
+        FROM sys_role_power
+        WHERE
+          record_status = '0'
+          <if test="req.roleId != null and req.roleId != ''">
+              AND role_id = #{req.roleId}
+          </if>
+          <if test="req.powerId != null and req.powerId != ''">
+              AND power_id = #{req.powerId}
+          </if>
+    </select>
+
+    <insert id="batchInsertRolePowers">
+        INSERT all
+        <foreach collection="list" item="item" separator="  " open=" " close=" " index="index">
+            INTO sys_role_power
+            (
+            id,
+            role_id,
+            power_id,
+            record_status,
+            record_create_tm,
+            record_modify_tm
+            )
+            VALUES
+            (
+            #{item.id},
+            #{item.roleId},
+            #{item.powerId},
+            #{item.recordStatus},
+            #{item.recordCreateTm},
+            #{item.recordModifyTm}
+            )
+        </foreach>
+        select 1 from dual
+    </insert>
+
+    <update id="batchDeleteRolePowers">
+        <foreach collection="list" index="index" item="item" open="begin" separator=";" close=";end;">
+           UPDATE sys_role_power
+            <set>
+                record_status = #{status}
+            </set>
+           WHERE
+             1 = 1
+             and id = #{item}
+        </foreach>
+    </update >
+</mapper>

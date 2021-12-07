@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.VehiclePayMapper">
+    <resultMap id="rightRoleMapper" type="com.egintra.common.repository.entity.Vehicle">
+        <result column="hpzl" property="hpzl"/>
+        <result column="ywlx" property="ywlx"/>
+        <result column="ywyy" property="ywyy"/>
+        <result column="ywmc" property="ywmc"/>
+        <result column="project_id" property="projectId"/>
+        <result column="quantity" property="quantity"/>
+        <result column="options" property="options"/>
+        <result column="record_status" property="recordStatus"/>
+        <result column="record_create_cd" property="recordCreateCd"/>
+        <result column="record_create_nm" property="recordCreateNm"/>
+        <result column="record_create_tm" property="recordCreateTm"/>
+        <result column="record_modify_cd" property="recordModifyCd"/>
+        <result column="record_modify_nm" property="recordModifyNm"/>
+        <result column="record_modify_tm" property="recordModifyTm"/>
+    </resultMap>
+
+    <select id="getVehiclePayList" resultType="com.egintra.common.dto.VehiclePayReqDTO">
+        SELECT a.*,
+        nvl(b.cost, 0) materialCost
+        FROM (
+        SELECT jk.hpzl,
+        jk.ywlx,
+        jk.ywyy,
+        jk.project_id,
+        jk.options options,
+        jk.quantity,
+        proj.project_name,
+        proj.unit_price,
+        proj.class_id,
+        class.province_rate,
+        class.city_rate,
+        class.finance_code
+        FROM FEE_VEHJK jk,
+        fee_project_detail proj,
+        FEE_PROJECT_CLASS class
+        <where>
+            <if test="hpzl!=null and hpzl!=''">
+                and jk.hpzl = #{hpzl}
+            </if>
+            <if test="ywlx!=null and ywlx!=''">
+                and jk.ywlx = #{ywlx}
+            </if>
+            <if test="ywyy!=null and ywyy!=''">
+                and jk.ywyy = #{ywyy}
+            </if>
+            AND jk.project_id = proj.project_id
+            AND proj.class_id = class.class_id
+        </where>
+        ) a
+        LEFT JOIN (SELECT project_id, sum(material_cost) cost FROM fee_material GROUP BY project_id) b
+        ON a.project_id = b.project_id
+    </select>
+
+</mapper>

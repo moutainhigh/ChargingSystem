@@ -1,0 +1,44 @@
+package com.egintra.common.dto.pay;
+
+/**
+ * 银行对接请求DTO
+ *
+ * @author liushihao
+ * @date 2021/8/18
+ */
+public class BankDTO {
+
+    /**
+     * 数据体
+     */
+    private String encryptBody;
+
+    /**
+     * 标签
+     */
+    private String sign;
+
+    public String getEncryptBody() {
+        return encryptBody;
+    }
+
+    public void setEncryptBody(String encryptBody) {
+        this.encryptBody = encryptBody;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign;
+    }
+
+    @Override
+    public String toString() {
+        return "BankDto{" +
+                "encryptBody='" + encryptBody + '\'' +
+                ", sign='" + sign + '\'' +
+                '}';
+    }
+}

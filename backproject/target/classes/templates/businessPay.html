@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>车驾管业务缴费系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../static/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+<!--    <script src="../static/bootstrap/js/bootstrap-table.min.js"></script>-->
+<!--    <script src="../static/bootstrap/js/bootstrap.min.js" ></script>-->
+<!--    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css" />-->
+    <!--    <link rel="stylesheet" href="../static/weui/example/example.css">-->
+    <link rel="stylesheet" href="../static/weui/weui.min.css">
+    <link rel="stylesheet" href="../static/weui/weui.min.js">
+
+    <script>
+        function  rollback(){
+            window.location = "http://zwunz2.natappfree.cc/egintra-fee/dockingBank/queryPayInfo";
+        }
+        function  goToNext(){
+            var lsh = $("#lsh").val()
+            if(lsh==""){
+                var $iosDialog2 = $('#iosDialog2');
+                $iosDialog2.fadeIn(200);
+            } else{
+            }
+        }
+
+        $(document).ready(function(){
+            $(".weui-dialog__btn").click(function(){
+                $(this).parents('.js_dialog').fadeOut(200);
+            });
+        });
+    </script>
+    <style>
+        .weui-select{
+            margin-left: -18px;
+        }
+        .weui-label{
+            width: 205px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="weui-cells weui-cells_form">
+    <table id="table"></table>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">汽车道路驾驶考试3</label></div>
+        <div class="weui-cell__bd">
+            <span>100</span>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">汽车场地驾驶考试2</label></div>
+        <div class="weui-cell__bd">
+            <span>100</span>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">汽车安全文明驾驶常识3</label></div>
+        <div class="weui-cell__bd">
+            <span>100</span>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">汽车安全知识考试1</label></div>
+        <div class="weui-cell__bd">
+            <span>100</span>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">机动车驾驶证</label></div>
+        <div class="weui-cell__bd">
+            <span>100</span>
+        </div>
+    </div>
+
+
+</div>
+<div>
+    <a href="javascript:;" class="weui-btn weui-btn_primary" onclick="goToNext()">缴费</a>
+</div>
+<div class="js_dialog" id="iosDialog2" style="display: none;">
+    <div class="weui-mask"></div>
+    <div class="weui-dialog">
+        <div class="weui-dialog__bd">请输入流水号</div>
+        <div class="weui-dialog__ft">
+            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">确定</a>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

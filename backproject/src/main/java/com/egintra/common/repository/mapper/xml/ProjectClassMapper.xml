@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egintra.common.repository.mapper.ProjectClassMapper">
+    <resultMap id="ProjectClassMapper" type="com.egintra.common.repository.entity.ProjectClass">
+        <result column="class_id" property="classId"/>
+        <result column="class_name" property="className"/>
+        <result column="province_rate" property="provinceRate"/>
+        <result column="city_rate" property="cityRate"/>
+        <result column="project_property" property="projectProperty"/>
+        <result column="class_property" property="classProperty"/>
+        <result column="finance_code" property="financeCode"/>
+    </resultMap>
+
+    <select id="getProjectClassList"
+            resultType="com.egintra.common.dto.ProjectClassReqDTO">
+        SELECT
+          class_id AS classId,
+          class_name AS className,
+          province_rate AS provinceRate,
+          city_rate AS cityRate,
+          project_property AS projectProperty,
+          class_property AS classProperty,
+          finance_code AS financeCode
+        FROM
+          fee_project_class
+        <where>
+            <if test="classId != null and classId != ''">
+                and class_id like CONCAT(CONCAT('%',#{classId}),'%')
+            </if>
+            <if test="className != null and className != ''">
+                and class_name like CONCAT(CONCAT('%',#{className}),'%')
+            </if>
+            <if test="provinceRate != null and provinceRate != ''">
+                and province_rate=#{provinceRate}
+            </if>
+            <if test="cityRate != null and cityRate != ''">
+                and city_rate=#{cityRate}
+            </if>
+            <if test="projectProperty != null and projectProperty != ''">
+                and project_property=#{projectProperty}
+            </if>
+            <if test="classProperty != null and classProperty != ''">
+                and class_property=#{classProperty}
+            </if>
+            <if test="financeCode != null and financeCode != ''">
+                and finance_code=#{financeCode}
+            </if>
+        </where>
+    </select>
+
+    <select id="getOne" resultType="com.egintra.common.dto.ProjectClassReqDTO">
+        SELECT
+          class_id AS classId,
+          class_name AS className,
+          province_rate AS provinceRate,
+          city_rate AS cityRate,
+          project_property AS projectProperty,
+          class_property AS classProperty,
+          finance_code AS financeCode
+        FROM
+          fee_project_class
+        WHERE
+          class_id = #{classId}
+    </select>
+
+    <select id="findByName" resultType="com.egintra.common.dto.ProjectClassReqDTO">
+        SELECT
+          class_id AS classId,
+          class_name AS className,
+          province_rate AS provinceRate,
+          city_rate AS cityRate,
+          project_property AS projectProperty,
+          class_property AS classProperty,
+          finance_code AS financeCode
+        FROM
+          fee_project_class
+        WHERE class_id = #{className}
+    </select>
+
+    <insert id="addProjectClass" parameterType="com.egintra.common.dto.ProjectClassReqDTO">
+        INSERT INTO fee_project_class(
+          class_id,
+          class_name,
+          province_rate,
+          city_rate,
+          project_property,
+          class_property,
+          finance_code)
+        VALUES (
+          #{classId},
+          #{className},
+          #{provinceRate},
+          #{cityRate},
+          #{projectProperty},
+          #{classProperty},
+          #{financeCode})
+    </insert>
+
+    <update id="editProjectClass">
+        <foreach collection="list" index="index" item="item" open="begin" separator=";" close=";end;">
+            UPDATE fee_project_class
+            <set>
+                <if test="item.className != null and item.className != ''">
+                    class_name=#{item.className},
+                </if>
+                <if test="item.provinceRate != null and item.provinceRate != ''">
+                    province_rate=#{item.provinceRate},
+                </if>
+                <if test="item.cityRate != null and item.cityRate != ''">
+                    city_rate=#{item.cityRate},
+                </if>
+                <if test="item.projectProperty != null and item.projectProperty != ''">
+                    project_property=#{item.projectProperty},
+                </if>
+                <if test="item.classProperty != null and item.classProperty != ''">
+                    class_property=#{item.classProperty},
+                </if>
+                finance_code=#{item.financeCode}
+            </set>
+            WHERE class_id = #{item.classId}
+        </foreach>
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM fee_project_class
+        WHERE class_id = #{classId}
+    </delete>
+</mapper>

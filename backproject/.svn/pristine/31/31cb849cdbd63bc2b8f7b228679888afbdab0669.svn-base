@@ -1,0 +1,11 @@
+package com.egintra.feeService.pay.service;
+
+import com.egintra.common.utils.DataReuslt;
+
+public interface VehicleOnlinePayService {
+
+    DataReuslt vehicleOnlinePay(String lsh);
+
+
+    DataReuslt OnLinePay(String glbm);
+}

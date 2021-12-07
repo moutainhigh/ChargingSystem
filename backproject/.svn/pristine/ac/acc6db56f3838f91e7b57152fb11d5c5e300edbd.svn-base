@@ -1,0 +1,94 @@
+package com.egintra.common.utils;
+
+import java.io.StringReader;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+public class XmlUtils {
+
+
+    public static void main(String[] args) {
+        Map<String, String> map = new HashMap<String, String>();
+        String xml="<?xml version=\"1.0\" encoding=\"GBK\"?>\n" +
+                "<root>\n" +
+                "<head>\n" +
+                "<code>1</code>\n" +
+                "<message>%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD%E6%88%90%E5%8A%9F%EF%BC%81</message>\n" +
+                "<rownum>1</rownum>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<veh id=\"0\">\n" +
+                "  <lsh>1210806019988</lsh>\n" +
+                "  <xh>37040007001292</xh>\n" +
+                "  <ywlx>K</ywlx>\n" +
+                "  <ywyy>A</ywyy>\n" +
+                "  <syr>%E6%9D%8E%E7%BA%A2%E4%BA%91</syr>\n" +
+                "  <hpzl>02</hpzl>\n" +
+                "  <hphm>DS0069</hphm>\n" +
+                "  <clpp1>%E9%A3%9E%E5%BA%A6%E7%89%8C</clpp1>\n" +
+                "  <clxh>HG7132A%28i-DSI+CVT%29</clxh>\n" +
+                "  <cllx>K33</cllx>\n" +
+                "  <xzqh>370403</xzqh>\n" +
+                "  <sqrq>2021-08-06+10%3A44%3A13.0</sqrq>\n" +
+                "  <bjrq>2021-08-06+10%3A55%3A37.0</bjrq>\n" +
+                "  <xygw>E</xygw>\n" +
+                "  <ywlc>25E</ywlc>\n" +
+                "  <lszt>E</lszt>\n" +
+                "  <glbm>370402000400</glbm>\n" +
+                "  <fpbj>0</fpbj>\n" +
+                "  <ffbj>0</ffbj>\n" +
+                "  <rkbj>0</rkbj>\n" +
+                "  <clsbdh>LHGGD182772011600</clsbdh>\n" +
+                "</veh>\n" +
+                "</body>\n" +
+                "</root>";
+        XmlUtils test=new XmlUtils();
+        Map resMap=test.parseXml2Map(xml,map);
+        System.out.println("resMap==="+resMap);
+        String resultCode = (String)map.get("formNo");
+        System.out.println("resultCode===="+resultCode);
+        String handleDeptId = (String)map.get("detail.handleDeptId");
+        System.out.println("handleDeptId===="+handleDeptId);
+    }
+
+
+    /**
+     * 将xml转换为Map。 支持xml标签多层嵌套，并以"."分隔多级标签（不包括根节点）。 不支持XML标签重复时的情况
+     *
+     * @param xml
+     * @param map
+     * @return
+     */
+    public static Map<String, String> parseXml2Map(String xml, Map<String, String> map) {
+        try {
+            SAXReader reader = new SAXReader();
+            Document doc = reader.read(new StringReader(xml));
+            Element root = doc.getRootElement();
+            String path = "";
+            if (map.containsKey(root.getName().trim())) {
+                path = map.get(root.getName().trim());
+                map.remove(root.getName().trim());
+            }
+            for (Iterator i = root.elementIterator(); i.hasNext();) {
+                Element element = (Element) i.next();
+                if (element.isTextOnly()) {
+                    if (path.length() > 0) {
+                        map.put(path + element.getName().trim(), element.getTextTrim());
+                    } else {
+                        map.put(element.getName().trim(), element.getTextTrim());
+                    }
+                } else {
+                    map.put(element.getName().trim(), path+ element.getName().trim() + ".");
+                    parseXml2Map(element.asXML(), map);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+}
